@@ -1,7 +1,7 @@
 // main index.js
 
-import { NativeModules } from 'react-native';
+import { NativeModules } from "react-native";
 
-const { PointSdk } = NativeModules;
+const { PointSdkRn } = NativeModules;
 
-export default PointSdk;
+export default PointSdkRn;

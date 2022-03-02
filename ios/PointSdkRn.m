@@ -1,9 +1,9 @@
-// PointSdk.m
+// PointSdkRn.m
 
-#import "PointSdk.h"
+#import "PointSdkRn.h"
 
 
-@implementation PointSdk
+@implementation PointSdkRn
 
 RCT_EXPORT_MODULE()
 
