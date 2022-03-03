@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:/Users/fabio/Dev/point-sdk-rn/ios/PointSdkRn.xcodeproj">
+      location = "group:PointSdkRn.xcodeproj">
    </FileRef>
 </Workspace>

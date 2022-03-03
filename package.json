@@ -1,8 +1,8 @@
 {
   "name": "react-native-point-sdk",
-  "title": "React Native Point Sdk",
-  "version": "0.0.1",
-  "description": "React Native library for Point SDK",
+  "title": "React Native My Fancy Library",
+  "version": "1.0.0",
+  "description": "TODO",
   "main": "index.js",
   "files": [
     "README.md",
@@ -16,15 +16,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/agencyenterprise/point-sdk-rn.git",
-    "baseUrl": "https://github.com/agencyenterprise/point-sdk-rn"
+    "url": "git+https://github.com/github_account/react-native-point-sdk.git",
+    "baseUrl": "https://github.com/github_account/react-native-point-sdk"
   },
   "keywords": [
     "react-native"
   ],
   "author": {
-    "name": "Anny Figueira",
-    "email": "anny.figueira@gmail.com"
+    "name": "Your Name",
+    "email": "yourname@email.com"
   },
   "license": "MIT",
   "licenseFilename": "LICENSE",

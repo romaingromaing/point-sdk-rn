@@ -8,34 +8,27 @@
  * https://github.com/facebook/react-native
  */
 
-import React, { Component } from 'react';
-import { Platform, StyleSheet, Text, View } from 'react-native';
-import PointSdk from 'react-native-point-sdk';
+import React, {useState, useEffect} from 'react';
+import {StyleSheet, Text, View} from 'react-native';
+import PointSdkRn from 'react-native-point-sdk';
 
-export default class App extends Component<{}> {
-  state = {
-    status: 'starting',
-    message: '--'
-  };
-  componentDidMount() {
-    PointSdk.sampleMethod('Testing', 123, (message) => {
-      this.setState({
-        status: 'native callback received',
-        message
-      });
+const App = () => {
+  const [apiKey, setApiKey] = useState('not defined');
+
+  useEffect(() => {
+    PointSdkRn.setup('abc123', function callback(_, result) {
+      setApiKey(result);
     });
-  }
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>☆PointSdk example☆</Text>
-        <Text style={styles.instructions}>STATUS: {this.state.status}</Text>
-        <Text style={styles.welcome}>☆NATIVE CALLBACK MESSAGE☆</Text>
-        <Text style={styles.instructions}>{this.state.message}</Text>
-      </View>
-    );
-  }
-}
+  }, []);
+
+  return (
+    <View style={styles.container}>
+      <Text style={styles.welcome}>☆PointSdkRn example☆</Text>
+      <Text style={styles.welcome}>☆NATIVE CALLBACK MESSAGE☆</Text>
+      <Text style={styles.instructions}>Received Api Key: {apiKey}</Text>
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -55,3 +48,5 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
 });
+
+export default App;

@@ -1,4 +1,4 @@
-// PointSdkPackage.java
+// PointSdkRnPackage.java
 
 package com.reactlibrary;
 
@@ -11,10 +11,10 @@ import com.facebook.react.bridge.NativeModule;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.uimanager.ViewManager;
 
-public class PointSdkPackage implements ReactPackage {
+public class PointSdkRnPackage implements ReactPackage {
     @Override
     public List<NativeModule> createNativeModules(ReactApplicationContext reactContext) {
-        return Arrays.<NativeModule>asList(new PointSdkModule(reactContext));
+        return Arrays.<NativeModule>asList(new PointSdkRnModule(reactContext));
     }
 
     @Override
