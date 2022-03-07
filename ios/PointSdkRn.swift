@@ -7,14 +7,29 @@ class PointSdkRn: NSObject {
   private let healthKitManager = PointSDK.healthKit
   private let dataManager = PointSDK.dataManager
 
+  /** 
+   *  requiresMainQueueSetup
+   *  Necessary when constantsToExport is not available
+   *  https://reactnative.dev/docs/native-modules-ios#exporting-constants
+   */
   @objc static func requiresMainQueueSetup() -> Bool { return true }
 
+  /** 
+   *  setup           Initialize PointSDK
+   *  @param apiKey   API key
+   *  @param callback Completion handler
+   */
   @objc func setup(_ apiKey: String, callback: RCTResponseSenderBlock) -> Void {
     NSLog("The ApiKey is: %@", apiKey)
     PointSDK.setup(apiKey: apiKey)
     callback([NSNull(), apiKey])
   }
 
+  /** 
+   *  requestPermissions  Request HealthKit permissions
+   *  @param resolve      Resolve handler
+   *  @param reject       Reject handler
+   */
   @objc func requestPermissions(_ resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) -> Void {
     Task {
       do {
