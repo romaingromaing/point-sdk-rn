@@ -64,4 +64,37 @@ class PointSdkRn: NSObject {
       }
     }
   }
+
+  /** 
+   *  login               Login to Point
+   *  @param accessToken  Access token
+   *  @param resolve      Resolve handler
+   *  @param reject       Reject handler
+   */
+  @objc func login(_ accessToken: String, resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) -> Void {
+    Task {
+      do {
+        try await PointSDK.login(accessToken: accessToken)
+        resolve(true)
+      } catch {
+        reject("login", "Error logging in", error)
+      }
+    }
+  }
+
+  /** 
+   *  logout          Logout from Point
+   *  @param resolve  Resolve handler
+   *  @param reject   Reject handler
+   */
+  @objc func logout(_ resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) -> Void {
+    Task {
+      do {
+        try await PointSDK.logout()
+        resolve(true)
+      } catch {
+        reject("logout", "Error logging out", error)
+      }
+    }
+  }
 }
