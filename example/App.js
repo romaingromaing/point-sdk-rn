@@ -9,7 +9,7 @@
  */
 
 import React, {useState, useEffect} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View, Button} from 'react-native';
 import PointSdkRn from 'react-native-point-sdk';
 
 const App = () => {
@@ -21,11 +21,26 @@ const App = () => {
     });
   }, []);
 
+  const handleRequestPermissions = async () => {
+    try {
+      const result = await PointSdkRn.requestPermissions();
+      console.log(result);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <View style={styles.container}>
       <Text style={styles.welcome}>☆PointSdkRn example☆</Text>
       <Text style={styles.welcome}>☆NATIVE CALLBACK MESSAGE☆</Text>
       <Text style={styles.instructions}>Received Api Key: {apiKey}</Text>
+      <Button
+        onPress={handleRequestPermissions}
+        title="Request Permissions"
+        color="#841584"
+        accessibilityLabel="Request Permissions"
+      />
     </View>
   );
 };
