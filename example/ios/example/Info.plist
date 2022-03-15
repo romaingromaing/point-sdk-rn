@@ -51,5 +51,9 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>NSHealthShareUsageDescription</key>
+	<string>{{Your message for the usage of healthkit in your app}}</string>
+	<key>NSHealthUpdateUsageDescription</key>
+	<string>{{Your message for the usage of healthkit in your app}}</string>
 </dict>
 </plist>
