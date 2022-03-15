@@ -23,7 +23,25 @@ const App = () => {
 
   const handleRequestPermissions = async () => {
     try {
-      const result = await PointSdkRn.requestPermissions();
+      await PointSdkRn.requestPermissions();
+      console.log(true);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleLogin = async () => {
+    try {
+      await PointSdkRn.login('abc123');
+      console.log(true);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleLogout = async () => {
+    try {
+      const result = await PointSdkRn.logout();
       console.log(result);
     } catch (error) {
       console.log(error);
@@ -40,6 +58,18 @@ const App = () => {
         title="Request Permissions"
         color="#841584"
         accessibilityLabel="Request Permissions"
+      />
+      <Button
+        onPress={handleLogin}
+        title="Login"
+        color="#841584"
+        accessibilityLabel="Login"
+      />
+      <Button
+        onPress={handleLogout}
+        title="Logout"
+        color="#841584"
+        accessibilityLabel="Logout"
       />
     </View>
   );
