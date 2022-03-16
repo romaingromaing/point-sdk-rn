@@ -8,13 +8,6 @@ class PointSdkRn: NSObject {
   private let dataManager = PointSDK.dataManager
 
   /** 
-   *  requiresMainQueueSetup
-   *  Necessary when constantsToExport is not available
-   *  https://reactnative.dev/docs/native-modules-ios#exporting-constants
-   */
-  @objc static func requiresMainQueueSetup() -> Bool { return true }
-
-  /** 
    *  setup           Initialize PointSDK
    *  @param apiKey   API key
    *  @param callback Completion handler
@@ -96,5 +89,14 @@ class PointSdkRn: NSObject {
         reject("logout", "Error logging out", error)
       }
     }
+  }
+
+  /** 
+   *  constantsToExport Expose constants to React Native
+   */
+  @objc func constantsToExport() -> [String: Any]! {
+    return [
+      "healthPermissions": HealthQueryType.allCases.map { $0.rawValue }
+    ]
   }
 }
