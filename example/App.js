@@ -23,11 +23,9 @@ const App = () => {
 
   const handleRequestPermissions = async () => {
     try {
-      const result = await PointSdkRn.requestPermissions([
-        'restingHeartRate',
-        'example',
-        'workout',
-      ]);
+      const result = await PointSdkRn.requestPermissions(
+        PointSdkRn.healthPermissions,
+      );
       console.log(result);
     } catch (error) {
       console.log(error);
@@ -46,6 +44,15 @@ const App = () => {
   const handleLogout = async () => {
     try {
       const result = await PointSdkRn.logout();
+      console.log(result);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleStartBackgroundListener = async () => {
+    try {
+      const result = await PointSdkRn.startBackgroundListener();
       console.log(result);
     } catch (error) {
       console.log(error);
@@ -74,6 +81,12 @@ const App = () => {
         title="Logout"
         color="#841584"
         accessibilityLabel="Logout"
+      />
+      <Button
+        onPress={handleStartBackgroundListener}
+        title="Start Background Listener"
+        color="#841584"
+        accessibilityLabel="Start Background Listener"
       />
     </View>
   );
