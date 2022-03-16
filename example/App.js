@@ -59,6 +59,15 @@ const App = () => {
     }
   };
 
+  const handleStopBackgroundListener = async () => {
+    try {
+      const result = await PointSdkRn.stopBackgroundListener();
+      console.log(result);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <View style={styles.container}>
       <Text style={styles.welcome}>☆PointSdkRn example☆</Text>
@@ -67,26 +76,32 @@ const App = () => {
       <Button
         onPress={handleRequestPermissions}
         title="Request Permissions"
-        color="#841584"
+        color="blue"
         accessibilityLabel="Request Permissions"
       />
       <Button
         onPress={handleLogin}
         title="Login"
-        color="#841584"
+        color="blue"
         accessibilityLabel="Login"
       />
       <Button
         onPress={handleLogout}
         title="Logout"
-        color="#841584"
+        color="red"
         accessibilityLabel="Logout"
       />
       <Button
         onPress={handleStartBackgroundListener}
         title="Start Background Listener"
-        color="#841584"
+        color="green"
         accessibilityLabel="Start Background Listener"
+      />
+      <Button
+        onPress={handleStopBackgroundListener}
+        title="Stop Background Listener"
+        color="red"
+        accessibilityLabel="Stop Background Listener"
       />
     </View>
   );

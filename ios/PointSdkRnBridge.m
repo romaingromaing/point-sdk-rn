@@ -7,6 +7,7 @@
   RCT_EXTERN_METHOD(login:(NSString *)accessToken resolve: (RCTPromiseResolveBlock)resolve rejecter: (RCTPromiseRejectBlock)reject)
   RCT_EXTERN_METHOD(logout:(RCTPromiseResolveBlock)resolve rejecter: (RCTPromiseRejectBlock)reject)
   RCT_EXTERN_METHOD(startBackgroundListener:(RCTPromiseResolveBlock)resolve rejecter: (RCTPromiseRejectBlock)reject)
+  RCT_EXTERN_METHOD(stopBackgroundListener:(RCTPromiseResolveBlock)resolve rejecter: (RCTPromiseRejectBlock)reject)
 
   + (BOOL)requiresMainQueueSetup
   {

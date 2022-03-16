@@ -77,6 +77,11 @@ class PointSdkRn: NSObject {
     }
   }
   
+  /**
+   *  startBackgroundListener  Start background listener
+   *  @param resolve                Resolve handler
+   *  @param reject                   Reject handler
+   */
   @objc func startBackgroundListener(_ resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) -> Void {
     Task {
       do {
@@ -85,6 +90,22 @@ class PointSdkRn: NSObject {
         } updateHandler: { result in
             resolve(result)
         }
+      } catch {
+        reject("startBackgroundListener", "Error starting background listeners", error)
+      }
+    }
+  }
+  
+  /**
+   *  stopBackgroundListener  Stop background listener
+   *  @param resolve                Resolve handler
+   *  @param reject                   Reject handler
+   */
+  @objc func stopBackgroundListener(_ resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) -> Void {
+    Task {
+      do {
+        try await healthKitManager?.disableAllBackgroundDelivery()
+        resolve(true)
       } catch {
         reject("startBackgroundListener", "Error starting background listeners", error)
       }
