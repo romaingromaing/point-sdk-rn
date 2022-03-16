@@ -23,8 +23,12 @@ const App = () => {
 
   const handleRequestPermissions = async () => {
     try {
-      await PointSdkRn.requestPermissions();
-      console.log(true);
+      const result = await PointSdkRn.requestPermissions([
+        'restingHeartRate',
+        'example',
+        'workout',
+      ]);
+      console.log(result);
     } catch (error) {
       console.log(error);
     }
