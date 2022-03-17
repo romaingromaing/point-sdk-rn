@@ -79,8 +79,8 @@ class PointSdkRn: NSObject {
   
   /**
    *  startBackgroundListener  Start background listener
-   *  @param resolve                Resolve handler
-   *  @param reject                   Reject handler
+   *  @param resolve           Resolve handler
+   *  @param reject            Reject handler
    */
   @objc func startBackgroundListener(_ resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) -> Void {
     Task {
@@ -98,8 +98,8 @@ class PointSdkRn: NSObject {
   
   /**
    *  stopBackgroundListener  Stop background listener
-   *  @param resolve                Resolve handler
-   *  @param reject                   Reject handler
+   *  @param resolve          Resolve handler
+   *  @param reject           Reject handler
    */
   @objc func stopBackgroundListener(_ resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) -> Void {
     Task {
