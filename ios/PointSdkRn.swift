@@ -6,15 +6,8 @@ import HealthKit
 class PointSdkRn: NSObject {
   private let healthKitManager = PointSDK.healthKit
   private let dataManager = PointSDK.dataManager
-
-  /** 
-   *  requiresMainQueueSetup
-   *  Necessary when constantsToExport is not available
-   *  https://reactnative.dev/docs/native-modules-ios#exporting-constants
-   */
-  @objc static func requiresMainQueueSetup() -> Bool { return true }
-
-  /** 
+  
+  /**
    *  setup           Initialize PointSDK
    *  @param apiKey   API key
    *  @param callback Completion handler
@@ -24,48 +17,34 @@ class PointSdkRn: NSObject {
     PointSDK.setup(apiKey: apiKey)
     callback([NSNull(), apiKey])
   }
-
-  /** 
-   *  requestPermissions  Request HealthKit permissions
-   *  @param resolve      Resolve handler
-   *  @param reject       Reject handler
+  
+  /**
+   *  requestPermissions	Request HealthKit permissions
+   *  @param permissions  Permisisons to request
+   *  @param resolve     	Resolve handler
+   *  @param reject      	Reject handler
    */
-  @objc func requestPermissions(_ resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) -> Void {
+  @objc func requestPermissions(_ permissions: Array<String>?, resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) -> Void {
     Task {
       do {
+        var permissionsToRead = HealthQueryType.allCases
+        
+        if let permissions = permissions {
+          permissionsToRead = permissions.compactMap { HealthQueryType(rawValue: $0) }
+        }
+        
         try await healthKitManager?.requestAuthorizationIfPossible(
-          toRead: [
-            // Characteristic
-            HKCharacteristicType(.dateOfBirth),
-
-            // Quantity
-            HKQuantityType(.activeEnergyBurned),
-            HKQuantityType(.basalEnergyBurned),
-            HKQuantityType(.stepCount),
-            HKQuantityType(.vo2Max),
-            HKQuantityType(.heartRate),
-            HKQuantityType(.restingHeartRate),
-            HKQuantityType(.heartRateVariabilitySDNN),
-            HKQuantityType(.distanceCycling),
-            HKQuantityType(.distanceWalkingRunning),
-
-            // Category
-            HKCategoryType(.sleepAnalysis),
-            HKCategoryType(.mindfulSession),
-
-            // Series
-            HKSeriesType.workoutType(),
-            HKSeriesType.workoutRoute(),
-          ]
+          toRead: Set(permissionsToRead)
         )
+        
         resolve(true)
       } catch {
         reject("requestPermissions", "Error requesting permissions", error)
       }
     }
   }
-
-  /** 
+  
+  /**
    *  login               Login to Point
    *  @param accessToken  Access token
    *  @param resolve      Resolve handler
@@ -81,8 +60,8 @@ class PointSdkRn: NSObject {
       }
     }
   }
-
-  /** 
+  
+  /**
    *  logout          Logout from Point
    *  @param resolve  Resolve handler
    *  @param reject   Reject handler
@@ -96,5 +75,14 @@ class PointSdkRn: NSObject {
         reject("logout", "Error logging out", error)
       }
     }
+  }
+  
+  /**
+   *  constantsToExport	Expose constants to React Native
+   */
+  @objc func constantsToExport() -> [String: Any]! {
+    return [
+      "healthPermissions": HealthQueryType.allCases.map { $0.rawValue }
+    ]
   }
 }
