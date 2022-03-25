@@ -1,6 +1,5 @@
 import Foundation
 import PointSDK
-import HealthKit
 
 @objc(PointSdkRn)
 class PointSdkRn: NSObject {
@@ -39,7 +38,7 @@ class PointSdkRn: NSObject {
         
         resolve(true)
       } catch {
-        reject("requestPermissions", "Error requesting permissions", error)
+        reject("requestPermissions", error.localizedDescription, error)
       }
     }
   }
@@ -56,7 +55,7 @@ class PointSdkRn: NSObject {
         try await PointSDK.login(accessToken: accessToken)
         resolve(true)
       } catch {
-        reject("login", "Error logging in", error)
+        reject("login", error.localizedDescription, error)
       }
     }
   }
@@ -72,7 +71,7 @@ class PointSdkRn: NSObject {
         try await PointSDK.logout()
         resolve(true)
       } catch {
-        reject("logout", "Error logging out", error)
+        reject("logout", error.localizedDescription, error)
       }
     }
   }
@@ -86,12 +85,12 @@ class PointSdkRn: NSObject {
     Task {
       do {
         try await healthKitManager?.enableBackgroundDelivery {
-            .heartRate(startDate: Calendar.current.date(byAdding: .hour, value: -12, to: .init())!)
+          .heartRate(startDate: Calendar.current.date(byAdding: .hour, value: -12, to: .init())!)
         } updateHandler: { result in
-            resolve(result)
+          resolve(result)
         }
       } catch {
-        reject("startBackgroundListener", "Error starting background listeners", error)
+        reject("startBackgroundListener", error.localizedDescription, error)
       }
     }
   }
@@ -107,7 +106,31 @@ class PointSdkRn: NSObject {
         try await healthKitManager?.disableAllBackgroundDelivery()
         resolve(true)
       } catch {
-        reject("startBackgroundListener", "Error starting background listeners", error)
+        reject("startBackgroundListener", error.localizedDescription, error)
+      }
+    }
+  }
+  
+  /**
+   *  workouts              Retrieve workouts
+   *  @param resolve  Resolve handler
+   *  @param reject     Reject handler
+   */
+  @objc func getUserWorkouts(_ offset: Int = 0, resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) -> Void {
+    Task {
+      do {
+        let workouts = try await dataManager.getUserWorkouts(offset: offset)
+        resolve(workouts.map{
+          [
+            "id": $0.id,
+            "calories": $0.calories,
+            "duration": $0.duration,
+            "start": $0.start,
+            "end": $0.end
+          ]
+        })
+      } catch {
+        reject("getUserWorkouts", error.localizedDescription, error)
       }
     }
   }

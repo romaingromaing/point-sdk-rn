@@ -14,6 +14,13 @@ import PointSdkRn from 'react-native-point-sdk';
 
 const App = () => {
   const [apiKey, setApiKey] = useState('not defined');
+  const [workouts, setWorkouts] = useState([]);
+
+  async function foobar() {
+    const workouts = await PointSdkRn.getUserWorkouts(0);
+    console.log(workouts);
+    setWorkouts(workouts);
+  }
 
   useEffect(() => {
     PointSdkRn.setup('abc123', function callback(_, result) {
@@ -33,8 +40,11 @@ const App = () => {
   };
 
   const handleLogin = async () => {
+    // eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIiwiaXNzIjoiaHR0cHM6Ly9wb2ludC1hcHAtZGV2LnVzLmF1dGgwLmNvbS8ifQ..2k9y9Cp7945h0T4I.XdUPlgT1CHi7RF0e4RnKEpiip0_Mx0vRWdKRxqT9tH9toqmXlgLwrlA1xpl_kkfPCUPv-Uktwl7YTeAXBZfS-xhS1cOifuYRzWJABlZzcc1UIUCI7mf98fsW_nmf7TkdX89MrPlMRYs5hDcJ3tOOSnFdR4kjjuyNCBNyl0P6PKLfewv9m8ehODCNsGMS2hc9xK8eA2uTaWsLv-asrtfow87uz-JmH_HEm8brYeZbYk4lRQH_g2XDacXZzI5OGHCeE3O4UPw5M5rpEBGu4EzLEst4FY_x1YRKieSj72OaMhpbiY39i8GB-W4R2_Jb57nhEpCJ62mtzcRlGOSgI7ulVNIdO8bl2sYK-T8BpWyPmk_gCWor.jYzC6HoGDHtiH6iUZOCF4w
     try {
-      await PointSdkRn.login('abc123');
+      await PointSdkRn.login(
+        'eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIiwiaXNzIjoiaHR0cHM6Ly9wb2ludC1hcHAtZGV2LnVzLmF1dGgwLmNvbS8ifQ..2k9y9Cp7945h0T4I.XdUPlgT1CHi7RF0e4RnKEpiip0_Mx0vRWdKRxqT9tH9toqmXlgLwrlA1xpl_kkfPCUPv-Uktwl7YTeAXBZfS-xhS1cOifuYRzWJABlZzcc1UIUCI7mf98fsW_nmf7TkdX89MrPlMRYs5hDcJ3tOOSnFdR4kjjuyNCBNyl0P6PKLfewv9m8ehODCNsGMS2hc9xK8eA2uTaWsLv-asrtfow87uz-JmH_HEm8brYeZbYk4lRQH_g2XDacXZzI5OGHCeE3O4UPw5M5rpEBGu4EzLEst4FY_x1YRKieSj72OaMhpbiY39i8GB-W4R2_Jb57nhEpCJ62mtzcRlGOSgI7ulVNIdO8bl2sYK-T8BpWyPmk_gCWor.jYzC6HoGDHtiH6iUZOCF4w',
+      );
       console.log(true);
     } catch (error) {
       console.log(error);
@@ -91,7 +101,7 @@ const App = () => {
         color="red"
         accessibilityLabel="Logout"
       />
-      <Button
+      {/* <Button
         onPress={handleStartBackgroundListener}
         title="Start Background Listener"
         color="green"
@@ -100,6 +110,12 @@ const App = () => {
       <Button
         onPress={handleStopBackgroundListener}
         title="Stop Background Listener"
+        color="red"
+        accessibilityLabel="Stop Background Listener"
+      /> */}
+      <Button
+        onPress={foobar}
+        title="Get Workouts"
         color="red"
         accessibilityLabel="Stop Background Listener"
       />
