@@ -11,7 +11,8 @@ class PointSdkRn: NSObject {
    *  @param apiKey   API key
    *  @param callback Completion handler
    */
-  @objc func setup(_ apiKey: String, callback: RCTResponseSenderBlock) -> Void {
+  @objc
+  func setup(_ apiKey: String, callback: RCTResponseSenderBlock) -> Void {
     NSLog("The ApiKey is: %@", apiKey)
     PointSDK.setup(apiKey: apiKey)
     callback([NSNull(), apiKey])
@@ -23,7 +24,8 @@ class PointSdkRn: NSObject {
    *  @param resolve     	Resolve handler
    *  @param reject      	Reject handler
    */
-  @objc func requestPermissions(_ permissions: Array<String>?, resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) -> Void {
+  @objc
+  func requestPermissions(_ permissions: Array<String>?, resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) -> Void {
     Task {
       do {
         var permissionsToRead = HealthQueryType.allCases
@@ -49,7 +51,8 @@ class PointSdkRn: NSObject {
    *  @param resolve      Resolve handler
    *  @param reject       Reject handler
    */
-  @objc func login(_ accessToken: String, resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) -> Void {
+  @objc
+  func login(_ accessToken: String, resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) -> Void {
     Task {
       do {
         try await PointSDK.login(accessToken: accessToken)
@@ -61,11 +64,37 @@ class PointSdkRn: NSObject {
   }
   
   /**
+   *  getUserData       Get user data
+   *  @param resolve  Resolve handler
+   *  @param reject     Reject handler
+   */
+  @objc
+  func getUserData(_ resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) -> Void {
+    Task {
+      do {
+        let user = try await dataManager.getUserData()
+        resolve(
+          [
+            "id": user?.id,
+            "email": user?.email,
+            "firstName": user?.firstName,
+            "birthday": user?.birthday,
+            "goal": user?.goal
+          ]
+        )
+      } catch {
+        reject("getUserData", error.localizedDescription, error)
+      }
+    }
+  }
+  
+  /**
    *  logout          Logout from Point
    *  @param resolve  Resolve handler
    *  @param reject   Reject handler
    */
-  @objc func logout(_ resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) -> Void {
+  @objc
+  func logout(_ resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) -> Void {
     Task {
       do {
         try await PointSDK.logout()
@@ -81,7 +110,8 @@ class PointSdkRn: NSObject {
    *  @param resolve           Resolve handler
    *  @param reject            Reject handler
    */
-  @objc func startBackgroundListener(_ resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) -> Void {
+  @objc
+  func startBackgroundListener(_ resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) -> Void {
     Task {
       do {
         try await healthKitManager?.enableBackgroundDelivery {
@@ -100,7 +130,8 @@ class PointSdkRn: NSObject {
    *  @param resolve          Resolve handler
    *  @param reject           Reject handler
    */
-  @objc func stopBackgroundListener(_ resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) -> Void {
+  @objc
+  func stopBackgroundListener(_ resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) -> Void {
     Task {
       do {
         try await healthKitManager?.disableAllBackgroundDelivery()
@@ -116,7 +147,8 @@ class PointSdkRn: NSObject {
    *  @param resolve  Resolve handler
    *  @param reject     Reject handler
    */
-  @objc func getUserWorkouts(_ offset: Int = 0, resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) -> Void {
+  @objc
+  func getUserWorkouts(_ offset: Int = 0, resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) -> Void {
     Task {
       do {
         let workouts = try await dataManager.getUserWorkouts(offset: offset)
@@ -138,7 +170,8 @@ class PointSdkRn: NSObject {
   /**
    *  constantsToExport	Expose constants to React Native
    */
-  @objc func constantsToExport() -> [String: Any]! {
+  @objc
+  func constantsToExport() -> [String: Any]! {
     return [
       "healthPermissions": HealthQueryType.allCases.map { $0.rawValue }
     ]

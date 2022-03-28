@@ -16,6 +16,8 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
 function HomeScreen() {
+  const [user, setUser] = useState(null);
+
   const handleRequestPermissions = async () => {
     try {
       const result = await PointSdkRn.requestPermissions(
@@ -32,6 +34,8 @@ function HomeScreen() {
       await PointSdkRn.login(
         'eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIiwiaXNzIjoiaHR0cHM6Ly9wb2ludC1hcHAtZGV2LnVzLmF1dGgwLmNvbS8ifQ..uid-c9Gz9IAiN5T8.0sZiHvFJfusDcyXoe5Llw1A7oZkEwCgmwsr9VX2jtp2UJqtScSHpkLmA6soGQ64avyLs9qb6xTTeOiewm4WF_9E-v5bunQ1ey2G8sCM0udqtdPnVzOuM1uqUSlJDTV1zOFdLTpRegQIIBRxT-WVMIamGL4WcTa3exingT7eyU_RHLwn4LcEjz55uyDZzOhbsHUz_xAq3bJ9yHIHHCBCsYdDgTfIx-i2OSjuT38MDicXVmm2vFBIxalJDBGbjhTXLDYLnONpeZytV89pAjIdNme750jMZWwGH47rx6a4amYi9XhPtBuNiUC5yYqcvvwj7m_gkAlWuFKECCIU7l4XxVZ2THRbw0m-zNdIfD2tc6ZFfkHRCDYsJssZuFJ3LAydBvF8qzojJ.xQ6MD5_l2OFnLg88F6Xg4w',
       );
+      const userData = await PointSdkRn.getUserData();
+      setUser(userData);
       console.log('Successfully logged in');
     } catch (error) {
       console.log(error);
@@ -41,6 +45,7 @@ function HomeScreen() {
   const handleLogout = async () => {
     try {
       await PointSdkRn.logout();
+      setUser(null);
       console.log('Successfully logged out');
     } catch (error) {
       console.log(error);
@@ -67,6 +72,11 @@ function HomeScreen() {
 
   return (
     <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+      {user && (
+        <Text style={{fontSize: 18, fontWeight: 'bold'}}>
+          Welcome, {user.email}!
+        </Text>
+      )}
       <Button onPress={handleRequestPermissions} title="Request Permissions" />
       <Button onPress={handleLogin} title="Login" />
       <Button onPress={handleLogout} title="Logout" />
