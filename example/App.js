@@ -9,17 +9,14 @@
  */
 
 import React, {useState, useEffect} from 'react';
-import {StyleSheet, Text, View, Button} from 'react-native';
+import {Button, Text, View, FlatList} from 'react-native';
 import PointSdkRn from 'react-native-point-sdk';
+import styled from 'styled-components/native';
+import {NavigationContainer} from '@react-navigation/native';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
-const App = () => {
-  const [apiKey, setApiKey] = useState('not defined');
-
-  useEffect(() => {
-    PointSdkRn.setup('abc123', function callback(_, result) {
-      setApiKey(result);
-    });
-  }, []);
+function HomeScreen() {
+  const [user, setUser] = useState(null);
 
   const handleRequestPermissions = async () => {
     try {
@@ -34,8 +31,12 @@ const App = () => {
 
   const handleLogin = async () => {
     try {
-      await PointSdkRn.login('abc123');
-      console.log(true);
+      await PointSdkRn.login(
+        'eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIiwiaXNzIjoiaHR0cHM6Ly9wb2ludC1hcHAtZGV2LnVzLmF1dGgwLmNvbS8ifQ..uid-c9Gz9IAiN5T8.0sZiHvFJfusDcyXoe5Llw1A7oZkEwCgmwsr9VX2jtp2UJqtScSHpkLmA6soGQ64avyLs9qb6xTTeOiewm4WF_9E-v5bunQ1ey2G8sCM0udqtdPnVzOuM1uqUSlJDTV1zOFdLTpRegQIIBRxT-WVMIamGL4WcTa3exingT7eyU_RHLwn4LcEjz55uyDZzOhbsHUz_xAq3bJ9yHIHHCBCsYdDgTfIx-i2OSjuT38MDicXVmm2vFBIxalJDBGbjhTXLDYLnONpeZytV89pAjIdNme750jMZWwGH47rx6a4amYi9XhPtBuNiUC5yYqcvvwj7m_gkAlWuFKECCIU7l4XxVZ2THRbw0m-zNdIfD2tc6ZFfkHRCDYsJssZuFJ3LAydBvF8qzojJ.xQ6MD5_l2OFnLg88F6Xg4w',
+      );
+      const userData = await PointSdkRn.getUserData();
+      setUser(userData);
+      console.log('Successfully logged in');
     } catch (error) {
       console.log(error);
     }
@@ -43,8 +44,9 @@ const App = () => {
 
   const handleLogout = async () => {
     try {
-      const result = await PointSdkRn.logout();
-      console.log(result);
+      await PointSdkRn.logout();
+      setUser(null);
+      console.log('Successfully logged out');
     } catch (error) {
       console.log(error);
     }
@@ -69,61 +71,75 @@ const App = () => {
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.welcome}>☆PointSdkRn example☆</Text>
-      <Text style={styles.welcome}>☆NATIVE CALLBACK MESSAGE☆</Text>
-      <Text style={styles.instructions}>Received Api Key: {apiKey}</Text>
-      <Button
-        onPress={handleRequestPermissions}
-        title="Request Permissions"
-        color="blue"
-        accessibilityLabel="Request Permissions"
-      />
-      <Button
-        onPress={handleLogin}
-        title="Login"
-        color="blue"
-        accessibilityLabel="Login"
-      />
-      <Button
-        onPress={handleLogout}
-        title="Logout"
-        color="red"
-        accessibilityLabel="Logout"
-      />
+    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+      {user && (
+        <Text style={{fontSize: 18, fontWeight: 'bold'}}>
+          Welcome, {user.email}!
+        </Text>
+      )}
+      <Button onPress={handleRequestPermissions} title="Request Permissions" />
+      <Button onPress={handleLogin} title="Login" />
+      <Button onPress={handleLogout} title="Logout" />
       <Button
         onPress={handleStartBackgroundListener}
         title="Start Background Listener"
-        color="green"
-        accessibilityLabel="Start Background Listener"
       />
       <Button
         onPress={handleStopBackgroundListener}
         title="Stop Background Listener"
-        color="red"
-        accessibilityLabel="Stop Background Listener"
       />
     </View>
   );
+}
+
+function WorkoutsScreen() {
+  const [workouts, setWorkouts] = useState([]);
+
+  async function getWorkouts() {
+    setWorkouts([]);
+    setWorkouts(await PointSdkRn.getUserWorkouts(0));
+  }
+
+  return (
+    <View>
+      <Button onPress={getWorkouts} title="Get Workouts" />
+      <FlatList
+        data={workouts}
+        renderItem={({item}) => (
+          <WorkoutItem>
+            <Text>ID: {item.id}</Text>
+            <Text>Calories: {item.calories}</Text>
+            <Text>Duration: {item.duration}</Text>
+            <Text>Start: {item.start}</Text>
+            <Text>End: {item.end}</Text>
+          </WorkoutItem>
+        )}
+      />
+    </View>
+  );
+}
+
+const Tab = createBottomTabNavigator();
+
+const App = () => {
+  useEffect(() => {
+    PointSdkRn.setup('abc123', console.log);
+  }, []);
+
+  return (
+    <NavigationContainer>
+      <Tab.Navigator>
+        <Tab.Screen name="Home" component={HomeScreen} />
+        <Tab.Screen name="Workouts" component={WorkoutsScreen} />
+      </Tab.Navigator>
+    </NavigationContainer>
+  );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-});
+const WorkoutItem = styled.View`
+  border-bottom-width: 1px;
+  border-bottom-color: #ccc;
+  padding: 10px;
+`;
 
 export default App;
