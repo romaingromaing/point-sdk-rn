@@ -17,13 +17,13 @@ Pod::Spec.new do |s|
   # optional - use expanded license entry instead:
   # s.license    = { :type => "MIT", :file => "LICENSE" }
   s.authors      = { "Your Name" => "yourname@email.com" }
-  s.platforms    = { :ios => "15.0" }
+  s.platforms    = { :ios => "13.0" }
   s.source       = { :git => "https://github.com/github_account/react-native-point-sdk.git", :tag => "#{s.version}" }
 
   s.source_files = "ios/**/*.{h,c,cc,cpp,m,mm,swift}"
   s.requires_arc = true
 
   s.dependency "React"
-  s.dependency "PointSDK", '~> 0.0.5'
+  s.dependency "PointSDK", '~> 0.1.0'
 end
 
