@@ -121,6 +121,12 @@ const Tab = createBottomTabNavigator();
 
 const App = () => {
   useEffect(() => {
+    async function setupBackgroundListener() {
+      await PointSdkRn.setupBackgroundListener();
+    }
+
+    setupBackgroundListener();
+
     PointSdkRn.setup('foo', 'bar', PointSdkRn.healthPermissions, (_, success) =>
       console.log(success),
     );

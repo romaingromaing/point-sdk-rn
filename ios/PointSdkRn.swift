@@ -108,6 +108,24 @@ class PointSdkRn: NSObject {
    }
   
   /**
+   *  setupBackgroundListener  Setup background listener
+   *  @param resolve           Resolve handler
+   *  @param reject            Reject handler
+   */
+   @objc
+   func setupBackgroundListener(_ resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) -> Void {
+     Task {
+       do {
+         guard let healthKitManager = Point.healthKit else { return }
+         await healthKitManager.setupAllBackgroundQueries()
+         resolve(true)
+       } catch {
+         reject("setupBackgroundListener", error.localizedDescription, error)
+       }
+     }
+   }
+
+  /**
    *  startBackgroundListener  Start background listener
    *  @param resolve           Resolve handler
    *  @param reject            Reject handler
@@ -117,7 +135,6 @@ class PointSdkRn: NSObject {
      Task {
        do {
          guard let healthKitManager = Point.healthKit else { return }
-         await healthKitManager.setupAllBackgroundQueries()
          let result = try await healthKitManager.enableAllBackgroundDelivery()
          resolve(result)
        } catch {
