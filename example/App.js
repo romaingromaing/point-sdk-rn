@@ -20,9 +20,7 @@ function HomeScreen() {
 
   const handleRequestPermissions = async () => {
     try {
-      const result = await PointSdkRn.requestPermissions(
-        PointSdkRn.healthPermissions,
-      );
+      const result = await PointSdkRn.requestPermissions();
       console.log(result);
     } catch (error) {
       console.log(error);
@@ -32,7 +30,7 @@ function HomeScreen() {
   const handleLogin = async () => {
     try {
       await PointSdkRn.login(
-        'eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIiwiaXNzIjoiaHR0cHM6Ly9wb2ludC1hcHAtZGV2LnVzLmF1dGgwLmNvbS8ifQ..uid-c9Gz9IAiN5T8.0sZiHvFJfusDcyXoe5Llw1A7oZkEwCgmwsr9VX2jtp2UJqtScSHpkLmA6soGQ64avyLs9qb6xTTeOiewm4WF_9E-v5bunQ1ey2G8sCM0udqtdPnVzOuM1uqUSlJDTV1zOFdLTpRegQIIBRxT-WVMIamGL4WcTa3exingT7eyU_RHLwn4LcEjz55uyDZzOhbsHUz_xAq3bJ9yHIHHCBCsYdDgTfIx-i2OSjuT38MDicXVmm2vFBIxalJDBGbjhTXLDYLnONpeZytV89pAjIdNme750jMZWwGH47rx6a4amYi9XhPtBuNiUC5yYqcvvwj7m_gkAlWuFKECCIU7l4XxVZ2THRbw0m-zNdIfD2tc6ZFfkHRCDYsJssZuFJ3LAydBvF8qzojJ.xQ6MD5_l2OFnLg88F6Xg4w',
+        'eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIiwiaXNzIjoiaHR0cHM6Ly9wb2ludC1hcHAtZGV2LnVzLmF1dGgwLmNvbS8ifQ..7k85_xoymzp4TdU3.947hcoZJX1wVAsHoQlolM97qGz3uFCfYyJBSkXi8jp1gQ0t-qSgC0YrMArs9K-AwbarM3T84K3bLaBsi-HY4MBtQK7brG2ac-g6HsI85M38PXpTCQfqHYLTsFdglWUJSjVyir8SI9sTMTJMrS1Kdi-b-s6sNwAz8yaJzfsXCZ0WXILF2fA9AFFlKotudi_M7a95FpPosJMjuHz2wYpLHBC1OHWZI2dIgjg85ptASe7IGKJRQF-0zj1txNnHdl6EU2Uh_6wdjHaPBAyNFM8yJulfEiTG_vcWPmpubgpDueOdOSqXWHO04uWpPG-gMDNvjfVFr-pvTj8ZAtg-tCX_tCueYODwi5FNdyI8XlhFMiftPngg6.sTguS1fmttU2AryKbk5oOw',
       );
       const userData = await PointSdkRn.getUserData();
       setUser(userData);
@@ -123,7 +121,9 @@ const Tab = createBottomTabNavigator();
 
 const App = () => {
   useEffect(() => {
-    PointSdkRn.setup('abc123', console.log);
+    PointSdkRn.setup('foo', 'bar', PointSdkRn.healthPermissions, (_, success) =>
+      console.log(success),
+    );
   }, []);
 
   return (
