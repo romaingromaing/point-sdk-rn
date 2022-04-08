@@ -108,55 +108,55 @@ class PointSdkRn: NSObject {
    }
   
   /**
-   *  setupBackgroundListener  Setup background listener
+   *  setupBackgroundListeners Setup background listeners
    *  @param resolve           Resolve handler
    *  @param reject            Reject handler
    */
    @objc
-   func setupBackgroundListener(_ resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) -> Void {
+   func setupBackgroundListeners(_ resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) -> Void {
      Task {
        do {
          guard let healthKitManager = Point.healthKit else { return }
          await healthKitManager.setupAllBackgroundQueries()
          resolve(true)
        } catch {
-         reject("setupBackgroundListener", error.localizedDescription, error)
+         reject("setupBackgroundListeners", error.localizedDescription, error)
        }
      }
    }
 
   /**
-   *  startBackgroundListener  Start background listener
+   *  startBackgroundListeners Start background listeners
    *  @param resolve           Resolve handler
    *  @param reject            Reject handler
    */
    @objc
-   func startBackgroundListener(_ resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) -> Void {
+   func startBackgroundListeners(_ resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) -> Void {
      Task {
        do {
          guard let healthKitManager = Point.healthKit else { return }
          let result = try await healthKitManager.enableAllBackgroundDelivery()
          resolve(result)
        } catch {
-         reject("startBackgroundListener", error.localizedDescription, error)
+         reject("startBackgroundListeners", error.localizedDescription, error)
        }
      }
    }
   
   /**
-   *  stopBackgroundListener  Stop background listener
+   *  stopBackgroundListeners Stop background listener
    *  @param resolve          Resolve handler
    *  @param reject           Reject handler
    */
    @objc
-   func stopBackgroundListener(_ resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) -> Void {
+   func stopBackgroundListeners(_ resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) -> Void {
      Task {
        do {
          guard let healthKitManager = Point.healthKit else { return }
          try await healthKitManager.disableAllBackgroundDelivery()
          resolve(true)
        } catch {
-         reject("stopBackgroundListener", error.localizedDescription, error)
+         reject("stopBackgroundListeners", error.localizedDescription, error)
        }
      }
    }

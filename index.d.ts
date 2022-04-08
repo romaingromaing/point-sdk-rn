@@ -28,9 +28,10 @@ export function setup(
   permissions: Permissions[],
   callback: Callback
 ): void;
-export function startBackgroundListener(): Promise<any>;
-export function stopBackgroundListener(): Promise<any>;
-export function setupBackgroundListener(): Promise<any>;
+
+export function setupBackgroundListeners(): Promise<any>;
+export function startBackgroundListeners(): Promise<any>;
+export function stopBackgroundListeners(): Promise<any>;
 export function requestPermissions(): Promise<any>;
 
 // Auth

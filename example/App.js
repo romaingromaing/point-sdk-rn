@@ -50,18 +50,18 @@ function HomeScreen() {
     }
   };
 
-  const handleStartBackgroundListener = async () => {
+  const handleStartBackgroundListeners = async () => {
     try {
-      const result = await PointSdkRn.startBackgroundListener();
+      const result = await PointSdkRn.startBackgroundListeners();
       console.log(result);
     } catch (error) {
       console.log(error);
     }
   };
 
-  const handleStopBackgroundListener = async () => {
+  const handleStopBackgroundListeners = async () => {
     try {
-      const result = await PointSdkRn.stopBackgroundListener();
+      const result = await PointSdkRn.stopBackgroundListeners();
       console.log(result);
     } catch (error) {
       console.log(error);
@@ -79,11 +79,11 @@ function HomeScreen() {
       <Button onPress={handleLogin} title="Login" />
       <Button onPress={handleLogout} title="Logout" />
       <Button
-        onPress={handleStartBackgroundListener}
+        onPress={handleStartBackgroundListeners}
         title="Start Background Listener"
       />
       <Button
-        onPress={handleStopBackgroundListener}
+        onPress={handleStopBackgroundListeners}
         title="Stop Background Listener"
       />
     </View>
@@ -121,11 +121,11 @@ const Tab = createBottomTabNavigator();
 
 const App = () => {
   useEffect(() => {
-    async function setupBackgroundListener() {
-      await PointSdkRn.setupBackgroundListener();
+    async function setupBackgroundListeners() {
+      await PointSdkRn.setupBackgroundListeners();
     }
 
-    setupBackgroundListener();
+    setupBackgroundListeners();
 
     PointSdkRn.setup('foo', 'bar', PointSdkRn.healthPermissions, (_, success) =>
       console.log(success),
