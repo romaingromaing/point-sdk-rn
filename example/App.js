@@ -127,8 +127,12 @@ const App = () => {
 
     setupBackgroundListeners();
 
-    PointSdkRn.setup('foo', 'bar', PointSdkRn.healthPermissions, (_, success) =>
-      console.log(success),
+    PointSdkRn.setup(
+      'foo',
+      'bar',
+      PointSdkRn.healthPermissions,
+      'development',
+      (_, success) => console.log(success),
     );
   }, []);
 

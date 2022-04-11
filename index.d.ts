@@ -26,6 +26,7 @@ export function setup(
   clientId: string,
   clientSecret: string,
   permissions: Permissions[],
+  environment: string,
   callback: Callback
 ): void;
 

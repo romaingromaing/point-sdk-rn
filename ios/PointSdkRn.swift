@@ -3,6 +3,19 @@ import PointSDK
 
 @objc(PointSdkRn)
 class PointSdkRn: NSObject {
+  func environmentsMapping(type: String) -> APIEnvironment {
+    switch type {
+    case "development":
+      return .development
+    case "staging":
+      return .staging
+    case "production":
+      return .production
+    default:
+      return .development
+    }
+  }
+
   /**
    *  setup               Initialize PointSDK
    *  @param clientId     Client ID
@@ -11,7 +24,7 @@ class PointSdkRn: NSObject {
    *  @param callback     Completion handler
    */
   @objc
-  func setup(_ clientId: String, clientSecret: String, permissions: Array<String>?, callback: RCTResponseSenderBlock) -> Void {
+  func setup(_ clientId: String, clientSecret: String, permissions: Array<String>?, environment: String, callback: RCTResponseSenderBlock) -> Void {
     var queriesTypes = HealthQueryType.allCases
     
     if let permissions = permissions {
@@ -22,7 +35,7 @@ class PointSdkRn: NSObject {
       clientId: clientId, 
       clientSecret: clientSecret, 
       queryTypes: Set(queriesTypes),
-      environment: .development
+      environment: environmentsMapping(type: environment)
     )
     
     callback([NSNull(), true])
