@@ -44,9 +44,24 @@ export enum Goal {
   AthleticPerformance = "athleticPerformance",
 }
 
+export enum SpecificGoal {
+  BuildLeanMuscle = "buildLeanMuscle",
+  LoseWeight = "loseWeight",
+  PrepareForEvent = "prepareForEvent",
+  AccomplishMore = "accomplishMore",
+  MaintainHealth = "maintainHealth",
+}
+
+// Health Permissions
 export const healthPermissions: Permissions[];
 
-// Setup
+// Point Health Kit
+export function setupBackgroundListeners(): Promise<any>;
+export function startBackgroundListeners(): Promise<any>;
+export function stopBackgroundListeners(): Promise<any>;
+export function requestPermissions(): Promise<any>;
+
+// PointSDK
 export function setup(
   clientId: string,
   clientSecret: string,
@@ -54,20 +69,14 @@ export function setup(
   environment: string,
   callback: Callback
 ): void;
-
-export function setupBackgroundListeners(): Promise<any>;
-export function startBackgroundListeners(): Promise<any>;
-export function stopBackgroundListeners(): Promise<any>;
-export function requestPermissions(): Promise<any>;
-
-// Auth
 export function login(accessToken: string): Promise<any>;
 export function logout(): Promise<any>;
 
-// User Data
+// Point API
 export function getUserData(): Promise<User>;
 export function getUserWorkouts(offset: number): Promise<Workout[]>;
 export function getUserWorkoutById(id: number): Promise<Workout>;
-export function getDailyHistory(offset: number): Promise<[{ date: Date; metrics: HealthMetric[] }]>;
 export function getWorkoutRecommendations(): Promise<Recommendation[]>;
+export function getDailyHistory(offset: number): Promise<[{ date: Date; metrics: HealthMetric[] }]>;
 export function setUserGoal(goal: Goal): Promise<User>;
+export function setUserSpecificGoal(specificGoal: SpecificGoal): Promise<User>;
