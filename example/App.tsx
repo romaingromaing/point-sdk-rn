@@ -16,7 +16,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
 function HomeScreen() {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState<PointSdkRn.User | null>(null);
 
   const handleRequestPermissions = async () => {
     try {
@@ -91,7 +91,7 @@ function HomeScreen() {
 }
 
 function WorkoutsScreen() {
-  const [workouts, setWorkouts] = useState([]);
+  const [workouts, setWorkouts] = useState<PointSdkRn.Workout[]>([]);
 
   async function getWorkouts() {
     setWorkouts([]);
@@ -108,8 +108,12 @@ function WorkoutsScreen() {
             <Text>ID: {item.id}</Text>
             <Text>Calories: {item.calories}</Text>
             <Text>Duration: {item.duration}</Text>
-            <Text>Start: {item.start}</Text>
-            <Text>End: {item.end}</Text>
+            <Text>
+              <>Start: {item.start}</>
+            </Text>
+            <Text>
+              <>End: {item.end}</>
+            </Text>
           </WorkoutItem>
         )}
       />

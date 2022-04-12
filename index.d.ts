@@ -1,9 +1,9 @@
 /// <reference types="typescript" />
 
 type Callback = (_: any, success: any) => void;
-type Permissions = ["example"];
+export type Permissions = ["example"];
 
-type User = {
+export type User = {
   id: string;
   email: string;
   firstName: string;
@@ -11,15 +11,16 @@ type User = {
   goal: string;
 };
 
-type Workout = {
+export type Workout = {
   id: string;
   calories: number;
   distance: number;
+  duration: number;
   start: Date;
   end: Date;
 };
 
-type HealthMetric = {
+export type HealthMetric = {
   type: string;
   date: Date;
   value: number;
@@ -27,7 +28,7 @@ type HealthMetric = {
   workoutId: number;
 };
 
-type Recommendation = {
+export type Recommendation = {
   id: number;
   date: Date;
   activityId: number;
@@ -60,7 +61,7 @@ export function logout(): Promise<any>;
 
 // User Data
 export function getUserData(): Promise<User>;
-export function getUserWorkouts(offset: number): Promise<[Workout]>;
+export function getUserWorkouts(offset: number): Promise<Workout[]>;
 export function getUserWorkoutById(id: number): Promise<Workout>;
 export function getDailyHistory(offset: number): Promise<[{ date: Date; metrics: HealthMetric[] }]>;
 export function getWorkoutsRecommendations(date: Date): Promise<Recommendation[]>;
