@@ -10,9 +10,12 @@ RCT_EXTERN_METHOD(setupBackgroundListeners:(RCTPromiseResolveBlock)resolve rejec
 RCT_EXTERN_METHOD(startBackgroundListeners:(RCTPromiseResolveBlock)resolve rejecter: (RCTPromiseRejectBlock)reject)
 RCT_EXTERN_METHOD(stopBackgroundListeners:(RCTPromiseResolveBlock)resolve rejecter: (RCTPromiseRejectBlock)reject)
 RCT_EXTERN_METHOD(getUserWorkouts:(double)offset resolve: (RCTPromiseResolveBlock)resolve rejecter: (RCTPromiseRejectBlock)reject)
+RCT_EXTERN_METHOD(getUserWorkoutById:(double)id resolve: (RCTPromiseResolveBlock)resolve rejecter: (RCTPromiseRejectBlock)reject)
+RCT_EXTERN_METHOD(getDailyHistory:(double)offset resolve: (RCTPromiseResolveBlock)resolve rejecter: (RCTPromiseRejectBlock)reject)
+RCT_EXTERN_METHOD(getWorkoutsRecommendations:(NSString)date resolve: (RCTPromiseResolveBlock)resolve rejecter: (RCTPromiseRejectBlock)reject)
 
 + (BOOL)requiresMainQueueSetup
 {
-    return YES;
+  return YES;
 }
 @end

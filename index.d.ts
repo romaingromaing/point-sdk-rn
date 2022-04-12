@@ -19,6 +19,25 @@ type Workout = {
   end: Date;
 };
 
+type HealthMetric = {
+  type: string;
+  date: Date;
+  value: number;
+  variance: number;
+  workoutId: number;
+};
+
+type Recommendation = {
+  id: number;
+  date: Date;
+  activityId: number;
+  activityName: string;
+  workoutId: number;
+  completedAt: Date;
+  createdAt: Date;
+  savedAt: Date;
+};
+
 export const healthPermissions: Permissions[];
 
 // Setup
@@ -41,4 +60,7 @@ export function logout(): Promise<any>;
 
 // User Data
 export function getUserData(): Promise<User>;
-export function getUserWorkouts(): Promise<Workout>;
+export function getUserWorkouts(offset: number): Promise<[Workout]>;
+export function getUserWorkoutById(id: number): Promise<Workout>;
+export function getDailyHistory(offset: number): Promise<[{ date: Date; metrics: HealthMetric[] }]>;
+export function getWorkoutsRecommendations(date: Date): Promise<Recommendation[]>;
