@@ -64,4 +64,4 @@ export function getUserData(): Promise<User>;
 export function getUserWorkouts(offset: number): Promise<Workout[]>;
 export function getUserWorkoutById(id: number): Promise<Workout>;
 export function getDailyHistory(offset: number): Promise<[{ date: Date; metrics: HealthMetric[] }]>;
-export function getWorkoutsRecommendations(date: Date): Promise<Recommendation[]>;
+export function getWorkoutRecommendations(): Promise<Recommendation[]>;

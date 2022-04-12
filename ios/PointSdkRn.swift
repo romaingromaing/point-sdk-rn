@@ -258,31 +258,38 @@ class PointSdkRn: NSObject {
   }
   
   /**
-   *  getWorkoutsRecommendations  Retrieve workouts recommendations
+   *  getWorkoutRecommendations  Retrieve workouts recommendations
    *  @param date                 Date
    *  @param resolve              Resolve handler
    *  @param reject               Reject handler
    */
   @objc
-  func getWorkoutsRecommendations(_ date: Date, resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) -> Void {
+  func getWorkoutRecommendations(_ resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) -> Void {
     Task {
       do {
-        let recommendations = try await Point.dataManager.getWorkoutRecommendations(date: date)
-        resolve(recommendations.map {
-          [
-            "id": $0.id,
-            "date": $0.date,
-            "activityId": $0.activityId,
-            "activityName": $0.activityName,
-            "savedAt": $0.savedAt,
-            "workoutId": $0.workoutId,
-            "completedAt": $0.completedAt,
-            "createdAt": $0.createdAt,
-            "savedAt": $0.savedAt
-          ]
-        })
+        let currentDateTime = Date()
+        let recommendations = try await Point.dataManager.getWorkoutRecommendations(date: currentDateTime)
+        var mappedRecommendations: Array<Any> = []
+        
+        if (!recommendations.isEmpty) {
+          mappedRecommendations = recommendations.map {
+            [
+              "id": $0.id,
+              "date": $0.date,
+              "activityId": $0.activityId,
+              "activityName": $0.activityName,
+              "savedAt": $0.savedAt,
+              "workoutId": $0.workoutId,
+              "completedAt": $0.completedAt,
+              "createdAt": $0.createdAt,
+              "savedAt": $0.savedAt
+            ]
+          }
+        }
+
+        resolve(mappedRecommendations)
       } catch {
-        reject("getWorkoutsRecommendations", error.localizedDescription, error)
+        resolve([])
       }
     }
   }
