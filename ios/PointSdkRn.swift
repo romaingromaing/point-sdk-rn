@@ -16,6 +16,71 @@ class PointSdkRn: NSObject {
     }
   }
   
+  func goalsMapping(type: String) -> Goal {
+    switch type {
+    case "athleticPerformance":
+      return .athleticPerformance
+    case "weightLoss":
+      return .weightLoss
+    default:
+      return .weightLoss
+    }
+  }
+  
+  /**
+   *  setupBackgroundListeners Setup background listeners
+   *  @param resolve           Resolve handler
+   *  @param reject            Reject handler
+   */
+  @objc
+  func setupBackgroundListeners(_ resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) -> Void {
+    Task {
+      do {
+        guard let healthKitManager = Point.healthKit else { return }
+        await healthKitManager.setupAllBackgroundQueries()
+        resolve(true)
+      } catch {
+        reject("setupBackgroundListeners", error.localizedDescription, error)
+      }
+    }
+  }
+  
+  /**
+   *  startBackgroundListeners Start background listeners
+   *  @param resolve           Resolve handler
+   *  @param reject            Reject handler
+   */
+  @objc
+  func startBackgroundListeners(_ resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) -> Void {
+    Task {
+      do {
+        guard let healthKitManager = Point.healthKit else { return }
+        let result = try await healthKitManager.enableAllBackgroundDelivery()
+        resolve(result)
+      } catch {
+        reject("startBackgroundListeners", error.localizedDescription, error)
+      }
+    }
+  }
+  
+  /**
+   *  stopBackgroundListeners Stop background listener
+   *  @param resolve          Resolve handler
+   *  @param reject           Reject handler
+   */
+  @objc
+  func stopBackgroundListeners(_ resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) -> Void {
+    Task {
+      do {
+        guard let healthKitManager = Point.healthKit else { return }
+        try await healthKitManager.disableAllBackgroundDelivery()
+        resolve(true)
+      } catch {
+        reject("stopBackgroundListeners", error.localizedDescription, error)
+      }
+    }
+  }
+  
   /**
    *  setup               Initialize PointSDK
    *  @param clientId     Client ID
@@ -121,55 +186,20 @@ class PointSdkRn: NSObject {
   }
   
   /**
-   *  setupBackgroundListeners Setup background listeners
-   *  @param resolve           Resolve handler
-   *  @param reject            Reject handler
+   *  setUserGoal     Set user goal
+   *  @param goal     Goal
+   *  @param resolve  Resolve handler
+   *  @param reject   Reject handler
    */
   @objc
-  func setupBackgroundListeners(_ resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) -> Void {
+  func setUserGoal(_ goal: String, resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) -> Void {
     Task {
       do {
-        guard let healthKitManager = Point.healthKit else { return }
-        await healthKitManager.setupAllBackgroundQueries()
-        resolve(true)
-      } catch {
-        reject("setupBackgroundListeners", error.localizedDescription, error)
-      }
-    }
-  }
-  
-  /**
-   *  startBackgroundListeners Start background listeners
-   *  @param resolve           Resolve handler
-   *  @param reject            Reject handler
-   */
-  @objc
-  func startBackgroundListeners(_ resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) -> Void {
-    Task {
-      do {
-        guard let healthKitManager = Point.healthKit else { return }
-        let result = try await healthKitManager.enableAllBackgroundDelivery()
+        let mappedGoal = goalsMapping(type: goal)
+        let result = try await Point.dataManager.syncUserGoal(goal: mappedGoal)
         resolve(result)
       } catch {
-        reject("startBackgroundListeners", error.localizedDescription, error)
-      }
-    }
-  }
-  
-  /**
-   *  stopBackgroundListeners Stop background listener
-   *  @param resolve          Resolve handler
-   *  @param reject           Reject handler
-   */
-  @objc
-  func stopBackgroundListeners(_ resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) -> Void {
-    Task {
-      do {
-        guard let healthKitManager = Point.healthKit else { return }
-        try await healthKitManager.disableAllBackgroundDelivery()
-        resolve(true)
-      } catch {
-        reject("stopBackgroundListeners", error.localizedDescription, error)
+        reject("setUserGoal", error.localizedDescription, error)
       }
     }
   }
@@ -267,12 +297,10 @@ class PointSdkRn: NSObject {
   func getWorkoutRecommendations(_ resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) -> Void {
     Task {
       do {
-        let currentDateTime = Date()
-        let recommendations = try await Point.dataManager.getWorkoutRecommendations(date: currentDateTime)
-        var mappedRecommendations: Array<Any> = []
+        let recommendations = try await Point.dataManager.getWorkoutRecommendations(date: Date())
         
-        if (!recommendations.isEmpty) {
-          mappedRecommendations = recommendations.map {
+        resolve(
+          recommendations.map {
             [
               "id": $0.id,
               "date": $0.date,
@@ -285,11 +313,9 @@ class PointSdkRn: NSObject {
               "savedAt": $0.savedAt
             ]
           }
-        }
-
-        resolve(mappedRecommendations)
+        )
       } catch {
-        resolve([])
+        reject("getWorkoutRecommendations", error.localizedDescription, error)
       }
     }
   }

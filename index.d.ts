@@ -39,6 +39,11 @@ export type Recommendation = {
   savedAt: Date;
 };
 
+export enum Goal {
+  WeightLoss = "weightLoss",
+  AthleticPerformance = "athleticPerformance",
+}
+
 export const healthPermissions: Permissions[];
 
 // Setup
@@ -65,3 +70,4 @@ export function getUserWorkouts(offset: number): Promise<Workout[]>;
 export function getUserWorkoutById(id: number): Promise<Workout>;
 export function getDailyHistory(offset: number): Promise<[{ date: Date; metrics: HealthMetric[] }]>;
 export function getWorkoutRecommendations(): Promise<Recommendation[]>;
+export function setUserGoal(goal: Goal): Promise<User>;
