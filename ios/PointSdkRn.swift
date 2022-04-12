@@ -27,6 +27,23 @@ class PointSdkRn: NSObject {
     }
   }
   
+  func specificGoalsMapping(type: String) -> SpecificGoal {
+    switch type {
+    case "buildLeanMuscle":
+      return .buildLeanMuscle
+    case "loseWeight":
+      return .loseWeight
+    case "prepareForEvent":
+      return .prepareForEvent
+    case "accomplishMore":
+      return .accomplishMore
+    case "maintainHealth":
+      return .maintainHealth
+    default:
+      return .buildLeanMuscle
+    }
+  }
+  
   /**
    *  setupBackgroundListeners Setup background listeners
    *  @param resolve           Resolve handler
@@ -200,6 +217,25 @@ class PointSdkRn: NSObject {
         resolve(result)
       } catch {
         reject("setUserGoal", error.localizedDescription, error)
+      }
+    }
+  }
+  
+  /**
+   *  setUserSpecificGoal Set user specific goal
+   *  @param specificGoal Specific goal
+   *  @param resolve      Resolve handler
+   *  @param reject       Reject handler
+   */
+  @objc
+  func setUserSpecificGoal(_ specificGoal: String, resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) -> Void {
+    Task {
+      do {
+        let mappedSpecificGoal = specificGoalsMapping(type: specificGoal)
+        let result = try await Point.dataManager.syncUserSpecificGoal(specificGoal: mappedSpecificGoal)
+        resolve(result)
+      } catch {
+        reject("setUserSpecificGoal", error.localizedDescription, error)
       }
     }
   }
