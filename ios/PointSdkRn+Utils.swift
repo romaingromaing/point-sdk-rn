@@ -1,8 +1,8 @@
 import Foundation
 import PointSDK
 
-@objc extension PointSdkRn {
-  @objc
+extension PointSdkRn {
+
   func goalsMapping(type: String) -> Goal {
     switch type {
     case "athleticPerformance":
@@ -14,7 +14,6 @@ import PointSDK
     }
   }
 
-  @objc
   func specificGoalsMapping(type: String) -> SpecificGoal {
     switch type {
     case "buildLeanMuscle":
@@ -32,7 +31,6 @@ import PointSDK
     }
   }
 
-  @objc
   func environmentsMapping(type: String) -> APIEnvironment {
     switch type {
     case "development":
