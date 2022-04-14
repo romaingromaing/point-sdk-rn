@@ -72,8 +72,8 @@ class PointSdkRn: NSObject {
     Task {
       do {
         guard let healthKitManager = Point.healthKit else { return }
-        let result = try await healthKitManager.enableAllBackgroundDelivery()
-        resolve(result)
+        let _ = try await healthKitManager.enableAllBackgroundDelivery()
+        resolve(true)
       } catch {
         reject("startBackgroundListeners", error.localizedDescription, error)
       }
@@ -113,11 +113,13 @@ class PointSdkRn: NSObject {
       queriesTypes = permissions.compactMap { HealthQueryType(rawValue: $0) }
     }
     
+    Point.verbose = true
+    
     Point.setup(
       clientId: clientId,
       clientSecret: clientSecret,
       queryTypes: Set(queriesTypes),
-      environment: environmentsMapping(type: environment)
+      environment: .development
     )
     
     callback([NSNull(), true])
