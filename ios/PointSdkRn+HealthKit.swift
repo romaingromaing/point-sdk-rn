@@ -21,12 +21,12 @@ import PointSDK
   }
   
   /**
-   *  startBackgroundListeners Start background listeners
-   *  @param resolve           Resolve handler
-   *  @param reject            Reject handler
+   *  enableBackgroundListeners Start background listeners
+   *  @param resolve            Resolve handler
+   *  @param reject             Reject handler
    */
   @objc
-  func startBackgroundListeners(_ resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) -> Void {
+  func enableBackgroundListeners(_ resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) -> Void {
     Task {
       do {
         let _ = try await healthKit?.enableAllBackgroundDelivery()
@@ -38,12 +38,12 @@ import PointSDK
   }
   
   /**
-   *  stopBackgroundListeners Stop background listener
-   *  @param resolve          Resolve handler
-   *  @param reject           Reject handler
+   *  disableBackgroundListeners  Stop background listener
+   *  @param resolve              Resolve handler
+   *  @param reject               Reject handler
    */
   @objc
-  func stopBackgroundListeners(_ resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) -> Void {
+  func disableBackgroundListeners(_ resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) -> Void {
     Task {
       do {
         try await healthKit?.disableAllBackgroundDelivery()

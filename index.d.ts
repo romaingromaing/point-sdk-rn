@@ -57,8 +57,8 @@ export const healthPermissions: Permissions[];
 
 // Point Health Kit
 export function setupBackgroundListeners(): Promise<any>;
-export function startBackgroundListeners(): Promise<any>;
-export function stopBackgroundListeners(): Promise<any>;
+export function enableBackgroundListeners(): Promise<any>;
+export function disableBackgroundListeners(): Promise<any>;
 export function requestPermissions(): Promise<any>;
 
 // PointSDK

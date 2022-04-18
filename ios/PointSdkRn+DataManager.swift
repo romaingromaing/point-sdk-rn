@@ -153,10 +153,10 @@ import PointSDK
   }
   
   /**
-   *  getWorkoutRecommendations  Retrieve workouts recommendations
-   *  @param date                 Date
-   *  @param resolve              Resolve handler
-   *  @param reject               Reject handler
+   *  getWorkoutRecommendations Retrieve workouts recommendations
+   *  @param date               Date
+   *  @param resolve            Resolve handler
+   *  @param reject             Reject handler
    */
   @objc
   func getWorkoutRecommendations(_ resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) -> Void {

@@ -22,7 +22,7 @@ export function HomeScreen() {
       const userData = await PointSdkRn.getUserData();
       setUser(userData);
       console.log('Successfully logged in');
-      await PointSdkRn.startBackgroundListeners();
+      await PointSdkRn.enableBackgroundListeners();
     } catch (error) {
       console.log(error);
     }
@@ -33,7 +33,7 @@ export function HomeScreen() {
       await PointSdkRn.logout();
       setUser(null);
       console.log('Successfully logged out');
-      await PointSdkRn.stopBackgroundListeners();
+      await PointSdkRn.disableBackgroundListeners();
     } catch (error) {
       console.log(error);
     }
