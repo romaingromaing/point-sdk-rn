@@ -70,4 +70,42 @@ import PointSDK
       }
     }
   }
+  
+  /**
+   *  enableForegroundListeners Enable foreground listeners
+   *  @param resolve            Resolve handler
+   *  @param reject             Reject handler
+   */
+  @objc
+  func enableForegroundListeners(_ resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) -> Void {
+    Task {
+      do {
+        for healthQueryType in HealthQueryType.allCases {
+          try? await healthKit?.listen(type: healthQueryType)
+        }
+        resolve(true)
+      } catch {
+        reject("enableForegroundListeners", error.localizedDescription, error)
+      }
+    }
+  }
+  
+  /**
+   *  disableForegroundListeners  Disable foreground listeners
+   *  @param resolve              Resolve handler
+   *  @param reject               Reject handler
+   */
+  @objc
+  func disableForegroundListeners(_ resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) -> Void {
+    Task {
+      do {
+        for healthQueryType in HealthQueryType.allCases {
+          try? await healthKit?.stopListener(of: healthQueryType)
+        }
+        resolve(true)
+      } catch {
+        reject("disableForegroundListeners", error.localizedDescription, error)
+      }
+    }
+  }
 }
