@@ -30,6 +30,10 @@ export function WorkoutsScreen() {
             <Text>ID: {item.id}</Text>
             <Text>Calories: {item.calories}</Text>
             <Text>Duration: {item.duration}</Text>
+            <Text>Activity Name: {item.activityName}</Text>
+            <Text>Ratings - Difficulty: {item.ratings?.difficulty}</Text>
+            <Text>Ratings - Energy: {item.ratings?.energy}</Text>
+            <Text>Ratings - Instructor: {item.ratings?.instructor}</Text>
             <Text>
               <>Start: {item.start}</>
             </Text>

@@ -77,15 +77,7 @@ import PointSDK
     Task {
       do {
         let workouts = try await dataManager?.getUserWorkouts(offset: offset)
-        resolve(workouts?.map{
-          [
-            "id": $0.id,
-            "calories": $0.calories,
-            "duration": $0.duration,
-            "start": $0.start,
-            "end": $0.end
-          ]
-        })
+        resolve(workouts?.map{ workoutMapping(workout: $0) })
       } catch {
         reject("getUserWorkouts", error.localizedDescription, error)
       }
@@ -102,16 +94,8 @@ import PointSDK
   func getUserWorkoutById(_ id: Int, resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) -> Void {
     Task {
       do {
-        if let workout = try await dataManager?.getWorkout(id: id) {
-          resolve(
-            [
-              "id": workout.id,
-              "calories": workout.calories,
-              "duration": workout.duration,
-              "start": workout.start,
-              "end": workout.end
-            ]
-          )
+        if let workout: Workout = try await dataManager?.getWorkout(id: id) {
+          resolve(workoutMapping(workout: workout))
         } else {
           resolve([])
         }

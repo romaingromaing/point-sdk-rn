@@ -43,4 +43,22 @@ extension PointSdkRn {
       return .development
     }
   }
+
+  func workoutMapping(workout: Workout) -> [String : Any] {
+    [
+      "id": workout.id,
+      "calories": workout.calories,
+      "distance": workout.distance,
+      "duration": workout.duration,
+      "start": workout.start,
+      "end": workout.end,
+      "activityName": workout.activityName,
+      "activityId": workout.activityId,
+      "ratings": [
+        "difficulty": workout.ratings?.difficulty,
+        "energy": workout.ratings?.energy,
+        "instructor": workout.ratings?.instructor,
+      ]
+    ]
+  }
 }

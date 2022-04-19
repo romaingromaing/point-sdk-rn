@@ -11,13 +11,22 @@ export type User = {
   goal: string;
 };
 
+export type WorkoutRatings = {
+  difficulty: number;
+  energy: number;
+  instructor: number;
+};
+
 export type Workout = {
-  id: string;
+  id: number;
   calories: number;
   distance: number;
   duration: number;
   start: Date;
   end: Date;
+  activityName: string;
+  activityId: number;
+  ratings: WorkoutRatings;
 };
 
 export type HealthMetric = {
