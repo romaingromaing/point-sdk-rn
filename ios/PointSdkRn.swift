@@ -5,6 +5,15 @@ import PointSDK
 class PointSdkRn: NSObject {
   var healthKit: HealthKitManager? { Point.healthKit }
   var dataManager: DataManager? { Point.dataManager }
+  let healthQueryTypes: [HealthQueryType] = [
+    HealthQueryType.restingHeartRate,
+    HealthQueryType.heartRate,
+    HealthQueryType.workout,
+    HealthQueryType.heartRateVariabilitySDNN,
+    HealthQueryType.vo2Max,
+    HealthQueryType.mindfulSession,
+    HealthQueryType.sleepAnalysis
+  ]
 
   /**
    *  setup               Initialize PointSDK

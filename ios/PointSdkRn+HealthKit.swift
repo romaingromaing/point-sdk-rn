@@ -80,8 +80,8 @@ import PointSDK
   func enableForegroundListeners(_ resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) -> Void {
     Task {
       do {
-        for healthQueryType in HealthQueryType.allCases {
-          try? await healthKit?.listen(type: healthQueryType)
+        for healthQueryType in healthQueryTypes {
+          let _ = try? await healthKit?.listen(type: healthQueryType)
         }
         resolve(true)
       } catch {
@@ -99,8 +99,10 @@ import PointSDK
   func disableForegroundListeners(_ resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) -> Void {
     Task {
       do {
-        for healthQueryType in HealthQueryType.allCases {
-          try? await healthKit?.stopListener(of: healthQueryType)
+        for healthQueryType in healthQueryTypes {
+          do {
+            healthKit?.stopListener(of: healthQueryType)
+          }
         }
         resolve(true)
       } catch {

@@ -23,7 +23,7 @@ const App = () => {
     PointSdkRn.setupBackgroundListeners();
     PointSdkRn.enableBackgroundListeners();
 
-    const subscription = AppState.addEventListener(
+    const appStateSubscription = AppState.addEventListener(
       'change',
       (state: AppStateStatus) => {
         if (state === 'active') {
@@ -34,7 +34,7 @@ const App = () => {
       },
     );
 
-    return subscription?.remove;
+    return appStateSubscription?.remove;
   }, []);
 
   return (
