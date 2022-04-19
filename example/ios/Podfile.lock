@@ -22,8 +22,9 @@ PODS:
     - DoubleConversion
     - glog
   - glog (0.3.5)
-  - PointSDK (0.1.1):
+  - PointSDK (0.1.2):
     - Apollo (~> 0.51.2)
+    - SQLite.swift (~> 0.13.3)
   - RCTRequired (0.63.2)
   - RCTTypeSafety (0.63.2):
     - FBLazyVector (= 0.63.2)
@@ -191,7 +192,7 @@ PODS:
     - React-jsi (= 0.63.2)
   - React-jsinspector (0.63.2)
   - react-native-point-sdk (0.1.2):
-    - PointSDK (~> 0.1.1)
+    - PointSDK (~> 0.1.2)
     - React
   - react-native-safe-area-context (3.4.1):
     - React-Core
@@ -257,6 +258,9 @@ PODS:
     - React-jsi (= 0.63.2)
   - RNScreens (2.18.1):
     - React-Core
+  - SQLite.swift (0.13.3):
+    - SQLite.swift/standard (= 0.13.3)
+  - SQLite.swift/standard (0.13.3)
   - Yoga (1.14.0)
 
 DEPENDENCIES:
@@ -298,6 +302,7 @@ SPEC REPOS:
   trunk:
     - Apollo
     - boost-for-react-native
+    - SQLite.swift
 
 EXTERNAL SOURCES:
   DoubleConversion:
@@ -367,7 +372,7 @@ SPEC CHECKSUMS:
   FBReactNativeSpec: dc7fa9088f0f2a998503a352b0554d69a4391c5a
   Folly: b73c3869541e86821df3c387eb0af5f65addfab4
   glog: 40a13f7840415b9a77023fbcae0f1e6f43192af3
-  PointSDK: 029e4a7dc1aeba679f01c5c2600dd6e523b400ae
+  PointSDK: 57b9522353e1e135b05a0afae1ef0b34959ce45c
   RCTRequired: f13f25e7b12f925f1f6a6a8c69d929a03c0129fe
   RCTTypeSafety: 44982c5c8e43ff4141eb519a8ddc88059acd1f3a
   React: e1c65dd41cb9db13b99f24608e47dd595f28ca9a
@@ -378,7 +383,7 @@ SPEC CHECKSUMS:
   React-jsi: 54245e1d5f4b690dec614a73a3795964eeef13a8
   React-jsiexecutor: 8ca588cc921e70590820ce72b8789b02c67cce38
   React-jsinspector: b14e62ebe7a66e9231e9581279909f2fc3db6606
-  react-native-point-sdk: 86d15cfeba8505a970e0ed2712a9789d22f902a2
+  react-native-point-sdk: 72e525489304c9ea99f4085070e6c5dedbd9e4cb
   react-native-safe-area-context: 9e40fb181dac02619414ba1294d6c2a807056ab9
   React-RCTActionSheet: 910163b6b09685a35c4ebbc52b66d1bfbbe39fc5
   React-RCTAnimation: 9a883bbe1e9d2e158d4fb53765ed64c8dc2200c6
@@ -391,6 +396,7 @@ SPEC CHECKSUMS:
   React-RCTVibration: 4d2e726957f4087449739b595f107c0d4b6c2d2d
   ReactCommon: a0a1edbebcac5e91338371b72ffc66aa822792ce
   RNScreens: f7ad633b2e0190b77b6a7aab7f914fad6f198d8d
+  SQLite.swift: 903bfa3bc9ab06345fdfbb578e34f47cfcf417da
   Yoga: 7740b94929bbacbddda59bf115b5317e9a161598
 
 PODFILE CHECKSUM: 7223c34994097e9a8204ee5f29ecb4716acd037f
