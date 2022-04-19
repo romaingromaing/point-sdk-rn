@@ -1,4 +1,5 @@
-import React, {useState, useEffect} from 'react';
+import React, {useEffect} from 'react';
+import {AppState, AppStateStatus} from 'react-native';
 import PointSdkRn from 'react-native-point-sdk';
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
@@ -11,12 +12,6 @@ const Tab = createBottomTabNavigator();
 
 const App = () => {
   useEffect(() => {
-    async function setupBackgroundListeners() {
-      await PointSdkRn.setupBackgroundListeners();
-    }
-
-    setupBackgroundListeners();
-
     PointSdkRn.setup(
       'foo',
       'bar',
@@ -24,6 +19,22 @@ const App = () => {
       'development',
       console.log,
     );
+
+    PointSdkRn.setupBackgroundListeners();
+    PointSdkRn.enableBackgroundListeners();
+
+    const subscription = AppState.addEventListener(
+      'change',
+      (state: AppStateStatus) => {
+        if (state === 'active') {
+          PointSdkRn.enableForegroundListeners();
+        } else {
+          PointSdkRn.disableForegroundListeners();
+        }
+      },
+    );
+
+    return subscription?.remove;
   }, []);
 
   return (
