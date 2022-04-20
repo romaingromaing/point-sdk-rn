@@ -73,7 +73,7 @@ import PointSDK
    *  @param reject   Reject handler
    */
   @objc
-  func getUserWorkouts(_ offset: Int = 0, resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) -> Void {
+  func getUserWorkouts(_ offset: Int, resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) -> Void {
     Task {
       do {
         let workouts = try await dataManager?.getUserWorkouts(offset: offset)
