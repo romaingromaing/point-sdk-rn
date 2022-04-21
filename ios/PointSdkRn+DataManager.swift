@@ -12,16 +12,7 @@ import PointSDK
     Task {
       do {
         let user = try await dataManager?.getUserData()
-        resolve(
-          [
-            "id": user?.id,
-            "email": user?.email,
-            "firstName": user?.firstName,
-            "birthday": user?.birthday,
-            "goal": user?.goal,
-            "specificGoal": user?.specificGoal
-          ]
-        )
+        resolve(user != nil ? userMapping(user: user!) : [])
       } catch {
         reject("getUserData", error.localizedDescription, error)
       }

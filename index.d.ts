@@ -3,12 +3,23 @@
 type Callback = (_: any, success: any) => void;
 export type Permissions = ["example"];
 
+type GoalProgressKey = "overral" | "endurance" | "recovery" | "strength";
+
+type GoalProgressValue = {
+  value: number;
+  variance: number;
+};
+
 export type User = {
   id: string;
   email: string;
-  firstName: string;
   birthday: string;
+  firstName: string;
+  isSubscribed: boolean;
   goal: string;
+  goalProgress: Record<GoalProgressKey, GoalProgressValue>;
+  specificGoal: string;
+  lastWorkout: Workout;
 };
 
 export type WorkoutRatings = {

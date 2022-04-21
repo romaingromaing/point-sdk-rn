@@ -53,12 +53,47 @@ extension PointSdkRn {
       "start": workout.start,
       "end": workout.end,
       "activityName": workout.activityName,
-      "activityId": workout.activityId,
+      "activityId": workout.activityId!,
       "ratings": [
         "difficulty": workout.ratings?.difficulty,
         "energy": workout.ratings?.energy,
         "instructor": workout.ratings?.instructor,
       ]
+    ]
+  }
+
+  func goalProgressMapping(goalProgress: GoalProgress) -> [String : Any] {
+    [
+      "overral": [
+        "value": 0.234982938551425,
+        "variance": -0.49
+      ],
+      "endurance": [
+        "value": 0.71349520313981,
+        "variance": -0.29
+      ],
+      "recovery": [
+        "value": 0.401195740351498,
+        "variance": -0.35
+      ],
+      "strength": [
+        "value": 0.398320577378379,
+        "variance": -0.37
+      ]
+    ]
+  }
+
+  func userMapping(user: User) -> [String : Any] {
+    [
+      "id": user.id,
+      "email": user.email!,
+      "birthday": user.birthday!,
+      "firstName": user.firstName!,
+      "isSubscriber": user.isSubscriber!,
+      "goal": user.goal?.rawValue as Any,
+      "goalProgress": goalProgressMapping(goalProgress: user.goalProgress),
+      "specificGoal": user.specificGoal?.rawValue as Any,
+      "lastWorkout": workoutMapping(workout: user.lastWorkout!)
     ]
   }
 }
