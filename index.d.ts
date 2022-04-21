@@ -33,8 +33,8 @@ export type Workout = {
   calories: number;
   distance: number;
   duration: number;
-  start: Date;
-  end: Date;
+  start: string;
+  end: string;
   activityName: string;
   activityId: number;
   ratings: WorkoutRatings;
@@ -42,7 +42,7 @@ export type Workout = {
 
 export type HealthMetric = {
   type: string;
-  date: Date;
+  date: string;
   value: number;
   variance: number;
   workoutId: number;
@@ -50,13 +50,13 @@ export type HealthMetric = {
 
 export type Recommendation = {
   id: number;
-  date: Date;
+  date: string;
   activityId: number;
   activityName: string;
   workoutId: number;
-  completedAt: Date;
-  createdAt: Date;
-  savedAt: Date;
+  completedAt: string;
+  createdAt: string;
+  savedAt: string;
 };
 
 export enum Goal {
