@@ -17,6 +17,7 @@ const App = () => {
       'bar',
       PointSdkRn.healthPermissions,
       'development',
+      true,
       console.log,
     );
 

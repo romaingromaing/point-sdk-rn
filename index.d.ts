@@ -78,6 +78,7 @@ export function setup(
   clientSecret: string,
   permissions: Permissions[],
   environment: string,
+  verbose: boolean,
   callback: Callback
 ): void;
 export function login(accessToken: string): Promise<any>;
