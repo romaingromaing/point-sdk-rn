@@ -23,14 +23,14 @@ class PointSdkRn: NSObject {
    *  @param callback     Completion handler
    */
   @objc
-  func setup(_ clientId: String, clientSecret: String, permissions: Array<String>?, environment: String, callback: RCTResponseSenderBlock) -> Void {
+  func setup(_ clientId: String, clientSecret: String, permissions: Array<String>?, environment: String, verbose: Bool = false, callback: RCTResponseSenderBlock) -> Void {
     var queriesTypes = HealthQueryType.allCases
     
     if let permissions = permissions {
       queriesTypes = permissions.compactMap { HealthQueryType(rawValue: $0) }
     }
-    
-    Point.verbose = true
+
+    Point.verbose = verbose
     
     Point.setup(
       clientId: clientId,
