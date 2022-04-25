@@ -91,7 +91,7 @@ export function setup(
   environment: string,
   callback: Callback
 ): void;
-export function login(accessToken: string): Promise<any>;
+export function setUserToken(accessToken: string): Promise<any>;
 export function logout(): Promise<any>;
 
 // Point API

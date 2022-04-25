@@ -65,20 +65,20 @@ extension PointSdkRn {
   func goalProgressMapping(goalProgress: GoalProgress) -> [String : Any] {
     [
       "overral": [
-        "value": 0.234982938551425,
-        "variance": -0.49
+        "value": goalProgress.overral.value,
+        "variance": goalProgress.overral.variance
       ],
       "endurance": [
-        "value": 0.71349520313981,
-        "variance": -0.29
+        "value": goalProgress.endurance.value,
+        "variance": goalProgress.endurance.variance
       ],
       "recovery": [
-        "value": 0.401195740351498,
-        "variance": -0.35
+        "value": goalProgress.recovery.value,
+        "variance": goalProgress.recovery.variance
       ],
       "strength": [
-        "value": 0.398320577378379,
-        "variance": -0.37
+        "value": goalProgress.strength.value,
+        "variance": goalProgress.strength.variance
       ]
     ]
   }

@@ -5,15 +5,6 @@ import PointSDK
 class PointSdkRn: NSObject {
   var healthKit: HealthKitManager? { Point.healthKit }
   var dataManager: DataManager? { Point.dataManager }
-  let healthQueryTypes: [HealthQueryType] = [
-    HealthQueryType.restingHeartRate,
-    HealthQueryType.heartRate,
-    HealthQueryType.workout,
-    HealthQueryType.heartRateVariabilitySDNN,
-    HealthQueryType.vo2Max,
-    HealthQueryType.mindfulSession,
-    HealthQueryType.sleepAnalysis
-  ]
 
   /**
    *  setup               Initialize PointSDK
@@ -49,10 +40,10 @@ class PointSdkRn: NSObject {
    *  @param reject       Reject handler
    */
   @objc
-  func login(_ accessToken: String, resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) -> Void {
+  func setUserToken(_ accessToken: String, resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) -> Void {
     Task {
       do {
-        try await Point.login(accessToken: accessToken)
+        try await Point.setUserToken(accessToken: accessToken)
         resolve(true)
       } catch {
         reject("login", error.localizedDescription, error)
