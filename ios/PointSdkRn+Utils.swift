@@ -44,8 +44,10 @@ extension PointSdkRn {
     }
   }
 
-  func workoutMapping(workout: Workout) -> [String : Any] {
-    [
+  func workoutMapping(workout: Workout?) -> [String : Any] {
+    guard let workout = workout else { return [:] }
+    
+    return [
       "id": workout.id,
       "calories": workout.calories,
       "distance": workout.distance,
@@ -53,7 +55,7 @@ extension PointSdkRn {
       "start": workout.start,
       "end": workout.end,
       "activityName": workout.activityName,
-      "activityId": workout.activityId!,
+      "activityId": workout.activityId,
       "ratings": [
         "difficulty": workout.ratings?.difficulty,
         "energy": workout.ratings?.energy,
@@ -83,17 +85,19 @@ extension PointSdkRn {
     ]
   }
 
-  func userMapping(user: User) -> [String : Any] {
-    [
+  func userMapping(user: User?) -> [String : Any] {
+    guard let user = user else { return [:] }
+
+    return [
       "id": user.id,
-      "email": user.email!,
-      "birthday": user.birthday!,
-      "firstName": user.firstName!,
-      "isSubscriber": user.isSubscriber!,
+      "email": user.email ?? "",
+      "birthday": user.birthday ?? "",
+      "firstName": user.firstName ?? "",
+      "isSubscriber": user.isSubscriber ?? false,
       "goal": user.goal?.rawValue as Any,
       "goalProgress": goalProgressMapping(goalProgress: user.goalProgress),
       "specificGoal": user.specificGoal?.rawValue as Any,
-      "lastWorkout": workoutMapping(workout: user.lastWorkout!)
+      "lastWorkout": workoutMapping(workout: user.lastWorkout)
     ]
   }
 }

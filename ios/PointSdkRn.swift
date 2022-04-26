@@ -72,7 +72,7 @@ class PointSdkRn: NSObject {
    *  constantsToExport	Expose constants to React Native
    */
   @objc
-  func constantsToExport() -> [String: Any]! {
+  func constantsToExport() -> [String: Any] {
     return [
       "healthPermissions": HealthQueryType.allCases.map { $0.rawValue }
     ]
