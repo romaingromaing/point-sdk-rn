@@ -21,7 +21,7 @@ class PointSdkRn: NSObject {
       queriesTypes = permissions.compactMap { HealthQueryType(rawValue: $0) }
     }
 
-    Point.verbose = true
+    Point.verbose = verbose
     
     Point.setup(
       clientId: clientId,
