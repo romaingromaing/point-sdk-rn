@@ -27,7 +27,7 @@ class PointSdkRn: NSObject {
       clientId: clientId,
       clientSecret: clientSecret,
       queryTypes: Set(queriesTypes),
-      environment: .development
+      environment: environmentsMapping(type: environment)
     )
     
     callback([NSNull(), true])
