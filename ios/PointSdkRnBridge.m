@@ -17,6 +17,7 @@ RCT_EXTERN_METHOD(getDailyHistory:(NSInteger)offset resolve: (RCTPromiseResolveB
 RCT_EXTERN_METHOD(getWorkoutRecommendations:(RCTPromiseResolveBlock)resolve rejecter: (RCTPromiseRejectBlock)reject)
 RCT_EXTERN_METHOD(setUserGoal:(NSString)goal resolve: (RCTPromiseResolveBlock)resolve rejecter: (RCTPromiseRejectBlock)reject)
 RCT_EXTERN_METHOD(setUserSpecificGoal:(NSString)specificGoal resolve: (RCTPromiseResolveBlock)resolve rejecter: (RCTPromiseRejectBlock)reject)
+RCT_EXTERN_METHOD(getUserHealthMetrics:(NSArray *)filter resolve: (RCTPromiseResolveBlock)resolve rejecter: (RCTPromiseRejectBlock)reject)
 
 + (BOOL)requiresMainQueueSetup
 {

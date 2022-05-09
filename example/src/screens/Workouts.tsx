@@ -12,17 +12,9 @@ export function WorkoutsScreen() {
     setWorkouts(await PointSdkRn.getUserWorkouts(0));
   }
 
-  async function getDailyHistory() {
-    console.log(await PointSdkRn.getDailyHistory(0));
-  }
-
   return (
     <View>
       <Button onPress={getWorkouts} title="Get Workouts" />
-      <Button
-        onPress={getDailyHistory}
-        title="Get Daily History (Check Logs)"
-      />
       <FlatList
         data={workouts}
         renderItem={({item}) => (

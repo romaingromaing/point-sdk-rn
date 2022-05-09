@@ -110,15 +110,7 @@ import PointSDK
         resolve(workouts?.map {
           [
             "date": $0.date,
-            "metrics": $0.metrics.map {
-              [
-                "type": $0.type,
-                "date": $0.date,
-                "value": $0.value,
-                "variance": $0.variance,
-                "workoutId": $0.workoutId
-              ]
-            }
+            "metrics": $0.metrics.map { metricMapping(metric: $0) }
           ]
         })
       } catch {
@@ -156,6 +148,37 @@ import PointSDK
         )
       } catch {
         reject("getWorkoutRecommendations", error.localizedDescription, error)
+      }
+    }
+  }
+  
+  /**
+   *  getUserHealthMetrics  Retrieve user metrics
+   *  @param array          filter
+   *  @param int            workoutId
+   *  @param string         date
+   *  @param resolve        Resolve handler
+   *  @param reject         Reject handler
+   */
+  @objc
+  func getUserHealthMetrics(_ filter: Array<String>?, resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) -> Void {
+    Task {
+      do {
+        var healthMetrics = HealthMetric.Kind.allCases
+
+        if let filter = filter {
+          healthMetrics = filter.compactMap { HealthMetric.Kind(rawValue: $0) }
+        }
+
+        var data = try await dataManager?.getHealthMetrics(
+          filter: Set(healthMetrics),
+          workoutId: nil,
+          date: nil
+        )
+
+        resolve(data?.map { metricMapping(metric: $0) })
+      } catch {
+        reject("getUserHealthMetrics", error.localizedDescription, error)
       }
     }
   }

@@ -100,4 +100,16 @@ extension PointSdkRn {
       "lastWorkout": workoutMapping(workout: user.lastWorkout)
     ]
   }
+  
+  func metricMapping(metric: HealthMetric?) -> [String : Any] {
+    guard let metric = metric else { return [:] }
+
+    return [
+      "type": metric.type,
+      "date": metric.date,
+      "value": metric.value,
+      "variance": metric.variance,
+      "workoutId": metric.workoutId
+    ]
+  }
 }
