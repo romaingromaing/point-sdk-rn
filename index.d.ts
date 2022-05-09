@@ -3,7 +3,7 @@
 type Callback = (_: any, success: any) => void;
 export type Permissions = ["example"];
 
-type GoalProgressKey = "overral" | "endurance" | "recovery" | "strength",
+type GoalProgressKey = "overral" | "endurance" | "recovery" | "strength";
 
 type GoalProgressValue = {
   value: number;
@@ -73,46 +73,46 @@ export enum SpecificGoal {
 }
 
 export type HealthMetricType =
-  | 'RestingHR'
-  | 'OneMinuteHRR'
-  | 'ThreeMinuteHRR'
-  | 'HRV'
-  | 'Vo2Max'
-  | 'ActiveCalories'
-  | 'BasalCalories'
-  | 'TotalCalories'
-  | 'WorkoutCalories'
-  | 'WorkoutDistance'
-  | 'WorkoutDuration'
-  | 'ExertionRate'
-  | 'MovementLevel'
-  | 'MinsHRZone1'
-  | 'MinsHRZone2'
-  | 'MinsHRZone3'
-  | 'MinsHRZone4'
-  | 'MinsHRZone12'
-  | 'MinsHRZone23'
-  | 'MinsHRZone34'
-  | 'WorkoutMinsHRZone1'
-  | 'WorkoutMinsHRZone2'
-  | 'WorkoutMinsHRZone3'
-  | 'WorkoutMinsHRZone4'
-  | 'WorkoutMinsHRZone12'
-  | 'WorkoutMinsHRZone23'
-  | 'WorkoutMinsHRZone34'
-  | 'MindfulMinutes'
-  | 'AvgWorkoutHR'
-  | 'MinWorkoutHR'
-  | 'MaxWorkoutHR'
-  | 'SleepDuration'
-  | 'SleepDurationInbed'
-  | 'SleepDurationAsleep'
-  | 'TotalWorkoutDuration'
-  | 'TotalMinsHRZone12'
-  | 'TotalMinsHRZone34'
-  | 'WeeklyAvgWorkoutHR'
-  | 'WeeklyExertionRate'
-  | 'DailyWorkoutDuration'
+  | "RestingHR"
+  | "OneMinuteHRR"
+  | "ThreeMinuteHRR"
+  | "HRV"
+  | "Vo2Max"
+  | "ActiveCalories"
+  | "BasalCalories"
+  | "TotalCalories"
+  | "WorkoutCalories"
+  | "WorkoutDistance"
+  | "WorkoutDuration"
+  | "ExertionRate"
+  | "MovementLevel"
+  | "MinsHRZone1"
+  | "MinsHRZone2"
+  | "MinsHRZone3"
+  | "MinsHRZone4"
+  | "MinsHRZone12"
+  | "MinsHRZone23"
+  | "MinsHRZone34"
+  | "WorkoutMinsHRZone1"
+  | "WorkoutMinsHRZone2"
+  | "WorkoutMinsHRZone3"
+  | "WorkoutMinsHRZone4"
+  | "WorkoutMinsHRZone12"
+  | "WorkoutMinsHRZone23"
+  | "WorkoutMinsHRZone34"
+  | "MindfulMinutes"
+  | "AvgWorkoutHR"
+  | "MinWorkoutHR"
+  | "MaxWorkoutHR"
+  | "SleepDuration"
+  | "SleepDurationInbed"
+  | "SleepDurationAsleep"
+  | "TotalWorkoutDuration"
+  | "TotalMinsHRZone12"
+  | "TotalMinsHRZone34"
+  | "WeeklyAvgWorkoutHR"
+  | "WeeklyExertionRate"
+  | "DailyWorkoutDuration";
 
 // Health Permissions
 export const healthPermissions: Permissions[];
