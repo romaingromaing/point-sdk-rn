@@ -142,6 +142,24 @@ import PointSDK
   }
   
   /**
+   *  getUserRecommendations Retrieve user recommendations
+   *  @param resolve            Resolve handler
+   *  @param reject             Reject handler
+   */
+  @objc
+  func getUserRecommendations(_ resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) -> Void {
+    Task {
+      do {
+        let recommendations = try await dataManager?.getUserRecommendations()
+        
+        resolve(recommendations?.map { userRecommendationMapping(recommendation: $0) })
+      } catch {
+        reject("getUserRecommendations", error.localizedDescription, error)
+      }
+    }
+  }
+  
+  /**
    *  getUserHealthMetrics  Retrieve user metrics
    *  @param array          filter
    *  @param int            workoutId

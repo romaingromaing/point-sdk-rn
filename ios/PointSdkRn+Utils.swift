@@ -127,4 +127,25 @@ extension PointSdkRn {
       "savedAt": recommendation.savedAt
     ]
   }
+  
+  func userRecommendationMapping(recommendation: UserRecommendation?) -> [String : Any] {
+    guard let recommendation = recommendation else { return [:] }
+    
+    return [
+      "id": recommendation.id,
+      "insightId": recommendation.insightId,
+      "templateId": recommendation.templateId,
+      "category": recommendation.category?.rawValue,
+      "description": recommendation.description,
+      "actions": recommendation.actions.map {
+        [
+          "label": $0.label,
+          "url": $0.url
+        ]
+      },
+      "cooldownEndsAt": recommendation.cooldownEndsAt,
+      "lastSeenAt": recommendation.lastSeenAt
+    ]
+
+  }
 }
