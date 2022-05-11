@@ -17,7 +17,7 @@ export function HomeScreen() {
   const handleLogin = async () => {
     try {
       await PointSdkRn.setUserToken(
-        'eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIiwiaXNzIjoiaHR0cHM6Ly9wb2ludC1hcHAtZGV2LnVzLmF1dGgwLmNvbS8ifQ..kvZcmZ7k56XA0fm5.8I8V0lMPeH_YDpiWv1lkQVv4qk98iAp2flyvHPbHQoLl4YzpT7grtKESjXTw5Ywu-w1FsN-Bp4kuw6VlZsnz3xbnxJRcdQ-DO2tdMlyEL8kE4DYQUh-PrKKhVYB4d7pBEg_9vwkj2KOZkVTIgm2cjkiif5-TY8hIoSgLrYHcmd5EC7FxcQ7N-iQh0FLoBFd5aayorcKrP-3LiQ0EpwKjzKk70O83QbvgVmhTYxw-VKKLHFRJcC311lqU2a186yG2wyv5ZkCaO3ogkaSb4vPVQhyJEQLVZSGcH-D-7hm6J98YBmXlBCuR9KL_Co3EM9Pc9Jikze-zbj-0yWgxgHMkTb529cvr9TzOnP1YKA7oRLXjvka_EVDKY2cpkGbj6x5oqTa3nPko.y7HFbRA_aQIa6DtoqCYUQQ',
+        'eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIiwiaXNzIjoiaHR0cHM6Ly9wb2ludC1hcHAtZGV2LnVzLmF1dGgwLmNvbS8ifQ..Ek9NznRepKZ7QBzL.I578l-7AMRdNj7SboydXG6fFmZmhb56L7rQC7wWvSiVrvqL_3C51muWiKzQLNZXo3LEVaD4nqumwzcWdWko-HE3NiEWMzpwgYlfuVMl5a4zWmXu9Pg7YSmnsetgAjPqzfV0tWO4tGSH_V9uCnT9HA1_9DNQVLVNXGBTE3aw2MezdlBaQZGm2lFXHWMkGHjvpubtiXBAyyZv5DegCmxqxTJeT1c59EhGDs0RgTQIqB8tvkZ0-LrZcMLOY8R__V7CjGDWcB36JEDkLzj50dFtNkmK0GP9bhomIJDYfyTn0lfCOPR5ZMCVsne5bUKPBQ37eXfAALel6ENt5_9oZV-c8cSRTiwwDKtqSnoAjHVVrjPCeBDq6PUCnDU2mRPF9Cf2AVdxfvNLS.wjrwUa2U8p8Vu3Dat6Oedg',
       );
       const userData = await PointSdkRn.getUserData();
       console.log(userData);

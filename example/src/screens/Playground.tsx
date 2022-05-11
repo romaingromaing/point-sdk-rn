@@ -35,6 +35,14 @@ export function PlaygroundScreen() {
     }
   }
 
+  async function getUserRecommendations() {
+    try {
+      console.log(await PointSdkRn.getUserRecommendations());
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   return (
     <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
       <Text style={{fontSize: 18, fontWeight: 'bold'}}>
@@ -42,6 +50,10 @@ export function PlaygroundScreen() {
       </Text>
       <Button onPress={getUserHealthMetrics} title="Get User Health Metrics" />
       <Button onPress={getDailyHistory} title="Get Daily History" />
+      <Button
+        onPress={getUserRecommendations}
+        title="Get User Recommendations"
+      />
       <Button
         onPress={getWorkoutsRecommendations}
         title="Get Workout Recommendations"

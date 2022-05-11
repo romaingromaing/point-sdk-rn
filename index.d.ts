@@ -114,6 +114,36 @@ export type HealthMetricType =
   | "WeeklyExertionRate"
   | "DailyWorkoutDuration";
 
+export interface RecommendationAction {
+  label: string;
+  url: string;
+}
+
+export type InsightCategory =
+  | "HeartLifetimeIncrease"
+  | "Motivational"
+  | "NeedRecovery"
+  | "RoutineFreqOptimization"
+  | "RoutineTimeOptimization"
+  | "RoutineWorkoutTypeOptimization"
+  | "TocayaDeal"
+  | "TryHarder"
+  | "WorkoutStreak";
+
+export interface Recommendation {
+  id: number;
+  insightId: number;
+  templateId: number;
+  category: InsightCategory;
+  description: string;
+  actions: RecommendationAction[];
+  cooldownEndsAt: Date;
+  lastSeenAt: Date;
+  dismissedAt: Date;
+  icon: string;
+  color: string;
+}
+
 // Health Permissions
 export const healthPermissions: Permissions[];
 
@@ -146,3 +176,4 @@ export function getDailyHistory(offset: number): Promise<[{ date: Date; metrics:
 export function setUserGoal(goal: Goal): Promise<User>;
 export function setUserSpecificGoal(specificGoal: SpecificGoal): Promise<User>;
 export function getUserHealthMetrics(filter: HealthMetricType[]): Promise<HealthMetric[]>;
+export function getUserRecommendations(): Promise<Recommendation[]>;
