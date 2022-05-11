@@ -121,31 +121,20 @@ import PointSDK
   
   /**
    *  getWorkoutRecommendations Retrieve workouts recommendations
-   *  @param date               Date
+   *  @param string               Date
    *  @param resolve            Resolve handler
    *  @param reject             Reject handler
    */
   @objc
-  func getWorkoutRecommendations(_ resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) -> Void {
+  func getWorkoutRecommendations(_ date: String, resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) -> Void {
     Task {
       do {
-        let recommendations = try await dataManager?.getWorkoutRecommendations(date: Date())
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+        let finalDate = dateFormatter.date(from: date)!
+        let recommendations = try await dataManager?.getWorkoutRecommendations(date: finalDate)
         
-        resolve(
-          recommendations?.map {
-            [
-              "id": $0.id,
-              "date": $0.date,
-              "activityId": $0.activityId,
-              "activityName": $0.activityName,
-              "savedAt": $0.savedAt,
-              "workoutId": $0.workoutId,
-              "completedAt": $0.completedAt,
-              "createdAt": $0.createdAt,
-              "savedAt": $0.savedAt
-            ]
-          }
-        )
+        resolve(recommendations?.map { workoutRecommendationMapping(recommendation: $0) })
       } catch {
         reject("getWorkoutRecommendations", error.localizedDescription, error)
       }
