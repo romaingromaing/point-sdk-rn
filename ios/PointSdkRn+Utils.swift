@@ -112,4 +112,19 @@ extension PointSdkRn {
       "workoutId": metric.workoutId
     ]
   }
+  
+  func workoutRecommendationMapping(recommendation: WorkoutRecommendation?) -> [String : Any] {
+    guard let recommendation = recommendation else { return [:] }
+    
+    return [
+      "id": recommendation.id,
+      "date": recommendation.date,
+      "activityId": recommendation.activityId,
+      "activityName": recommendation.activityName,
+      "workoutId": recommendation.workoutId,
+      "completedAt": recommendation.completedAt,
+      "createdAt": recommendation.createdAt,
+      "savedAt": recommendation.savedAt
+    ]
+  }
 }

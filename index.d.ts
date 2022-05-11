@@ -48,7 +48,7 @@ export type HealthMetric = {
   workoutId: number;
 };
 
-export type Recommendation = {
+export type WorkoutRecommendation = {
   id: number;
   date: string;
   activityId: number;
@@ -141,7 +141,7 @@ export function logout(): Promise<any>;
 export function getUserData(): Promise<User>;
 export function getUserWorkouts(offset: number): Promise<Workout[]>;
 export function getUserWorkoutById(id: number): Promise<Workout>;
-export function getWorkoutRecommendations(): Promise<Recommendation[]>;
+export function getWorkoutRecommendations(date: string): Promise<WorkoutRecommendation[]>;
 export function getDailyHistory(offset: number): Promise<[{ date: Date; metrics: HealthMetric[] }]>;
 export function setUserGoal(goal: Goal): Promise<User>;
 export function setUserSpecificGoal(specificGoal: SpecificGoal): Promise<User>;

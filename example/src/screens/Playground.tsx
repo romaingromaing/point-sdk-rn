@@ -27,7 +27,9 @@ export function PlaygroundScreen() {
 
   async function getWorkoutsRecommendations() {
     try {
-      console.log(await PointSdkRn.getWorkoutRecommendations());
+      console.log(
+        await PointSdkRn.getWorkoutRecommendations(new Date().toISOString()),
+      );
     } catch (error) {
       console.log(error);
     }
@@ -42,7 +44,7 @@ export function PlaygroundScreen() {
       <Button onPress={getDailyHistory} title="Get Daily History" />
       <Button
         onPress={getWorkoutsRecommendations}
-        title="Get Recommendations"
+        title="Get Workout Recommendations"
       />
     </View>
   );
