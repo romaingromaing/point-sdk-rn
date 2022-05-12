@@ -144,6 +144,20 @@ export interface Recommendation {
   color: string;
 }
 
+export type TrendTypes =
+  | "record_calories_burned_across_all_workout_types"
+  | "most_efficient_workout_type"
+  | "longest_workout_type"
+  | "avg_workout_calories_burned"
+  | "avg_workout_duration"
+  | "usual_workout_time";
+
+export interface Trend {
+  id: string;
+  type: TrendTypes;
+  additionalFields: string;
+}
+
 // Health Permissions
 export const healthPermissions: Permissions[];
 
@@ -177,3 +191,4 @@ export function setUserGoal(goal: Goal): Promise<User>;
 export function setUserSpecificGoal(specificGoal: SpecificGoal): Promise<User>;
 export function getUserHealthMetrics(filter: HealthMetricType[]): Promise<HealthMetric[]>;
 export function getUserRecommendations(): Promise<Recommendation[]>;
+export function getUserTrends(): Promise<Trend[]>;
