@@ -20,6 +20,23 @@ import PointSDK
   }
   
   /**
+   *  getUserTrends   Get user trends
+   *  @param resolve  Resolve handler
+   *  @param reject   Reject handler
+   */
+  @objc
+  func getUserTrends(_ resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) -> Void {
+    Task {
+      do {
+        let trends = try await dataManager?.getUserTrends()
+        resolve(trends?.map { trendMapping(trend: $0) })
+      } catch {
+        reject("getUserTrends", error.localizedDescription, error)
+      }
+    }
+  }
+  
+  /**
    *  setUserGoal     Set user goal
    *  @param goal     Goal
    *  @param resolve  Resolve handler

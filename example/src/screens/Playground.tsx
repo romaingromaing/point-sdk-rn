@@ -43,11 +43,20 @@ export function PlaygroundScreen() {
     }
   }
 
+  async function getUserTrends() {
+    try {
+      console.log(await PointSdkRn.getUserTrends());
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   return (
     <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
       <Text style={{fontSize: 18, fontWeight: 'bold'}}>
         Open the console log to see the results
       </Text>
+      <Button onPress={getUserTrends} title="Get User Trends" />
       <Button onPress={getUserHealthMetrics} title="Get User Health Metrics" />
       <Button onPress={getDailyHistory} title="Get Daily History" />
       <Button

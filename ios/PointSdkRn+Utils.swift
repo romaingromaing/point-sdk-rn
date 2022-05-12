@@ -148,4 +148,14 @@ extension PointSdkRn {
     ]
 
   }
+  
+  func trendMapping(trend: Trend?) -> [String : Any] {
+    guard let trend = trend else { return [:] }
+    
+    return [
+      "id": trend.id,
+      "type": trend.type.rawValue,
+      "additionalFields": trend.additionalFields
+    ]
+  }
 }
