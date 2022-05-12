@@ -51,6 +51,14 @@ export function PlaygroundScreen() {
     }
   }
 
+  async function saveWorkoutRecommendation() {
+    try {
+      console.log(await PointSdkRn.saveWorkoutRecommendation(2093));
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   return (
     <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
       <Text style={{fontSize: 18, fontWeight: 'bold'}}>
@@ -66,6 +74,10 @@ export function PlaygroundScreen() {
       <Button
         onPress={getWorkoutsRecommendations}
         title="Get Workout Recommendations"
+      />
+      <Button
+        onPress={saveWorkoutRecommendation}
+        title="Save Workout Recommendation"
       />
     </View>
   );

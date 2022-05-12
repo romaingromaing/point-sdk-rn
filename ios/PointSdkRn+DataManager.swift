@@ -159,6 +159,24 @@ import PointSDK
   }
   
   /**
+   *  saveWorkoutRecommendation Save workout recommendation
+   *  @param integer            Recommendation ID
+   *  @param resolve            Resolve handler
+   *  @param reject             Reject handler
+   */
+  @objc
+  func saveWorkoutRecommendation(_ id: Int, resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) -> Void {
+    Task {
+      do {
+        _ = try await dataManager?.saveWorkoutRecommendation(id: id)
+        resolve(true)
+      } catch {
+        reject("saveWorkoutRecommendation", error.localizedDescription, error)
+      }
+    }
+  }
+  
+  /**
    *  getUserRecommendations Retrieve user recommendations
    *  @param resolve            Resolve handler
    *  @param reject             Reject handler
