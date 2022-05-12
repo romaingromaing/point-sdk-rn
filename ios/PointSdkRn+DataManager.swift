@@ -168,8 +168,8 @@ import PointSDK
   func saveWorkoutRecommendation(_ id: Int, resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) -> Void {
     Task {
       do {
-        _ = try await dataManager?.saveWorkoutRecommendation(id: id)
-        resolve(true)
+        let result = try await dataManager?.saveWorkoutRecommendation(id: id)
+        resolve(result)
       } catch {
         reject("saveWorkoutRecommendation", error.localizedDescription, error)
       }
