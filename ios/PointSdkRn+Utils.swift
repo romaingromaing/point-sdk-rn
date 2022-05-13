@@ -1,6 +1,14 @@
 import Foundation
 import PointSDK
 
+extension Date {
+  func toIsoString() -> String? {
+    let formatter = DateFormatter()
+    formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+    return formatter.string(from: self)
+  }
+}
+
 extension PointSdkRn {
 
   func goalsMapping(type: String) -> Goal {
@@ -128,37 +136,24 @@ extension PointSdkRn {
     ]
   }
   
-  func toIsoString(date: Date?) -> String? {
-    guard let date = date else { return nil }
-    
-    let dateFormatter = DateFormatter()
-    dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
-    return dateFormatter.string(from: date)
-  }
-  
   func userRecommendationMapping(recommendation: UserRecommendation?) -> [String : Any?] {
     guard let recommendation = recommendation else { return [:] }
     
-    if #available(iOS 15.0, *) {
-      return [
-        "id": recommendation.id,
-        "insightId": recommendation.insightId,
-        "templateId": recommendation.templateId,
-        "category": recommendation.category?.rawValue,
-        "description": recommendation.description,
-        "actions": recommendation.actions.map {
-          [
-            "label": $0.label,
-            "url": $0.url
-          ]
-        },
-        "cooldownEndsAt": toIsoString(date: recommendation.cooldownEndsAt),
-        "lastSeenAt": toIsoString(date: recommendation.lastSeenAt)
-      ]
-    } else {
-      return [:]
-    }
-
+    return [
+      "id": recommendation.id,
+      "insightId": recommendation.insightId,
+      "templateId": recommendation.templateId,
+      "category": recommendation.category?.rawValue,
+      "description": recommendation.description,
+      "actions": recommendation.actions.map {
+        [
+          "label": $0.label,
+          "url": $0.url
+        ]
+      },
+      "cooldownEndsAt": recommendation.cooldownEndsAt?.toIsoString(),
+      "lastSeenAt": recommendation.lastSeenAt?.toIsoString()
+    ]
   }
   
   func trendMapping(trend: Trend?) -> [String : Any] {
