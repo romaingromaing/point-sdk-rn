@@ -52,7 +52,7 @@ extension PointSdkRn {
     }
   }
 
-  func workoutMapping(workout: Workout?) -> [String : Any?] {
+  func workoutMapping(workout: Workout?) -> [String : Any] {
     guard let workout = workout else { return [:] }
     
     return [
@@ -63,7 +63,7 @@ extension PointSdkRn {
       "start": workout.start,
       "end": workout.end,
       "activityName": workout.activityName,
-      "activityId": workout.activityId,
+      "activityId": workout.activityId as Any,
       "ratings": [
         "difficulty": workout.ratings?.difficulty,
         "energy": workout.ratings?.energy,
@@ -93,57 +93,57 @@ extension PointSdkRn {
     ]
   }
 
-  func userMapping(user: User?) -> [String : Any?] {
+  func userMapping(user: User?) -> [String : Any] {
     guard let user = user else { return [:] }
 
     return [
       "id": user.id,
-      "email": user.email,
-      "birthday": user.birthday,
-      "firstName": user.firstName,
-      "isSubscriber": user.isSubscriber,
-      "goal": user.goal?.rawValue,
+      "email": user.email as Any,
+      "birthday": user.birthday as Any,
+      "firstName": user.firstName as Any,
+      "isSubscriber": user.isSubscriber as Any,
+      "goal": user.goal?.rawValue as Any,
       "goalProgress": goalProgressMapping(goalProgress: user.goalProgress),
-      "specificGoal": user.specificGoal?.rawValue,
+      "specificGoal": user.specificGoal?.rawValue as Any,
       "lastWorkout": workoutMapping(workout: user.lastWorkout)
     ]
   }
   
-  func metricMapping(metric: HealthMetric?) -> [String : Any?] {
+  func metricMapping(metric: HealthMetric?) -> [String : Any] {
     guard let metric = metric else { return [:] }
 
     return [
       "type": metric.type,
       "date": metric.date,
       "value": metric.value,
-      "variance": metric.variance,
-      "workoutId": metric.workoutId
+      "variance": metric.variance as Any,
+      "workoutId": metric.workoutId as Any
     ]
   }
   
-  func workoutRecommendationMapping(recommendation: WorkoutRecommendation?) -> [String : Any?] {
+  func workoutRecommendationMapping(recommendation: WorkoutRecommendation?) -> [String : Any] {
     guard let recommendation = recommendation else { return [:] }
     
     return [
       "id": recommendation.id,
-      "date": recommendation.date,
-      "activityId": recommendation.activityId,
-      "activityName": recommendation.activityName,
-      "workoutId": recommendation.workoutId,
-      "completedAt": recommendation.completedAt,
-      "createdAt": recommendation.createdAt,
-      "savedAt": recommendation.savedAt
+      "date": recommendation.date as Any,
+      "activityId": recommendation.activityId as Any,
+      "activityName": recommendation.activityName as Any,
+      "workoutId": recommendation.workoutId as Any,
+      "completedAt": recommendation.completedAt as Any,
+      "createdAt": recommendation.createdAt as Any,
+      "savedAt": recommendation.savedAt as Any
     ]
   }
   
-  func userRecommendationMapping(recommendation: UserRecommendation?) -> [String : Any?] {
+  func userRecommendationMapping(recommendation: UserRecommendation?) -> [String : Any] {
     guard let recommendation = recommendation else { return [:] }
     
     return [
       "id": recommendation.id,
-      "insightId": recommendation.insightId,
-      "templateId": recommendation.templateId,
-      "category": recommendation.category?.rawValue,
+      "insightId": recommendation.insightId as Any,
+      "templateId": recommendation.templateId as Any,
+      "category": recommendation.category?.rawValue as Any,
       "description": recommendation.description,
       "actions": recommendation.actions.map {
         [
@@ -151,8 +151,8 @@ extension PointSdkRn {
           "url": $0.url
         ]
       },
-      "cooldownEndsAt": recommendation.cooldownEndsAt?.toIsoString(),
-      "lastSeenAt": recommendation.lastSeenAt?.toIsoString()
+      "cooldownEndsAt": recommendation.cooldownEndsAt?.toIsoString() as Any,
+      "lastSeenAt": recommendation.lastSeenAt?.toIsoString() as Any
     ]
   }
   
