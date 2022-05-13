@@ -23,6 +23,7 @@ RCT_EXTERN_METHOD(setUserGoal:(NSString)goal resolve: (RCTPromiseResolveBlock)re
 RCT_EXTERN_METHOD(setUserSpecificGoal:(NSString)specificGoal resolve: (RCTPromiseResolveBlock)resolve rejecter: (RCTPromiseRejectBlock)reject);
 RCT_EXTERN_METHOD(getUserHealthMetrics:(NSArray *)filter resolve: (RCTPromiseResolveBlock)resolve rejecter: (RCTPromiseRejectBlock)reject);
 RCT_EXTERN_METHOD(getUserRecommendations:(RCTPromiseResolveBlock)resolve rejecter: (RCTPromiseRejectBlock)reject);
+RCT_EXTERN_METHOD(recommendationSeen:(NSInteger)id resolve: (RCTPromiseResolveBlock)resolve rejecter: (RCTPromiseRejectBlock)reject);
 
 + (BOOL)requiresMainQueueSetup
 {

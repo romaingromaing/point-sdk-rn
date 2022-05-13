@@ -44,7 +44,7 @@ extension PointSdkRn {
     }
   }
 
-  func workoutMapping(workout: Workout?) -> [String : Any] {
+  func workoutMapping(workout: Workout?) -> [String : Any?] {
     guard let workout = workout else { return [:] }
     
     return [
@@ -85,23 +85,23 @@ extension PointSdkRn {
     ]
   }
 
-  func userMapping(user: User?) -> [String : Any] {
+  func userMapping(user: User?) -> [String : Any?] {
     guard let user = user else { return [:] }
 
     return [
       "id": user.id,
-      "email": user.email ?? "",
-      "birthday": user.birthday ?? "",
-      "firstName": user.firstName ?? "",
-      "isSubscriber": user.isSubscriber ?? false,
-      "goal": user.goal?.rawValue as Any,
+      "email": user.email,
+      "birthday": user.birthday,
+      "firstName": user.firstName,
+      "isSubscriber": user.isSubscriber,
+      "goal": user.goal?.rawValue,
       "goalProgress": goalProgressMapping(goalProgress: user.goalProgress),
-      "specificGoal": user.specificGoal?.rawValue as Any,
+      "specificGoal": user.specificGoal?.rawValue,
       "lastWorkout": workoutMapping(workout: user.lastWorkout)
     ]
   }
   
-  func metricMapping(metric: HealthMetric?) -> [String : Any] {
+  func metricMapping(metric: HealthMetric?) -> [String : Any?] {
     guard let metric = metric else { return [:] }
 
     return [
@@ -113,7 +113,7 @@ extension PointSdkRn {
     ]
   }
   
-  func workoutRecommendationMapping(recommendation: WorkoutRecommendation?) -> [String : Any] {
+  func workoutRecommendationMapping(recommendation: WorkoutRecommendation?) -> [String : Any?] {
     guard let recommendation = recommendation else { return [:] }
     
     return [
@@ -128,24 +128,36 @@ extension PointSdkRn {
     ]
   }
   
-  func userRecommendationMapping(recommendation: UserRecommendation?) -> [String : Any] {
+  func toIsoString(date: Date?) -> String? {
+    guard let date = date else { return nil }
+    
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+    return dateFormatter.string(from: date)
+  }
+  
+  func userRecommendationMapping(recommendation: UserRecommendation?) -> [String : Any?] {
     guard let recommendation = recommendation else { return [:] }
     
-    return [
-      "id": recommendation.id,
-      "insightId": recommendation.insightId,
-      "templateId": recommendation.templateId,
-      "category": recommendation.category?.rawValue,
-      "description": recommendation.description,
-      "actions": recommendation.actions.map {
-        [
-          "label": $0.label,
-          "url": $0.url
-        ]
-      },
-      "cooldownEndsAt": recommendation.cooldownEndsAt,
-      "lastSeenAt": recommendation.lastSeenAt
-    ]
+    if #available(iOS 15.0, *) {
+      return [
+        "id": recommendation.id,
+        "insightId": recommendation.insightId,
+        "templateId": recommendation.templateId,
+        "category": recommendation.category?.rawValue,
+        "description": recommendation.description,
+        "actions": recommendation.actions.map {
+          [
+            "label": $0.label,
+            "url": $0.url
+          ]
+        },
+        "cooldownEndsAt": toIsoString(date: recommendation.cooldownEndsAt),
+        "lastSeenAt": toIsoString(date: recommendation.lastSeenAt)
+      ]
+    } else {
+      return [:]
+    }
 
   }
   

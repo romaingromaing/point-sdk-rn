@@ -195,6 +195,24 @@ import PointSDK
   }
   
   /**
+   *  recommendationSeen  Mark recommendation seen
+   *  @param id           Recommendation ID
+   *  @param resolve      Resolve handler
+   *  @param reject       Reject handler
+   */
+  @objc
+  func recommendationSeen(_ id: Int, resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) -> Void {
+    Task {
+      do {
+        let result = try await dataManager?.recommendationSeen(id: id)
+        resolve(result)
+      } catch {
+        reject("recommendationSeen", error.localizedDescription, error)
+      }
+    }
+  }
+  
+  /**
    *  getUserHealthMetrics  Retrieve user metrics
    *  @param array          filter
    *  @param int            workoutId
