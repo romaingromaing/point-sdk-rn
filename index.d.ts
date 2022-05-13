@@ -192,4 +192,5 @@ export function setUserGoal(goal: Goal): Promise<User>;
 export function setUserSpecificGoal(specificGoal: SpecificGoal): Promise<User>;
 export function getUserHealthMetrics(filter: HealthMetricType[]): Promise<HealthMetric[]>;
 export function getUserRecommendations(): Promise<Recommendation[]>;
+export function recommendationSeen(id: number): Promise<any>;
 export function getUserTrends(): Promise<Trend[]>;

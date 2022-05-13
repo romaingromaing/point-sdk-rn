@@ -1,6 +1,14 @@
 import Foundation
 import PointSDK
 
+extension Date {
+  func toIsoString() -> String? {
+    let formatter = DateFormatter()
+    formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+    return formatter.string(from: self)
+  }
+}
+
 extension PointSdkRn {
 
   func goalsMapping(type: String) -> Goal {
@@ -55,7 +63,7 @@ extension PointSdkRn {
       "start": workout.start,
       "end": workout.end,
       "activityName": workout.activityName,
-      "activityId": workout.activityId,
+      "activityId": workout.activityId as Any,
       "ratings": [
         "difficulty": workout.ratings?.difficulty,
         "energy": workout.ratings?.energy,
@@ -90,10 +98,10 @@ extension PointSdkRn {
 
     return [
       "id": user.id,
-      "email": user.email ?? "",
-      "birthday": user.birthday ?? "",
-      "firstName": user.firstName ?? "",
-      "isSubscriber": user.isSubscriber ?? false,
+      "email": user.email as Any,
+      "birthday": user.birthday as Any,
+      "firstName": user.firstName as Any,
+      "isSubscriber": user.isSubscriber as Any,
       "goal": user.goal?.rawValue as Any,
       "goalProgress": goalProgressMapping(goalProgress: user.goalProgress),
       "specificGoal": user.specificGoal?.rawValue as Any,
@@ -108,8 +116,8 @@ extension PointSdkRn {
       "type": metric.type,
       "date": metric.date,
       "value": metric.value,
-      "variance": metric.variance,
-      "workoutId": metric.workoutId
+      "variance": metric.variance as Any,
+      "workoutId": metric.workoutId as Any
     ]
   }
   
@@ -118,13 +126,13 @@ extension PointSdkRn {
     
     return [
       "id": recommendation.id,
-      "date": recommendation.date,
-      "activityId": recommendation.activityId,
-      "activityName": recommendation.activityName,
-      "workoutId": recommendation.workoutId,
-      "completedAt": recommendation.completedAt,
-      "createdAt": recommendation.createdAt,
-      "savedAt": recommendation.savedAt
+      "date": recommendation.date as Any,
+      "activityId": recommendation.activityId as Any,
+      "activityName": recommendation.activityName as Any,
+      "workoutId": recommendation.workoutId as Any,
+      "completedAt": recommendation.completedAt as Any,
+      "createdAt": recommendation.createdAt as Any,
+      "savedAt": recommendation.savedAt as Any
     ]
   }
   
@@ -133,9 +141,9 @@ extension PointSdkRn {
     
     return [
       "id": recommendation.id,
-      "insightId": recommendation.insightId,
-      "templateId": recommendation.templateId,
-      "category": recommendation.category?.rawValue,
+      "insightId": recommendation.insightId as Any,
+      "templateId": recommendation.templateId as Any,
+      "category": recommendation.category?.rawValue as Any,
       "description": recommendation.description,
       "actions": recommendation.actions.map {
         [
@@ -143,10 +151,9 @@ extension PointSdkRn {
           "url": $0.url
         ]
       },
-      "cooldownEndsAt": recommendation.cooldownEndsAt,
-      "lastSeenAt": recommendation.lastSeenAt
+      "cooldownEndsAt": recommendation.cooldownEndsAt?.toIsoString() as Any,
+      "lastSeenAt": recommendation.lastSeenAt?.toIsoString() as Any
     ]
-
   }
   
   func trendMapping(trend: Trend?) -> [String : Any] {
