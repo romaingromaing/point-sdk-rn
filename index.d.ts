@@ -158,6 +158,12 @@ export interface Trend {
   additionalFields: string;
 }
 
+export interface WorkoutRatings {
+  difficulty: number;
+  energy: number;
+  instructor: number;
+}
+
 // Health Permissions
 export const healthPermissions: Permissions[];
 
@@ -187,6 +193,7 @@ export function getUserWorkouts(offset: number): Promise<Workout[]>;
 export function getUserWorkoutById(id: number): Promise<Workout>;
 export function getWorkoutRecommendations(date: string): Promise<WorkoutRecommendation[]>;
 export function saveWorkoutRecommendation(id: number): Promise<any>;
+export function rateWorkout(id: number, ratings: WorkoutRatings): Promise<Workout>;
 export function getDailyHistory(offset: number): Promise<[{ date: Date; metrics: HealthMetric[] }]>;
 export function setUserGoal(goal: Goal): Promise<User>;
 export function setUserSpecificGoal(specificGoal: SpecificGoal): Promise<User>;

@@ -114,6 +114,30 @@ import PointSDK
   }
   
   /**
+   *  rateWorkout     Rate workout by ID
+   *  @param Workout  Workout ID
+   *  @param Rating[] Ratings
+   *  @param resolve  Resolve handler
+   *  @param reject   Reject handler
+   */
+  @objc
+  func rateWorkout(_ id: Int, ratings: [String : Int], resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) -> Void {
+    Task {
+      do {
+        if let workout = try await dataManager?.getWorkout(id: id) {
+          let ratings = WorkoutRatings(difficulty: ratings["difficulty"], energy: ratings["energy"], instructor: ratings["instructor"])
+          let newWorkout = try await dataManager?.rate(workout: workout, ratings: ratings)
+          resolve(workoutMapping(workout: newWorkout))
+        } else {
+          resolve(false)
+        }
+      } catch {
+        reject("getUserWorkoutById", error.localizedDescription, error)
+      }
+    }
+  }
+  
+  /**
    *  getDailyHistory Retrieve daily history
    *  @param offset   Offset
    *  @param resolve  Resolve handler
@@ -230,7 +254,7 @@ import PointSDK
           healthMetrics = filter.compactMap { HealthMetric.Kind(rawValue: $0) }
         }
 
-        var data = try await dataManager?.getHealthMetrics(
+        let data = try await dataManager?.getHealthMetrics(
           filter: Set(healthMetrics),
           workoutId: nil,
           date: nil

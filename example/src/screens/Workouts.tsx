@@ -12,11 +12,25 @@ export function WorkoutsScreen() {
     setWorkouts(await PointSdkRn.getUserWorkouts(0));
   }
 
+  async function rateWorkout(workoutId: number) {
+    try {
+      await PointSdkRn.rateWorkout(workoutId, {
+        difficulty: 1,
+        energy: 2,
+        instructor: 3,
+      });
+      setWorkouts(await PointSdkRn.getUserWorkouts(0));
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   return (
     <View>
       <Button onPress={getWorkouts} title="Get Workouts" />
       <FlatList
         data={workouts}
+        keyExtractor={item => `${item.id}`}
         renderItem={({item}) => (
           <Item>
             <Text>ID: {item.id}</Text>
@@ -32,6 +46,7 @@ export function WorkoutsScreen() {
             <Text>
               <>End: {item.end}</>
             </Text>
+            <Button onPress={() => rateWorkout(item.id)} title="Rate" />
           </Item>
         )}
       />
