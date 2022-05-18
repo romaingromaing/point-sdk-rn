@@ -191,7 +191,7 @@ PODS:
     - React-cxxreact (= 0.63.2)
     - React-jsi (= 0.63.2)
   - React-jsinspector (0.63.2)
-  - react-native-point-sdk (0.1.6):
+  - react-native-point-sdk (0.1.7):
     - PointSDK (~> 0.1.7)
     - React
   - react-native-safe-area-context (3.4.1):
@@ -383,7 +383,7 @@ SPEC CHECKSUMS:
   React-jsi: 54245e1d5f4b690dec614a73a3795964eeef13a8
   React-jsiexecutor: 8ca588cc921e70590820ce72b8789b02c67cce38
   React-jsinspector: b14e62ebe7a66e9231e9581279909f2fc3db6606
-  react-native-point-sdk: 4fd51c62f6151662ea2c3f97ab72ea7cc346fc7e
+  react-native-point-sdk: 4548696a52d9967a113760a8214c25d23ef225da
   react-native-safe-area-context: 9e40fb181dac02619414ba1294d6c2a807056ab9
   React-RCTActionSheet: 910163b6b09685a35c4ebbc52b66d1bfbbe39fc5
   React-RCTAnimation: 9a883bbe1e9d2e158d4fb53765ed64c8dc2200c6
