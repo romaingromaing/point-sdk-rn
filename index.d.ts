@@ -15,7 +15,7 @@ export type User = {
   email: string;
   birthday: string;
   firstName: string;
-  isSubscribed: boolean;
+  isSubscriber: boolean;
   goal: string;
   goalProgress: Record<GoalProgressKey, GoalProgressValue>;
   specificGoal: string;
@@ -156,12 +156,6 @@ export interface Trend {
   id: string;
   type: TrendTypes;
   additionalFields: string;
-}
-
-export interface WorkoutRatings {
-  difficulty: number;
-  energy: number;
-  instructor: number;
 }
 
 // Health Permissions
