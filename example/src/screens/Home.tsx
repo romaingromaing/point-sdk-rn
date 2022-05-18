@@ -25,7 +25,7 @@ export function HomeScreen() {
       );
       const userData = await PointSdkRn.getUserData();
 
-      if (!userData?.email) {
+      if (!userData) {
         throw new Error('Token expired!');
       }
 
