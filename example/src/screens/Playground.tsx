@@ -5,12 +5,15 @@ import PointSdkRn from 'react-native-point-sdk';
 export function PlaygroundScreen() {
   const getUserHealthMetrics = async () => {
     try {
-      const data = await PointSdkRn.getUserHealthMetrics([
-        'Vo2Max',
-        'TotalWorkoutDuration',
-        'TotalMinsHRZone12',
-        'TotalMinsHRZone34',
-      ]);
+      const data = await PointSdkRn.getUserHealthMetrics(
+        [
+          'Vo2Max',
+          'TotalWorkoutDuration',
+          'TotalMinsHRZone12',
+          'TotalMinsHRZone34',
+        ],
+        new Date().toISOString(),
+      );
       console.log(data);
     } catch (error) {
       console.log(error);
