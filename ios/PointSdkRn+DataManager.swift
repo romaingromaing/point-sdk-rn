@@ -170,9 +170,7 @@ import PointSDK
   func getWorkoutRecommendations(_ date: String, resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) -> Void {
     Task {
       do {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
-        let finalDate = dateFormatter.date(from: date)!
+        let finalDate = date.fromIsoStringToDate()
         let recommendations = try await dataManager?.getWorkoutRecommendations(date: finalDate)
         
         resolve(recommendations?.map { workoutRecommendationMapping(recommendation: $0) })
@@ -245,7 +243,7 @@ import PointSDK
    *  @param reject         Reject handler
    */
   @objc
-  func getUserHealthMetrics(_ filter: Array<String>?, resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) -> Void {
+  func getUserHealthMetrics(_ filter: Array<String>?, date: String, resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) -> Void {
     Task {
       do {
         var healthMetrics = HealthMetric.Kind.allCases
@@ -257,7 +255,7 @@ import PointSDK
         let data = try await dataManager?.getHealthMetrics(
           filter: Set(healthMetrics),
           workoutId: nil,
-          date: nil
+          date: date.fromIsoStringToDate()
         )
 
         resolve(data?.map { metricMapping(metric: $0) })
