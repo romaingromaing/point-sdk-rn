@@ -235,17 +235,18 @@ import PointSDK
   }
   
   /**
-   *  getUserHealthMetrics  Retrieve user metrics
-   *  @param array          filter
-   *  @param int            workoutId
-   *  @param string         date
-   *  @param resolve        Resolve handler
-   *  @param reject         Reject handler
+   *  getHealthMetrics Retrieve health metrics
+   *  @param object    Params
+   *  @param resolve   Resolve handler
+   *  @param reject    Reject handler
    */
   @objc
-  func getUserHealthMetrics(_ filter: Array<String>?, date: String, resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) -> Void {
+  func getHealthMetrics(_ params: [String : Any], resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) -> Void {
     Task {
       do {
+        let filter = params["filter"] as? [String]
+        let workoutId = params["workoutId"] as? Int
+        let date = params["date"] as? String
         var healthMetrics = HealthMetric.Kind.allCases
 
         if let filter = filter {
@@ -254,13 +255,13 @@ import PointSDK
 
         let data = try await dataManager?.getHealthMetrics(
           filter: Set(healthMetrics),
-          workoutId: nil,
-          date: date.fromIsoStringToDate()
+          workoutId: workoutId,
+          date: date?.fromIsoStringToDate()
         )
 
         resolve(data?.map { metricMapping(metric: $0) })
       } catch {
-        reject("getUserHealthMetrics", error.localizedDescription, error)
+        reject("getHealthMetrics", error.localizedDescription, error)
       }
     }
   }
