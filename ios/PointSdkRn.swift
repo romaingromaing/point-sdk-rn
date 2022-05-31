@@ -15,7 +15,7 @@ class PointSdkRn: NSObject {
    */
   @objc
   func setup(_ clientId: String, clientSecret: String, permissions: Array<String>?, environment: String, verbose: Bool = false, callback: RCTResponseSenderBlock) -> Void {
-    var queriesTypes = HealthQueryType.allCases
+    var queriesTypes: Array<HealthQueryType> = []
     
     if let permissions = permissions {
       queriesTypes = permissions.compactMap { HealthQueryType(rawValue: $0) }
