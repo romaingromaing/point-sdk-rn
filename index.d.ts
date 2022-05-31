@@ -1,7 +1,20 @@
 /// <reference types="typescript" />
 
 type Callback = (_: any, success: any) => void;
-export type Permissions = ["example"];
+
+export type Permissions = [
+  "restingHeartRate",
+  "heartRate",
+  "activeEnergyBurned",
+  "basalEnergyBurned",
+  "workout",
+  "heartRateVariabilitySDNN",
+  "vo2Max",
+  "stepCount",
+  "mindfulSession",
+  "sleepAnalysis",
+  "birthday"
+];
 
 type GoalProgressKey = "overral" | "endurance" | "recovery" | "strength";
 
