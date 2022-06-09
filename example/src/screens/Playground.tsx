@@ -8,6 +8,7 @@ export function PlaygroundScreen() {
       const data = await PointSdkRn.getHealthMetrics({
         filter: [
           'Vo2Max',
+          'Weight',
           'TotalWorkoutDuration',
           'TotalMinsHRZone12',
           'TotalMinsHRZone34',

@@ -11,7 +11,7 @@ import PointSDK
   func getUserData(_ resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) -> Void {
     Task {
       do {
-        let user = try await dataManager?.getUserData()
+        let user = try await healthService?.getUserData()
         resolve(userMapping(user: user))
       } catch {
         reject("getUserData", error.localizedDescription, error)
@@ -28,7 +28,7 @@ import PointSDK
   func getUserTrends(_ resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) -> Void {
     Task {
       do {
-        let trends = try await dataManager?.getUserTrends()
+        let trends = try await healthService?.getUserTrends()
         resolve(trends?.map { trendMapping(trend: $0) })
       } catch {
         reject("getUserTrends", error.localizedDescription, error)
@@ -47,7 +47,7 @@ import PointSDK
     Task {
       do {
         let mappedGoal = goalsMapping(type: goal)
-        let result = try await dataManager?.syncUserGoal(goal: mappedGoal)
+        let result = try await healthService?.syncUserGoal(goal: mappedGoal)
         resolve(result)
       } catch {
         reject("setUserGoal", error.localizedDescription, error)
@@ -66,7 +66,7 @@ import PointSDK
     Task {
       do {
         let mappedSpecificGoal = specificGoalsMapping(type: specificGoal)
-        let result = try await dataManager?.syncUserSpecificGoal(specificGoal: mappedSpecificGoal)
+        let result = try await healthService?.syncUserSpecificGoal(specificGoal: mappedSpecificGoal)
         resolve(result)
       } catch {
         reject("setUserSpecificGoal", error.localizedDescription, error)
@@ -84,7 +84,7 @@ import PointSDK
   func getUserWorkouts(_ offset: Int, resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) -> Void {
     Task {
       do {
-        let workouts = try await dataManager?.getUserWorkouts(offset: offset)
+        let workouts = try await healthService?.getUserWorkouts(offset: offset)
         resolve(workouts?.map{ workoutMapping(workout: $0) })
       } catch {
         reject("getUserWorkouts", error.localizedDescription, error)
@@ -102,7 +102,7 @@ import PointSDK
   func getUserWorkoutById(_ id: Int, resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) -> Void {
     Task {
       do {
-        if let workout: Workout = try await dataManager?.getWorkout(id: id) {
+        if let workout: Workout = try await healthService?.getWorkout(id: id) {
           resolve(workoutMapping(workout: workout))
         } else {
           resolve([])
@@ -124,9 +124,9 @@ import PointSDK
   func rateWorkout(_ id: Int, ratings: [String : Int], resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) -> Void {
     Task {
       do {
-        if let workout = try await dataManager?.getWorkout(id: id) {
+        if let workout = try await healthService?.getWorkout(id: id) {
           let ratings = WorkoutRatings(difficulty: ratings["difficulty"], energy: ratings["energy"], instructor: ratings["instructor"])
-          let newWorkout = try await dataManager?.rate(workout: workout, ratings: ratings)
+          let newWorkout = try await healthService?.rate(workout: workout, ratings: ratings)
           resolve(workoutMapping(workout: newWorkout))
         } else {
           resolve(false)
@@ -147,7 +147,7 @@ import PointSDK
   func getDailyHistory(_ offset: Int = 0, resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) -> Void {
     Task {
       do {
-        let workouts = try await dataManager?.getDailyHistory(offset: offset)
+        let workouts = try await healthService?.getDailyHistory(offset: offset)
         resolve(workouts?.map {
           [
             "date": $0.date,
@@ -171,7 +171,7 @@ import PointSDK
     Task {
       do {
         let finalDate = date.fromIsoStringToDate()
-        let recommendations = try await dataManager?.getWorkoutRecommendations(date: finalDate)
+        let recommendations = try await healthService?.getWorkoutRecommendations(date: finalDate)
         
         resolve(recommendations?.map { workoutRecommendationMapping(recommendation: $0) })
       } catch {
@@ -190,7 +190,7 @@ import PointSDK
   func saveWorkoutRecommendation(_ id: Int, resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) -> Void {
     Task {
       do {
-        let result = try await dataManager?.saveWorkoutRecommendation(id: id)
+        let result = try await healthService?.saveWorkoutRecommendation(id: id)
         resolve(result)
       } catch {
         reject("saveWorkoutRecommendation", error.localizedDescription, error)
@@ -207,7 +207,7 @@ import PointSDK
   func getUserRecommendations(_ resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) -> Void {
     Task {
       do {
-        let recommendations = try await dataManager?.getUserRecommendations()
+        let recommendations = try await healthService?.getUserRecommendations()
         
         resolve(recommendations?.map { userRecommendationMapping(recommendation: $0) })
       } catch {
@@ -226,7 +226,7 @@ import PointSDK
   func recommendationSeen(_ id: Int, resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) -> Void {
     Task {
       do {
-        let result = try await dataManager?.recommendationSeen(id: id)
+        let result = try await healthService?.recommendationSeen(id: id)
         resolve(result)
       } catch {
         reject("recommendationSeen", error.localizedDescription, error)
@@ -247,13 +247,13 @@ import PointSDK
         let filter = params["filter"] as? [String]
         let workoutId = params["workoutId"] as? Int
         let date = params["date"] as? String
-        var healthMetrics = HealthMetric.Kind.allCases
+          var healthMetrics = HealthMetric.HealthMetricType.allCases
 
         if let filter = filter {
-          healthMetrics = filter.compactMap { HealthMetric.Kind(rawValue: $0) }
+          healthMetrics = filter.compactMap { HealthMetric.HealthMetricType(rawValue: $0) }
         }
 
-        let data = try await dataManager?.getHealthMetrics(
+        let data = try await healthService?.getHealthMetrics(
           filter: Set(healthMetrics),
           workoutId: workoutId,
           date: date?.fromIsoStringToDate()
