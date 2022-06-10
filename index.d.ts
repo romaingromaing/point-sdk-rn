@@ -13,7 +13,8 @@ export type Permissions = [
   "stepCount",
   "mindfulSession",
   "sleepAnalysis",
-  "birthday"
+  "birthday",
+  "bodyMass"
 ];
 
 type GoalProgressKey = "overral" | "endurance" | "recovery" | "strength";
@@ -125,7 +126,16 @@ export type HealthMetricType =
   | "TotalMinsHRZone34"
   | "WeeklyAvgWorkoutHR"
   | "WeeklyExertionRate"
-  | "DailyWorkoutDuration";
+  | "DailyWorkoutDuration"
+  | "Weight"
+  | "SleepEfficiency"
+  | "SleepLatency"
+  | "SleepStageDeep"
+  | "SleepStageLight"
+  | "SleepStageREM"
+  | "SleepStageWake"
+  | "SleepDurationInbed"
+  | "SleepDurationAsleep";
 
 export interface RecommendationAction {
   label: string;

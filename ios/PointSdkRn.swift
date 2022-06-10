@@ -4,7 +4,7 @@ import PointSDK
 @objc(PointSdkRn)
 class PointSdkRn: NSObject {
   var healthKit: HealthKitManager? { Point.healthKit }
-  var dataManager: DataManager? { Point.dataManager }
+  var healthService: HealthDataService? { Point.healthDataService }
 
   /**
    *  setup               Initialize PointSDK
