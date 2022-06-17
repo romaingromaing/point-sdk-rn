@@ -22,7 +22,7 @@ PODS:
     - DoubleConversion
     - glog
   - glog (0.3.5)
-  - PointSDK (0.1.14):
+  - PointSDK (0.1.15):
     - Apollo (~> 0.51.2)
     - SQLite.swift (~> 0.13.3)
   - RCTRequired (0.63.2)
@@ -191,8 +191,8 @@ PODS:
     - React-cxxreact (= 0.63.2)
     - React-jsi (= 0.63.2)
   - React-jsinspector (0.63.2)
-  - react-native-point-sdk (0.1.14):
-    - PointSDK (~> 0.1.14)
+  - react-native-point-sdk (0.1.15):
+    - PointSDK (~> 0.1.15)
     - React
   - react-native-safe-area-context (3.4.1):
     - React-Core
@@ -372,7 +372,7 @@ SPEC CHECKSUMS:
   FBReactNativeSpec: dc7fa9088f0f2a998503a352b0554d69a4391c5a
   Folly: b73c3869541e86821df3c387eb0af5f65addfab4
   glog: 40a13f7840415b9a77023fbcae0f1e6f43192af3
-  PointSDK: cc47df089a03216b7f3886d179540cd2e135c850
+  PointSDK: e48f08db320bd9028e58256e49de7dad4ecba055
   RCTRequired: f13f25e7b12f925f1f6a6a8c69d929a03c0129fe
   RCTTypeSafety: 44982c5c8e43ff4141eb519a8ddc88059acd1f3a
   React: e1c65dd41cb9db13b99f24608e47dd595f28ca9a
@@ -383,7 +383,7 @@ SPEC CHECKSUMS:
   React-jsi: 54245e1d5f4b690dec614a73a3795964eeef13a8
   React-jsiexecutor: 8ca588cc921e70590820ce72b8789b02c67cce38
   React-jsinspector: b14e62ebe7a66e9231e9581279909f2fc3db6606
-  react-native-point-sdk: d3fef27ac803d5df0adc65e5ad955c8fbd79f143
+  react-native-point-sdk: 856a1d5a7315d9c6cf3469630b78e7febbad5040
   react-native-safe-area-context: 9e40fb181dac02619414ba1294d6c2a807056ab9
   React-RCTActionSheet: 910163b6b09685a35c4ebbc52b66d1bfbbe39fc5
   React-RCTAnimation: 9a883bbe1e9d2e158d4fb53765ed64c8dc2200c6

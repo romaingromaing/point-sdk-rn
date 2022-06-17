@@ -21,15 +21,15 @@ import PointSDK
   }
   
   /**
-   *  enableBackgroundListeners Start background listeners
+   *  startBackgroundListeners Start background listeners
    *  @param resolve            Resolve handler
    *  @param reject             Reject handler
    */
   @objc
-  func enableBackgroundListeners(_ resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) -> Void {
+  func startBackgroundListeners(_ resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) -> Void {
     Task {
       do {
-        let _ = try await healthKit?.enableAllBackgroundDelivery()
+        let _ = try await healthKit?.startAllBackgroundListeners()
         resolve(true)
       } catch {
         reject("startBackgroundListeners", error.localizedDescription, error)
@@ -46,27 +46,10 @@ import PointSDK
   func disableBackgroundListeners(_ resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) -> Void {
     Task {
       do {
-        try await healthKit?.disableAllBackgroundDelivery()
+        try await healthKit?.disableAllBackgroundListeners()
         resolve(true)
       } catch {
         reject("stopBackgroundListeners", error.localizedDescription, error)
-      }
-    }
-  }
-  
-  /**
-   *  setupBackgroundListeners Setup background listeners
-   *  @param resolve           Resolve handler
-   *  @param reject            Reject handler
-   */
-  @objc
-  func setupBackgroundListeners(_ resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) -> Void {
-    Task {
-      do {
-        await healthKit?.setupAllBackgroundQueries()
-        resolve(true)
-      } catch {
-        reject("setupBackgroundListeners", error.localizedDescription, error)
       }
     }
   }

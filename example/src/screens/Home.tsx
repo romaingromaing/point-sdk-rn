@@ -30,7 +30,6 @@ export function HomeScreen() {
       }
 
       setUser(userData);
-      await PointSdkRn.enableBackgroundListeners();
     } catch (error) {
       console.error(error);
     }
@@ -41,7 +40,6 @@ export function HomeScreen() {
       await PointSdkRn.logout();
       setUser(null);
       console.log('Successfully logged out');
-      await PointSdkRn.disableBackgroundListeners();
     } catch (error) {
       console.log(error);
     }
