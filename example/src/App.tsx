@@ -12,8 +12,6 @@ const Tab = createBottomTabNavigator();
 
 const App = () => {
   useEffect(() => {
-    PointSdkRn.enableBackgroundListeners();
-
     const appStateSubscription = AppState.addEventListener(
       'change',
       (state: AppStateStatus) => {

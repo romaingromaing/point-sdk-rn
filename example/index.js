@@ -17,7 +17,7 @@ AppRegistry.registerComponent(appName, () => {
     () => console.log('Setup completed!'),
   );
 
-  PointSdkRn.setupBackgroundListeners();
+  PointSdkRn.startBackgroundListeners();
 
   return App;
 });

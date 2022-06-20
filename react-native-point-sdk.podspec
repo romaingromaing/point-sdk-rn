@@ -11,7 +11,7 @@ Pod::Spec.new do |s|
   s.description   = <<-DESC
                   react-native-point-sdk
                    DESC
-  s.homepage      = "https://github.com/github_account/react-native-point-sdk"
+  s.homepage      = "https://github.com/agencyenterprise/point-sdk-rn"
   # brief license entry:
   s.license       = "MIT"
   # optional - use expanded license entry instead:
@@ -25,6 +25,6 @@ Pod::Spec.new do |s|
   s.requires_arc  = true
 
   s.dependency "React"
-  s.dependency "PointSDK", '~> 0.1.14'
+  s.dependency "PointSDK", '~> 0.1.15'
 end
 

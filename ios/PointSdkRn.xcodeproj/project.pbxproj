@@ -332,7 +332,7 @@
 			repositoryURL = "https://github.com/agencyenterprise/point-sdk-ios/";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 0.0.5;
+				minimumVersion = 0.1.15;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
