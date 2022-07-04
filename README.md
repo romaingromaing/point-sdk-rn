@@ -31,4 +31,3 @@ See [Getting Started](https://point-landing-pages.vercel.app/docs/rn-getting-sta
 ### Mostly automatic installation
 
 `$ npm install react-native-point-sdk --save`
-`$ react-native link react-native-point-sdk`
