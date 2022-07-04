@@ -1,8 +1,8 @@
 {
   "name": "react-native-point-sdk",
   "title": "React Native Point SDK",
-  "version": "0.1.15",
-  "description": "TODO",
+  "version": "0.1.17",
+  "description": "Capacitor Wrapper for PointSDK",
   "main": "index.js",
   "files": [
     "README.md",
@@ -17,7 +17,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/agencyenterprise/point-sdk-rn/.git",
+    "url": "git+https://github.com/agencyenterprise/point-sdk-rn.git",
     "baseUrl": "https://github.com/agencyenterprise/point-sdk-rn/"
   },
   "keywords": [
@@ -27,7 +27,7 @@
     "name": "Agency Enterprise",
     "email": "contact@ae.studio"
   },
-  "license": "MIT",
+  "license": "Proprietary",
   "licenseFilename": "LICENSE",
   "readmeFilename": "README.md",
   "peerDependencies": {
