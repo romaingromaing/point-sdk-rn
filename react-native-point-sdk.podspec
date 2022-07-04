@@ -5,7 +5,7 @@ require "json"
 package = JSON.parse(File.read(File.join(__dir__, "package.json")))
 
 Pod::Spec.new do |s|
-  s.name          = "PointSDK-RN"
+  s.name          = "react-native-point-sdk"
   s.version       = package["version"]
   s.summary       = package["description"]
   s.description   = <<-DESC
