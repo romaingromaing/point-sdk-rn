@@ -2,7 +2,7 @@
   "name": "react-native-point-sdk",
   "title": "React Native Point SDK",
   "version": "0.1.17",
-  "description": "Capacitor Wrapper for PointSDK",
+  "description": "React native Wrapper for PointSDK",
   "main": "index.js",
   "files": [
     "README.md",
