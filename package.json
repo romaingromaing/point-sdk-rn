@@ -1,7 +1,7 @@
 {
   "name": "react-native-point-sdk",
   "title": "React Native Point SDK",
-  "version": "0.1.17",
+  "version": "0.2.0",
   "description": "React Native Wrapper for PointSDK",
   "main": "index.js",
   "files": [
@@ -31,11 +31,11 @@
   "licenseFilename": "LICENSE",
   "readmeFilename": "README.md",
   "peerDependencies": {
-    "react": "16.13.1",
-    "react-native": "0.63.2"
+    "react": "18.0.0",
+    "react-native": "0.68.0"
   },
   "devDependencies": {
-    "react": "16.13.1",
-    "react-native": "0.63.2"
+    "react": "18.0.0",
+    "react-native": "0.68.0"
   }
 }

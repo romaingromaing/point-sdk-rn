@@ -2,20 +2,32 @@
 
 type Callback = (_: any, success: any) => void;
 
-export type Permissions = [
-  "restingHeartRate",
-  "heartRate",
-  "activeEnergyBurned",
-  "basalEnergyBurned",
-  "workout",
-  "heartRateVariabilitySDNN",
-  "vo2Max",
-  "stepCount",
-  "mindfulSession",
-  "sleepAnalysis",
-  "birthday",
-  "bodyMass"
-];
+export enum QueryType {
+  RestingHeartRate = "restingHeartRate",
+  HeartRate = "heartRate",
+  ActiveEnergyBurned = "activeEnergyBurned",
+  BasalEnergyBurned = "basalEnergyBurned",
+  Workout = "workout",
+  HeartRateVariabilitySDNN = "heartRateVariabilitySDNN",
+  Vo2Max = "vo2Max",
+  StepCount = "stepCount",
+  MindfulSession = "mindfulSession",
+  SleepAnalysis = "sleepAnalysis",
+  Birthday = "birthday",
+  BodyMass = "bodyMass",
+}
+
+export enum FitbitScopes {
+  Activity = "activity",
+  Heartrate = "heartrate",
+  Location = "location",
+  Nutrition = "nutrition",
+  Profile = "profile",
+  Settings = "settings",
+  Sleep = "sleep",
+  Social = "social",
+  Weight = "weight",
+}
 
 type GoalProgressKey = "overral" | "endurance" | "recovery" | "strength";
 
@@ -181,9 +193,6 @@ export interface Trend {
   additionalFields: string;
 }
 
-// Health Permissions
-export const healthPermissions: Permissions[];
-
 // Point Health Kit
 export function requestPermissions(): Promise<any>;
 export function startBackgroundListeners(): Promise<any>;
@@ -195,11 +204,17 @@ export function disableForegroundListeners(): Promise<any>;
 export function setup(
   clientId: string,
   clientSecret: string,
-  permissions: Permissions[],
   environment: string,
   verbose: boolean,
   callback: Callback
 ): void;
+
+export function setupHealthkitIntegration(queryTypes: QueryType[], callback: Callback): void;
+
+export function setupFitbitIntegration(fitbitClientID: string, callback: Callback): void;
+
+export function authenticateFitbit(callbackURLScheme: string, fitbitScopes?: FitbitScopes[]): Promise<any>;
+
 export function setUserToken(accessToken: string): Promise<any>;
 export function logout(): Promise<any>;
 

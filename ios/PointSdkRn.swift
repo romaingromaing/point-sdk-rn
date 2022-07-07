@@ -3,7 +3,8 @@ import PointSDK
 
 @objc(PointSdkRn)
 class PointSdkRn: NSObject {
-  var healthKit: HealthKitManager? { Point.healthKit }
+  var healthKit: HealthKitManager? 
+  var fitbitManager: FitbitIntegrationManager?
   var healthService: HealthDataService? { Point.healthDataService }
 
   /**
@@ -14,19 +15,12 @@ class PointSdkRn: NSObject {
    *  @param callback     Completion handler
    */
   @objc
-  func setup(_ clientId: String, clientSecret: String, permissions: Array<String>?, environment: String, verbose: Bool = false, callback: RCTResponseSenderBlock) -> Void {
-    var queriesTypes: Array<HealthQueryType> = []
-    
-    if let permissions = permissions {
-      queriesTypes = permissions.compactMap { HealthQueryType(rawValue: $0) }
-    }
-
+  func setup(_ clientId: String, clientSecret: String, environment: String, verbose: Bool = false, callback: RCTResponseSenderBlock) -> Void {
     Point.verbose = verbose
     
     Point.setup(
       clientId: clientId,
       clientSecret: clientSecret,
-      queryTypes: Set(queriesTypes),
       environment: environmentsMapping(type: environment)
     )
     
@@ -74,7 +68,7 @@ class PointSdkRn: NSObject {
   @objc
   func constantsToExport() -> [String: Any] {
     return [
-      "healthPermissions": HealthQueryType.allCases.map { $0.rawValue }
+      "queryTypes": HealthQueryType.allCases.map { $0.rawValue }
     ]
   }
 }

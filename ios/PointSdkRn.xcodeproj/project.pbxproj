@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0FB7ECB928771B520087D75F /* PointSdkRn+Fitbit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FB7ECB828771B520087D75F /* PointSdkRn+Fitbit.swift */; };
 		E500E84B27E1FDF60030E1A9 /* PointSdkRn.swift in Sources */ = {isa = PBXBuildFile; fileRef = E500E84827E1FDF60030E1A9 /* PointSdkRn.swift */; };
 		E500E84D27E1FF050030E1A9 /* PointSdkRnBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = E500E84C27E1FF050030E1A9 /* PointSdkRnBridge.m */; };
 		E500E85227E2068B0030E1A9 /* PointSDK in Frameworks */ = {isa = PBXBuildFile; productRef = E500E85127E2068B0030E1A9 /* PointSDK */; };
@@ -28,6 +29,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0FB7ECB828771B520087D75F /* PointSdkRn+Fitbit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PointSdkRn+Fitbit.swift"; sourceTree = "<group>"; };
 		E500E84827E1FDF60030E1A9 /* PointSdkRn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PointSdkRn.swift; sourceTree = "<group>"; };
 		E500E84C27E1FF050030E1A9 /* PointSdkRnBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PointSdkRnBridge.m; sourceTree = "<group>"; };
 		E500E84E27E1FF180030E1A9 /* PointSdkRn-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PointSdkRn-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -58,6 +60,7 @@
 				E5CCFD372805E64F009A84E5 /* libPointSdkRn.a */,
 				E5CCFD38280739DA009A84E5 /* PointSdkRn+DataManager.swift */,
 				E5CCFD3C28073AFF009A84E5 /* PointSdkRn+HealthKit.swift */,
+				0FB7ECB828771B520087D75F /* PointSdkRn+Fitbit.swift */,
 				E5CCFD3A28073AB2009A84E5 /* PointSdkRn+Utils.swift */,
 			);
 			sourceTree = "<group>";
@@ -127,6 +130,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E500E84B27E1FDF60030E1A9 /* PointSdkRn.swift in Sources */,
+				0FB7ECB928771B520087D75F /* PointSdkRn+Fitbit.swift in Sources */,
 				E5CCFD3B28073AB2009A84E5 /* PointSdkRn+Utils.swift in Sources */,
 				E5CCFD3D28073AFF009A84E5 /* PointSdkRn+HealthKit.swift in Sources */,
 				E5CCFD39280739DA009A84E5 /* PointSdkRn+DataManager.swift in Sources */,
