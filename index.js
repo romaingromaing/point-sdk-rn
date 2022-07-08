@@ -1,6 +1,7 @@
 // main index.js
 
 import { NativeModules } from "react-native";
+const { PointSdkRn } = NativeModules;
 
 export const QueryType = {
   RestingHeartRate: "restingHeartRate",
@@ -29,4 +30,7 @@ export const FitbitScopes = {
   Weight: "weight",
 };
 
-export default NativeModules.PointSdkRn;
+PointSdkRn.allQueryTypes = Object.values(QueryType);
+PointSdkRn.allFitbitScopes = Object.values(FitbitScopes);
+
+export default PointSdkRn;

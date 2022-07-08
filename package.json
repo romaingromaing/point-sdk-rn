@@ -1,13 +1,15 @@
 {
   "name": "react-native-point-sdk",
   "title": "React Native Point SDK",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "React Native Wrapper for PointSDK",
   "main": "index.js",
+  "types": "index.d.ts",
   "files": [
     "README.md",
     "android",
     "index.js",
+    "index.d.ts",
     "ios",
     "react-native-point-sdk.podspec"
   ],
