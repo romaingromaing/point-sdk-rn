@@ -212,8 +212,9 @@ export function setup(
 export function setupHealthkitIntegration(queryTypes: QueryType[], callback: Callback): void;
 
 export function setupFitbitIntegration(fitbitClientID: string, callback: Callback): void;
-
 export function authenticateFitbit(callbackURLScheme: string, fitbitScopes?: FitbitScopes[]): Promise<any>;
+export function revokeFitbitAuthentication(): Promise<any>;
+export function isFitbitAuthenticated(): Promise<any>;
 
 export function setUserToken(accessToken: string): Promise<any>;
 export function logout(): Promise<any>;
