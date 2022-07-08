@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {Button, Text, View} from 'react-native';
-import PointSdkRn from 'react-native-point-sdk';
+import PointSdkRn, {FitbitScopes} from 'react-native-point-sdk';
 
 export function HomeScreen() {
   const [user, setUser] = useState<PointSdkRn.User | null>(null);
@@ -18,10 +18,23 @@ export function HomeScreen() {
     }
   };
 
+  const handleFitbit = async () => {
+    try {
+      const result = await PointSdkRn.authenticateFitbit('sampleapp', [
+        FitbitScopes.Activity,
+        FitbitScopes.Heartrate,
+        FitbitScopes.Profile,
+      ]);
+      console.log(result);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const handleLogin = async () => {
     try {
       await PointSdkRn.setUserToken(
-        'eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIiwiaXNzIjoiaHR0cHM6Ly9wb2ludC1hcHAtZGV2LnVzLmF1dGgwLmNvbS8ifQ..K-3zLr9CIj6VgrDy.UibGK5NrgrOkDICuRL4F6zFA-Mus-9YvlPtNX0cUQES7ZGzQ3NpQB5ING4iJW49b29HrBOMxrpV97C7fAs8GSk9nr4JjPfW-5hnTs8qb5ax59PqpL_Ha64xV153CR0V1_e-yVke3GaZIv1M7Uft4M84d5FsES8TMeaPmSOZmx8sSwOKRy8WbGfFF8Eudz3qv1bp4fLjoKb0sSGI3Uh4ND6UY2_wVXWSMic4Xsp7YYqaz9_M7s9veoDlBa8ihipi_Q2A9a99lQ7N_eULe8iPkodmwVXs4wfMpvcH4PYK7b7yuN124GVIgA-xWYEjLXIyu0NJmr9dDzO1iss6-1hysHVUhW01EDknIK5Q721Nk74VtZ6TPnE6NHOq7sOZUOliG3nB5ANrc.A_h06PB5u9KJg7Ju5jrgiA',
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJvcmdhbml6YXRpb24iOiJQb2ludCIsIm9yZ0lkIjo0NCwic3ViIjoicG9pbnR8NjFmODA0ZTNiYzc2YWQwMDcxY2Y3NzNjIiwiaWF0IjoxNjU3MjE2NjE2LCJleHAiOjE2NTczMDMwMTZ9.uL-H_qFClvQet3iEHprh7k0xy4jlYGRgr2g4eOXHNGA',
       );
       const userData = await PointSdkRn.getUserData();
 
@@ -53,6 +66,7 @@ export function HomeScreen() {
         </Text>
       )}
       <Button onPress={handleRequestPermissions} title="Request Permissions" />
+      <Button onPress={handleFitbit} title="Authenticate Fitbit" />
       {user ? (
         <Button onPress={handleLogout} title="Logout" />
       ) : (

@@ -1,10 +1,17 @@
 #import <React/RCTBridgeModule.h>
 
 @interface RCT_EXTERN_MODULE(PointSdkRn, NSObject)
-RCT_EXTERN_METHOD(setup:(NSString)clientId clientSecret: (NSString)clientSecret permissions: (NSArray)pemissions environment: (NSString)environment verbose: (BOOL)verbose callback: (RCTResponseSenderBlock)callback);
+RCT_EXTERN_METHOD(setup:(NSString)clientId clientSecret: (NSString)clientSecret environment: (NSString)environment verbose: (BOOL)verbose callback: (RCTResponseSenderBlock)callback);
+RCT_EXTERN_METHOD(setupHealthkitIntegration:(NSArray)queryTypes callback: (RCTResponseSenderBlock)callback);
 RCT_EXTERN_METHOD(requestPermissions:(RCTPromiseResolveBlock)resolve rejecter: (RCTPromiseRejectBlock)reject);
 RCT_EXTERN_METHOD(setUserToken:(NSString)accessToken resolve: (RCTPromiseResolveBlock)resolve rejecter: (RCTPromiseRejectBlock)reject);
 RCT_EXTERN_METHOD(logout:(RCTPromiseResolveBlock)resolve rejecter: (RCTPromiseRejectBlock)reject);
+
+RCT_EXTERN_METHOD(setupFitbitIntegration:(NSString)fitbitClientId callback: (RCTResponseSenderBlock)callback);
+RCT_EXTERN_METHOD(authenticateFitbit:(NSString)callbackURLScheme fitbitScopes: (NSArray)fitbitScopes resolve: (RCTPromiseResolveBlock)resolve rejecter: (RCTPromiseRejectBlock)reject);
+RCT_EXTERN_METHOD(revokeFitbitAuthentication:(RCTPromiseResolveBlock)resolve rejecter: (RCTPromiseRejectBlock)reject);
+RCT_EXTERN_METHOD(isFitbitAuthenticated:(RCTPromiseResolveBlock)resolve);
+
 
 RCT_EXTERN_METHOD(startBackgroundListeners:(RCTPromiseResolveBlock)resolve rejecter: (RCTPromiseRejectBlock)reject);
 RCT_EXTERN_METHOD(disableBackgroundListeners:(RCTPromiseResolveBlock)resolve rejecter: (RCTPromiseRejectBlock)reject);

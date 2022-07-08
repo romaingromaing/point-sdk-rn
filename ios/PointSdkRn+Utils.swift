@@ -55,9 +55,17 @@ extension PointSdkRn {
       return .staging
     case "production":
       return .production
+    case "preprod":
+      return .preprod
     default:
       return .development
     }
+  }
+    
+  func fitbitScopesMapping(type: String?) -> FitbitScopes? {
+    guard let scope = type else { return nil }
+    
+    return FitbitScopes.init(rawValue: scope)
   }
 
   func workoutMapping(workout: Workout?) -> [String : Any] {
