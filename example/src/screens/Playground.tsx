@@ -1,6 +1,6 @@
 import React from 'react';
 import {Button, Text, View} from 'react-native';
-import PointSdkRn from 'react-native-point-sdk';
+import PointSdkRn, { InsightType } from 'react-native-point-sdk';
 
 export function PlaygroundScreen() {
   const getUserHealthMetrics = async () => {
@@ -47,6 +47,14 @@ export function PlaygroundScreen() {
     }
   }
 
+  async function getInsights() {
+    try {
+      console.log(await PointSdkRn.getInsights({ types: [InsightType.UsualWorkoutTime]}));
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   return (
     <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
       <Text style={{fontSize: 18, fontWeight: 'bold'}}>
@@ -62,6 +70,7 @@ export function PlaygroundScreen() {
         onPress={saveWorkoutRecommendation}
         title="Save Workout Recommendation"
       />
+      <Button onPress={getInsights} title="Get Insights" />
     </View>
   );
 }

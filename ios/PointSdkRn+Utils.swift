@@ -151,4 +151,15 @@ extension PointSdkRn {
       "savedAt": recommendation.savedAt as Any
     ]
   }
+
+    func insightMapping(insight: Insight?) -> [String: Any] {
+        guard let insight = insight else { return [:] }
+
+        return [
+            "id": insight.id as Any,
+            "type": insight.type.rawValue as Any,
+            "additionalFields": insight.additionalFields as Any ,
+            "createdAt": insight.createdAt as Any
+        ]
+    }
 }
