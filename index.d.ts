@@ -149,49 +149,6 @@ export type HealthMetricType =
   | "SleepDurationInbed"
   | "SleepDurationAsleep";
 
-export interface RecommendationAction {
-  label: string;
-  url: string;
-}
-
-export type InsightCategory =
-  | "HeartLifetimeIncrease"
-  | "Motivational"
-  | "NeedRecovery"
-  | "RoutineFreqOptimization"
-  | "RoutineTimeOptimization"
-  | "RoutineWorkoutTypeOptimization"
-  | "TocayaDeal"
-  | "TryHarder"
-  | "WorkoutStreak";
-
-export interface Recommendation {
-  id: number;
-  insightId: number;
-  templateId: number;
-  category: InsightCategory;
-  description: string;
-  actions: RecommendationAction[];
-  cooldownEndsAt: Date;
-  lastSeenAt: Date;
-  dismissedAt: Date;
-  icon: string;
-  color: string;
-}
-
-export type TrendTypes =
-  | "record_calories_burned_across_all_workout_types"
-  | "most_efficient_workout_type"
-  | "longest_workout_type"
-  | "avg_workout_calories_burned"
-  | "avg_workout_duration"
-  | "usual_workout_time";
-
-export interface Trend {
-  id: string;
-  type: TrendTypes;
-  additionalFields: string;
-}
 
 // Point Health Kit
 export function requestPermissions(): Promise<any>;
@@ -234,6 +191,3 @@ export function getHealthMetrics(params: {
   workoutId?: number;
   date?: string;
 }): Promise<HealthMetric[]>;
-export function getUserRecommendations(): Promise<Recommendation[]>;
-export function recommendationSeen(id: number): Promise<any>;
-export function getUserTrends(): Promise<Trend[]>;

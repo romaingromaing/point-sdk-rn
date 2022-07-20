@@ -39,33 +39,9 @@ export function PlaygroundScreen() {
     }
   }
 
-  async function getUserRecommendations() {
-    try {
-      console.log(await PointSdkRn.getUserRecommendations());
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-  async function getUserTrends() {
-    try {
-      console.log(await PointSdkRn.getUserTrends());
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
   async function saveWorkoutRecommendation() {
     try {
       console.log(await PointSdkRn.saveWorkoutRecommendation(2093));
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-  async function recommendationSeen() {
-    try {
-      console.log(await PointSdkRn.recommendationSeen(351));
     } catch (error) {
       console.log(error);
     }
@@ -76,13 +52,8 @@ export function PlaygroundScreen() {
       <Text style={{fontSize: 18, fontWeight: 'bold'}}>
         Open the console log to see the results
       </Text>
-      <Button onPress={getUserTrends} title="Get User Trends" />
       <Button onPress={getUserHealthMetrics} title="Get User Health Metrics" />
       <Button onPress={getDailyHistory} title="Get Daily History" />
-      <Button
-        onPress={getUserRecommendations}
-        title="Get User Recommendations"
-      />
       <Button
         onPress={getWorkoutsRecommendations}
         title="Get Workout Recommendations"
@@ -91,7 +62,6 @@ export function PlaygroundScreen() {
         onPress={saveWorkoutRecommendation}
         title="Save Workout Recommendation"
       />
-      <Button onPress={recommendationSeen} title="Mark Recommendation Seen" />
     </View>
   );
 }

@@ -20,23 +20,6 @@ import PointSDK
   }
   
   /**
-   *  getUserTrends   Get user trends
-   *  @param resolve  Resolve handler
-   *  @param reject   Reject handler
-   */
-  @objc
-  func getUserTrends(_ resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) -> Void {
-    Task {
-      do {
-        let trends = try await healthService?.getUserTrends()
-        resolve(trends?.map { trendMapping(trend: $0) })
-      } catch {
-        reject("getUserTrends", error.localizedDescription, error)
-      }
-    }
-  }
-  
-  /**
    *  setUserGoal     Set user goal
    *  @param goal     Goal
    *  @param resolve  Resolve handler
@@ -194,42 +177,6 @@ import PointSDK
         resolve(result)
       } catch {
         reject("saveWorkoutRecommendation", error.localizedDescription, error)
-      }
-    }
-  }
-  
-  /**
-   *  getUserRecommendations Retrieve user recommendations
-   *  @param resolve            Resolve handler
-   *  @param reject             Reject handler
-   */
-  @objc
-  func getUserRecommendations(_ resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) -> Void {
-    Task {
-      do {
-        let recommendations = try await healthService?.getUserRecommendations()
-        
-        resolve(recommendations?.map { userRecommendationMapping(recommendation: $0) })
-      } catch {
-        reject("getUserRecommendations", error.localizedDescription, error)
-      }
-    }
-  }
-  
-  /**
-   *  recommendationSeen  Mark recommendation seen
-   *  @param id           Recommendation ID
-   *  @param resolve      Resolve handler
-   *  @param reject       Reject handler
-   */
-  @objc
-  func recommendationSeen(_ id: Int, resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) -> Void {
-    Task {
-      do {
-        let result = try await healthService?.recommendationSeen(id: id)
-        resolve(result)
-      } catch {
-        reject("recommendationSeen", error.localizedDescription, error)
       }
     }
   }
