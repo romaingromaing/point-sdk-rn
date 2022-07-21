@@ -213,6 +213,12 @@ import PointSDK
     }
   }
 
+  /**
+   *  getInsights Retrieve user insights
+   *  @param params    Params
+   *  @param resolve   Resolve handler
+   *  @param reject    Reject handler
+   */
     @objc
     func getInsights(_ params: [String: Any], resolve:  @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) -> Void {
         Task {
@@ -221,7 +227,7 @@ import PointSDK
                 let endDate = (params["to"] as? String)?.fromIsoStringToDate()
                 let offset = params["offset"] as? Int
                 guard let typesStrings = params["types"] as? [String], typesStrings.count > 0 else {
-                    resolve([])
+                    reject("getInsights", "You must provide at least one Insight type.", nil)
                     return
                 }
                 let types = typesStrings.compactMap{ InsightType(rawValue: $0) }
