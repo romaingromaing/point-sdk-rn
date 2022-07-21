@@ -194,7 +194,7 @@ import PointSDK
         let filter = params["filter"] as? [String]
         let workoutId = params["workoutId"] as? Int
         let date = params["date"] as? String
-          var healthMetrics = HealthMetric.HealthMetricType.allCases
+        var healthMetrics = HealthMetric.HealthMetricType.allCases
 
         if let filter = filter {
           healthMetrics = filter.compactMap { HealthMetric.HealthMetricType(rawValue: $0) }
@@ -212,4 +212,30 @@ import PointSDK
       }
     }
   }
+
+  /**
+   *  getInsights Retrieve user insights
+   *  @param params    Params
+   *  @param resolve   Resolve handler
+   *  @param reject    Reject handler
+   */
+    @objc
+    func getInsights(_ params: [String: Any], resolve:  @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) -> Void {
+        Task {
+            do {
+                let startDate = (params["from"] as? String)?.fromIsoStringToDate()
+                let endDate = (params["to"] as? String)?.fromIsoStringToDate()
+                let offset = params["offset"] as? Int
+                guard let typesStrings = params["types"] as? [String], typesStrings.count > 0 else {
+                    reject("getInsights", "You must provide at least one Insight type.", nil)
+                    return
+                }
+                let types = typesStrings.compactMap{ InsightType(rawValue: $0) }
+                let data = try await healthService?.getInsights(types: Set(types), from: startDate, to: endDate, offset: offset)
+                resolve(data?.map { insightMapping(insight: $0) })
+            } catch {
+                reject("getInsights", error.localizedDescription, error)
+            }
+        }
+    }
 }
