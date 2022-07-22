@@ -201,7 +201,7 @@ import PointSDK
         }
 
         let data = try await healthService?.getHealthMetrics(
-          filter: Set(healthMetrics),
+          types: Set(healthMetrics),
           workoutId: workoutId,
           date: date?.fromIsoStringToDate()
         )
