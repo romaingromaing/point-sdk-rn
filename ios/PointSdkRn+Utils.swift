@@ -129,7 +129,7 @@ extension PointSdkRn {
     guard let metric = metric else { return [:] }
 
     return [
-      "type": metric.type,
+      "type": metric.type.rawValue,
       "date": metric.date,
       "value": metric.value,
       "variance": metric.variance as Any,

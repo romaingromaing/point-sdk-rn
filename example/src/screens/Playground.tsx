@@ -1,17 +1,18 @@
 import React from 'react';
 import {Button, Text, View} from 'react-native';
-import PointSdkRn, { InsightType } from 'react-native-point-sdk';
+import PointSdkRn, { HealthMetricType, InsightType } from 'react-native-point-sdk';
 
 export function PlaygroundScreen() {
   const getUserHealthMetrics = async () => {
     try {
       const data = await PointSdkRn.getHealthMetrics({
         filter: [
-          'Vo2Max',
-          'Weight',
-          'TotalWorkoutDuration',
-          'TotalMinsHRZone12',
-          'TotalMinsHRZone34',
+          HealthMetricType.Vo2Max,
+          HealthMetricType.Weight,
+          HealthMetricType.TotalWorkoutDuration,
+          HealthMetricType.TotalMinsHRZone12,
+          HealthMetricType.MinsHRZone12,
+          HealthMetricType.MinsHRZone5,
         ],
         date: new Date('2022-05-10').toISOString(),
       });
