@@ -11,21 +11,6 @@ import {PlaygroundScreen} from './screens/Playground';
 const Tab = createBottomTabNavigator();
 
 const App = () => {
-  useEffect(() => {
-    const appStateSubscription = AppState.addEventListener(
-      'change',
-      (state: AppStateStatus) => {
-        if (state === 'active') {
-          PointSdkRn.enableForegroundListeners();
-        } else {
-          PointSdkRn.disableForegroundListeners();
-        }
-      },
-    );
-
-    return appStateSubscription?.remove;
-  }, []);
-
   return (
     <NavigationContainer>
       <Tab.Navigator>

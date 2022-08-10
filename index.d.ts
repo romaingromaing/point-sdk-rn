@@ -41,7 +41,7 @@ export enum InsightType {
   WeekHrZonesLowMinutesBurnFat = "week_hr_zones_low_minutes_burn_fat",
   WeekHrZonesLowMinutesBurnCarb = "week_hr_zones_low_minutes_burn_carb",
   WeekHrZonesHighMinutesBurnCarb = "week_hr_zones_high_minutes_burn_carb",
-  WeekHrZone5HighMinutes = "week_hr_zone5_high_minutes"
+  WeekHrZone5HighMinutes = "week_hr_zone5_high_minutes",
 }
 
 export enum FitbitScopes {
@@ -133,66 +133,63 @@ export enum SpecificGoal {
 }
 
 export enum HealthMetricType {
-  RestingHR = 'RestingHR',
-  OneMinuteHRR = 'OneMinuteHRR',
-  ThreeMinuteHRR = 'ThreeMinuteHRR',
-  HRV = 'HRV',
-  Vo2Max = 'Vo2Max',
-  ActiveCalories = 'ActiveCalories',
-  BasalCalories = 'BasalCalories',
-  TotalCalories = 'TotalCalories',
-  WorkoutCalories = 'WorkoutCalories',
-  WorkoutDistance = 'WorkoutDistance',
-  WorkoutDuration = 'WorkoutDuration',
-  ExertionRate = 'ExertionRate',
-  MovementLevel = 'MovementLevel',
-  MinsHRZone1 = 'MinsHRZone1',
-  MinsHRZone2 = 'MinsHRZone2',
-  MinsHRZone3 = 'MinsHRZone3',
-  MinsHRZone4 = 'MinsHRZone4',
-  MinsHRZone12 = 'MinsHRZone12',
-  MinsHRZone23 = 'MinsHRZone23',
-  MinsHRZone34 = 'MinsHRZone34',
-  MinsHRZone45 = 'MinsHRZone45',
-  MinsHRZone5 = 'MinsHRZone5',
-  WorkoutMinsHRZone1 = 'WorkoutMinsHRZone1',
-  WorkoutMinsHRZone2 = 'WorkoutMinsHRZone2',
-  WorkoutMinsHRZone3 = 'WorkoutMinsHRZone3',
-  WorkoutMinsHRZone4 = 'WorkoutMinsHRZone4',
-  WorkoutMinsHRZone12 = 'WorkoutMinsHRZone12',
-  WorkoutMinsHRZone23 = 'WorkoutMinsHRZone23',
-  WorkoutMinsHRZone34 = 'WorkoutMinsHRZone34',
-  WorkoutMinsHRZone45 = 'WorkoutMinsHRZone45',
-  WorkoutMinsHRZone5 = 'WorkoutMinsHRZone5',
-  MindfulMinutes = 'MindfulMinutes',
-  AvgWorkoutHR = 'AvgWorkoutHR',
-  MinWorkoutHR = 'MinWorkoutHR',
-  MaxWorkoutHR = 'MaxWorkoutHR',
-  SleepDuration = 'SleepDuration',
-  SleepDurationInbed = 'SleepDurationInbed',
-  SleepDurationAsleep = 'SleepDurationAsleep',
-  TotalWorkoutDuration = 'TotalWorkoutDuration',
-  TotalMinsHRZone12 = 'TotalMinsHRZone12',
-  TotalMinsHRZone34 = 'TotalMinsHRZone34',
-  WeeklyAvgWorkoutHR = 'WeeklyAvgWorkoutHR',
-  WeeklyExertionRate = 'WeeklyExertionRate',
-  DailyWorkoutDuration = 'DailyWorkoutDuration',
-  Weight = 'Weight',
-  SleepEfficiency = 'SleepEfficiency',
-  SleepLatency = 'SleepLatency',
-  SleepStageDeep = 'SleepStageDeep',
-  SleepStageLight = 'SleepStageLight',
-  SleepStageREM = 'SleepStageREM',
-  SleepStageWake = 'SleepStageWake'
+  RestingHR = "RestingHR",
+  OneMinuteHRR = "OneMinuteHRR",
+  ThreeMinuteHRR = "ThreeMinuteHRR",
+  HRV = "HRV",
+  Vo2Max = "Vo2Max",
+  ActiveCalories = "ActiveCalories",
+  BasalCalories = "BasalCalories",
+  TotalCalories = "TotalCalories",
+  WorkoutCalories = "WorkoutCalories",
+  WorkoutDistance = "WorkoutDistance",
+  WorkoutDuration = "WorkoutDuration",
+  ExertionRate = "ExertionRate",
+  MovementLevel = "MovementLevel",
+  MinsHRZone1 = "MinsHRZone1",
+  MinsHRZone2 = "MinsHRZone2",
+  MinsHRZone3 = "MinsHRZone3",
+  MinsHRZone4 = "MinsHRZone4",
+  MinsHRZone12 = "MinsHRZone12",
+  MinsHRZone23 = "MinsHRZone23",
+  MinsHRZone34 = "MinsHRZone34",
+  MinsHRZone45 = "MinsHRZone45",
+  MinsHRZone5 = "MinsHRZone5",
+  WorkoutMinsHRZone1 = "WorkoutMinsHRZone1",
+  WorkoutMinsHRZone2 = "WorkoutMinsHRZone2",
+  WorkoutMinsHRZone3 = "WorkoutMinsHRZone3",
+  WorkoutMinsHRZone4 = "WorkoutMinsHRZone4",
+  WorkoutMinsHRZone12 = "WorkoutMinsHRZone12",
+  WorkoutMinsHRZone23 = "WorkoutMinsHRZone23",
+  WorkoutMinsHRZone34 = "WorkoutMinsHRZone34",
+  WorkoutMinsHRZone45 = "WorkoutMinsHRZone45",
+  WorkoutMinsHRZone5 = "WorkoutMinsHRZone5",
+  MindfulMinutes = "MindfulMinutes",
+  AvgWorkoutHR = "AvgWorkoutHR",
+  MinWorkoutHR = "MinWorkoutHR",
+  MaxWorkoutHR = "MaxWorkoutHR",
+  SleepDuration = "SleepDuration",
+  SleepDurationInbed = "SleepDurationInbed",
+  SleepDurationAsleep = "SleepDurationAsleep",
+  TotalWorkoutDuration = "TotalWorkoutDuration",
+  TotalMinsHRZone12 = "TotalMinsHRZone12",
+  TotalMinsHRZone34 = "TotalMinsHRZone34",
+  WeeklyAvgWorkoutHR = "WeeklyAvgWorkoutHR",
+  WeeklyExertionRate = "WeeklyExertionRate",
+  DailyWorkoutDuration = "DailyWorkoutDuration",
+  Weight = "Weight",
+  SleepEfficiency = "SleepEfficiency",
+  SleepLatency = "SleepLatency",
+  SleepStageDeep = "SleepStageDeep",
+  SleepStageLight = "SleepStageLight",
+  SleepStageREM = "SleepStageREM",
+  SleepStageWake = "SleepStageWake",
 }
-
 
 // Point Health Kit
 export function requestPermissions(): Promise<any>;
-export function startBackgroundListeners(): Promise<any>;
-export function disableBackgroundListeners(): Promise<any>;
-export function enableForegroundListeners(): Promise<any>;
-export function disableForegroundListeners(): Promise<any>;
+export function startAllListeners(): Promise<any>;
+export function stopAllListeners(): Promise<any>;
 
 // PointSDK
 export function setup(
@@ -233,4 +230,4 @@ export function getInsights(params: {
   from?: string;
   to?: string;
   offset?: number;
-}): Promise<Insight[]>
+}): Promise<Insight[]>;
