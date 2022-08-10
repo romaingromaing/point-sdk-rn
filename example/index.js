@@ -27,7 +27,7 @@ AppRegistry.registerComponent(appName, () => {
     console.log('Setup Fitbit completed!'),
   );
 
-  PointSdkRn.startBackgroundListeners();
+  PointSdkRn.startAllListeners();
 
   return App;
 });

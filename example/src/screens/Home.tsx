@@ -34,7 +34,7 @@ export function HomeScreen() {
   const handleLogin = async () => {
     try {
       await PointSdkRn.setUserToken(
-        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJvcmdhbml6YXRpb24iOiJQb2ludCIsIm9yZ0lkIjo0NCwic3ViIjoicG9pbnR8NjFmODA0ZTNiYzc2YWQwMDcxY2Y3NzNjIiwiaWF0IjoxNjU3MjE2NjE2LCJleHAiOjE2NTczMDMwMTZ9.uL-H_qFClvQet3iEHprh7k0xy4jlYGRgr2g4eOXHNGA',
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJvcmdhbml6YXRpb24iOiJQb2ludCIsIm9yZ0lkIjo0NCwic3ViIjoicG9pbnR8NjJlZDU1MTY4ZDcwN2EzYTUwM2Y3ZTA3IiwiaWF0IjoxNjYwMTU5NjEwLCJleHAiOjE2NjAyNDYwMTB9.OBn9nGHsrCcv5pVwGvhzudVVU0nhwcL09gRB7hQ7Gmc',
       );
       const userData = await PointSdkRn.getUserData();
 

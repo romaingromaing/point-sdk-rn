@@ -13,10 +13,8 @@ RCT_EXTERN_METHOD(revokeFitbitAuthentication:(RCTPromiseResolveBlock)resolve rej
 RCT_EXTERN_METHOD(isFitbitAuthenticated:(RCTPromiseResolveBlock)resolve);
 
 
-RCT_EXTERN_METHOD(startBackgroundListeners:(RCTPromiseResolveBlock)resolve rejecter: (RCTPromiseRejectBlock)reject);
-RCT_EXTERN_METHOD(disableBackgroundListeners:(RCTPromiseResolveBlock)resolve rejecter: (RCTPromiseRejectBlock)reject);
-RCT_EXTERN_METHOD(enableForegroundListeners:(RCTPromiseResolveBlock)resolve rejecter: (RCTPromiseRejectBlock)reject);
-RCT_EXTERN_METHOD(disableForegroundListeners:(RCTPromiseResolveBlock)resolve rejecter: (RCTPromiseRejectBlock)reject);
+RCT_EXTERN_METHOD(startAllListeners:(RCTPromiseResolveBlock)resolve rejecter: (RCTPromiseRejectBlock)reject);
+RCT_EXTERN_METHOD(stopAllListeners:(RCTPromiseResolveBlock)resolve rejecter: (RCTPromiseRejectBlock)reject);
 
 RCT_EXTERN_METHOD(getUserData:(RCTPromiseResolveBlock)resolve rejecter: (RCTPromiseRejectBlock)reject);
 RCT_EXTERN_METHOD(getUserWorkouts:(NSInteger)offset resolve: (RCTPromiseResolveBlock)resolve rejecter: (RCTPromiseRejectBlock)reject);

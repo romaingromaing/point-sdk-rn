@@ -35,15 +35,15 @@ extension PointSdkRn {
     }
   
     /**
-     *  startBackgroundListeners Start background listeners
+     *  startAllListeners Start background listeners
      *  @param resolve            Resolve handler
      *  @param reject             Reject handler
      */
 
-    func startBackgroundListeners(_ resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) {
+    func startAllListeners(_ resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) {
         Task {
             do {
-                let _ = try await healthKit?.startAllBackgroundListeners()
+                let _ = try await healthKit?.startAllListeners()
                 resolve(true)
             } catch {
                 reject("startBackgroundListeners", error.localizedDescription, error)
@@ -52,52 +52,18 @@ extension PointSdkRn {
     }
   
     /**
-     *  disableBackgroundListeners  Stop background listener
+     *  stopAllListeners  Stop background listener
      *  @param resolve              Resolve handler
      *  @param reject               Reject handler
      */
 
-    func disableBackgroundListeners(_ resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) {
+    func stopAllListeners(_ resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) {
         Task {
             do {
-                try await healthKit?.disableAllBackgroundListeners()
+                try await healthKit?.stopAllListeners()
                 resolve(true)
             } catch {
                 reject("stopBackgroundListeners", error.localizedDescription, error)
-            }
-        }
-    }
-  
-    /**
-     *  enableForegroundListeners Enable foreground listeners
-     *  @param resolve            Resolve handler
-     *  @param reject             Reject handler
-     */
-
-    func enableForegroundListeners(_ resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) {
-        Task {
-            do {
-                let _ = try await healthKit?.enableAllForegroundListeners()
-                resolve(true)
-            } catch {
-                reject("enableForegroundListeners", error.localizedDescription, error)
-            }
-        }
-    }
-  
-    /**
-     *  disableForegroundListeners  Disable foreground listeners
-     *  @param resolve              Resolve handler
-     *  @param reject               Reject handler
-     */
-
-    func disableForegroundListeners(_ resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) {
-        Task {
-            do {
-                healthKit?.stopAllForegroundListeners()
-                resolve(true)
-            } catch {
-                reject("disableForegroundListeners", error.localizedDescription, error)
             }
         }
     }
