@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {Button, Text, View} from 'react-native';
-import PointSdkRn, {FitbitScopes} from 'react-native-point-sdk';
+import PointSdkRn, {FitbitScopes, OuraScopes} from 'react-native-point-sdk';
 
 export function HomeScreen() {
   const [user, setUser] = useState<PointSdkRn.User | null>(null);
@@ -31,10 +31,22 @@ export function HomeScreen() {
     }
   };
 
+  const handleOura = async () => {
+    try {
+      const result = await PointSdkRn.authenticateOura('sampleapp', [
+        OuraScopes.HeartRate,
+        OuraScopes.Workout,
+      ]);
+      console.log(result);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const handleLogin = async () => {
     try {
       await PointSdkRn.setUserToken(
-        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJvcmdhbml6YXRpb24iOiJQb2ludCIsIm9yZ0lkIjo0NCwic3ViIjoicG9pbnR8NjJlZDU1MTY4ZDcwN2EzYTUwM2Y3ZTA3IiwiaWF0IjoxNjYwMTU5NjEwLCJleHAiOjE2NjAyNDYwMTB9.OBn9nGHsrCcv5pVwGvhzudVVU0nhwcL09gRB7hQ7Gmc',
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJvcmdhbml6YXRpb24iOiJQb2ludCBPcmciLCJvcmdJZCI6NDQsInN1YiI6InBvaW50fDYyOThkYjZjZGM0ZGVhMDA2OGQ4NDUyYyIsImlhdCI6MTY2NTUyMzIwNywiZXhwIjoxNjY1NjA5NjA3fQ.73rNcr9SmKK2M01S2AEyqpvVyN1hiFEe4TaBPi2WtVg',
       );
       const userData = await PointSdkRn.getUserData();
 
@@ -67,6 +79,7 @@ export function HomeScreen() {
       )}
       <Button onPress={handleRequestPermissions} title="Request Permissions" />
       <Button onPress={handleFitbit} title="Authenticate Fitbit" />
+      <Button onPress={handleOura} title="Authenticate Oura" />
       {user ? (
         <Button onPress={handleLogout} title="Logout" />
       ) : (

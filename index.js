@@ -21,13 +21,17 @@ export const QueryType = {
 export const FitbitScopes = {
   Activity: "activity",
   Heartrate: "heartrate",
-  Location: "location",
-  Nutrition: "nutrition",
   Profile: "profile",
-  Settings: "settings",
   Sleep: "sleep",
-  Social: "social",
   Weight: "weight",
+};
+
+export const OuraScopes = {
+  Daily: "daily",
+  HeartRate: "heartrate",
+  Personal: "personal",
+  Session: "session",
+  Workout: "workout",
 };
 
 export const InsightType = {

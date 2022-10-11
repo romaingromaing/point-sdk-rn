@@ -27,6 +27,10 @@ AppRegistry.registerComponent(appName, () => {
     console.log('Setup Fitbit completed!'),
   );
 
+  PointSdkRn.setupOuraIntegration('D4NKI4CXAXA7KFNC', () =>
+    console.log('Setup Oura completed!'),
+  );
+
   PointSdkRn.startAllListeners();
 
   return App;

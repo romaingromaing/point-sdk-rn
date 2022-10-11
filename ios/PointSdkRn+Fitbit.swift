@@ -39,12 +39,16 @@ extension PointSdkRn {
         }
     }
         
-    func isFitbitAuthenticated(_ resolve: @escaping RCTPromiseResolveBlock) {
+    func isFitbitAuthenticated(_ resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) {
         Task {
             guard !Task.isCancelled else { return }
                 
-            let result = fitbitManager?.isFitbitAuthenticated ?? false
-            resolve(result)
+            do {
+                let result = try await fitbitManager?.getUserAuthenticationStatus()?.active ?? false
+                resolve(result)
+            } catch {
+                reject("isFitbitAuthenticated", error.localizedDescription, error)
+            }
         }
     }
 }
