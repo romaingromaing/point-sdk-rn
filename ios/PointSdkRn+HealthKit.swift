@@ -6,12 +6,14 @@ extension PointSdkRn {
     
     func setupHealthkitIntegration(_ queryTypes: Array<String>?, callback: RCTResponseSenderBlock) {
         var queriesTypes: [HealthQueryType] = []
+        var infoTypes: [HealthInfoType] = []
       
         if let types = queryTypes {
             queriesTypes = types.compactMap { HealthQueryType(rawValue: $0) }
+            infoTypes = types.compactMap { HealthInfoType(rawValue: $0) }
         }
         
-        healthKit = Point.setupHealthkitIntegration(queryTypes: Set(queriesTypes))
+        healthKit = Point.setupHealthkitIntegration(queryTypes: Set(queriesTypes), userInformationTypes: Set(infoTypes))
         
         callback([NSNull(), true])
     }

@@ -14,8 +14,17 @@ export const QueryType = {
   StepCount: "stepCount",
   MindfulSession: "mindfulSession",
   SleepAnalysis: "sleepAnalysis",
-  Birthday: "birthday",
   BodyMass: "bodyMass",
+  LeanBodyMass: "leanBodyMass",
+  BodyMassIndex: "bodyMassIndex",
+  BodyTemperature: "bodyTemperature",
+  BodyFatPercentage: "bodyFatPercentage",
+  OxygenSaturation: "oxygenSaturation",
+  RespiratoryRate: "respiratoryRate",
+  BloodGlucose: "bloodGlucose",
+  BloodPressure: "bloodPressure",
+  Birthday: "dateOfBirth",
+  BiologicalSex: "biologicalSex",
 };
 
 export const FitbitScopes = {

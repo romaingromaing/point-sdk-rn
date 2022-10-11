@@ -19,6 +19,16 @@ AppRegistry.registerComponent(appName, () => {
       QueryType.ActiveEnergyBurned,
       QueryType.BasalEnergyBurned,
       QueryType.Workout,
+      QueryType.LeanBodyMass,
+      QueryType.BodyMassIndex,
+      QueryType.BodyTemperature,
+      QueryType.BodyFatPercentage,
+      QueryType.OxygenSaturation,
+      QueryType.RespiratoryRate,
+      QueryType.BloodGlucose,
+      QueryType.BloodPressure,
+      QueryType.Birthday,
+      QueryType.BiologicalSex
     ],
     () => console.log('Setup Health Kit completed!'),
   );
