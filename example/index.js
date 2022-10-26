@@ -19,12 +19,26 @@ AppRegistry.registerComponent(appName, () => {
       QueryType.ActiveEnergyBurned,
       QueryType.BasalEnergyBurned,
       QueryType.Workout,
+      QueryType.LeanBodyMass,
+      QueryType.BodyMassIndex,
+      QueryType.BodyTemperature,
+      QueryType.BodyFatPercentage,
+      QueryType.OxygenSaturation,
+      QueryType.RespiratoryRate,
+      QueryType.BloodGlucose,
+      QueryType.BloodPressure,
+      QueryType.Birthday,
+      QueryType.BiologicalSex
     ],
     () => console.log('Setup Health Kit completed!'),
   );
 
   PointSdkRn.setupFitbitIntegration('23895P', () =>
     console.log('Setup Fitbit completed!'),
+  );
+
+  PointSdkRn.setupOuraIntegration('D4NKI4CXAXA7KFNC', () =>
+    console.log('Setup Oura completed!'),
   );
 
   PointSdkRn.startAllListeners();

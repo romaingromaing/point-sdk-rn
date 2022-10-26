@@ -13,8 +13,17 @@ export enum QueryType {
   StepCount = "stepCount",
   MindfulSession = "mindfulSession",
   SleepAnalysis = "sleepAnalysis",
-  Birthday = "birthday",
+  Birthday = "dateOfBirth",
   BodyMass = "bodyMass",
+  LeanBodyMass = "leanBodyMass",
+  BodyMassIndex = "bodyMassIndex",
+  BodyTemperature = "bodyTemperature",
+  BodyFatPercentage = "bodyFatPercentage",
+  OxygenSaturation = "oxygenSaturation",
+  RespiratoryRate = "respiratoryRate",
+  BloodGlucose = "bloodGlucose",
+  BloodPressure = "bloodPressure",
+  BiologicalSex = "biologicalSex",
 }
 
 export enum InsightType {
@@ -47,13 +56,17 @@ export enum InsightType {
 export enum FitbitScopes {
   Activity = "activity",
   Heartrate = "heartrate",
-  Location = "location",
-  Nutrition = "nutrition",
   Profile = "profile",
-  Settings = "settings",
   Sleep = "sleep",
-  Social = "social",
   Weight = "weight",
+}
+
+export enum OuraScopes {
+  Daily = "daily",
+  HeartRate = "heartrate",
+  Personal = "personal",
+  Session = "session",
+  Workout = "workout",
 }
 
 type GoalProgressKey = "overral" | "endurance" | "recovery" | "strength";
@@ -206,6 +219,11 @@ export function setupFitbitIntegration(fitbitClientID: string, callback: Callbac
 export function authenticateFitbit(callbackURLScheme: string, fitbitScopes?: FitbitScopes[]): Promise<any>;
 export function revokeFitbitAuthentication(): Promise<any>;
 export function isFitbitAuthenticated(): Promise<any>;
+
+export function setupOuraIntegration(ouraClientID: string, callback: Callback): void;
+export function authenticateOura(callbackURLScheme: string, ouraScopes?: OuraScopes[]): Promise<any>;
+export function revokeOuraAuthentication(): Promise<any>;
+export function isOuraAuthenticated(): Promise<any>;
 
 export function setUserToken(accessToken: string): Promise<any>;
 export function logout(): Promise<any>;

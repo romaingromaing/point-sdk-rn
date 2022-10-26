@@ -68,6 +68,12 @@ extension PointSdkRn {
     return FitbitScopes.init(rawValue: scope)
   }
 
+  func ouraScopesMapping(type: String?) -> OuraScopes? {
+    guard let scope = type else { return nil }
+    
+    return OuraScopes.init(rawValue: scope)
+  }
+
   func workoutMapping(workout: Workout?) -> [String : Any] {
     guard let workout = workout else { return [:] }
     
@@ -91,8 +97,8 @@ extension PointSdkRn {
   func goalProgressMapping(goalProgress: GoalProgress) -> [String : Any] {
     [
       "overral": [
-        "value": goalProgress.overral.value,
-        "variance": goalProgress.overral.variance
+        "value": goalProgress.overall.value,
+        "variance": goalProgress.overall.variance
       ],
       "endurance": [
         "value": goalProgress.endurance.value,
@@ -117,7 +123,6 @@ extension PointSdkRn {
       "email": user.email as Any,
       "birthday": user.birthday as Any,
       "firstName": user.firstName as Any,
-      "isSubscriber": user.isSubscriber as Any,
       "goal": user.goal?.rawValue as Any,
       "goalProgress": goalProgressMapping(goalProgress: user.goalProgress),
       "specificGoal": user.specificGoal?.rawValue as Any,

@@ -5,6 +5,7 @@ import PointSDK
 class PointSdkRn: NSObject {
   var healthKit: HealthKitManager? 
   var fitbitManager: FitbitIntegrationManager?
+  var ouraManager: OuraIntegrationManager?
   var healthService: HealthDataService? { Point.healthDataService }
 
   /**

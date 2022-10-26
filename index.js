@@ -14,20 +14,33 @@ export const QueryType = {
   StepCount: "stepCount",
   MindfulSession: "mindfulSession",
   SleepAnalysis: "sleepAnalysis",
-  Birthday: "birthday",
   BodyMass: "bodyMass",
+  LeanBodyMass: "leanBodyMass",
+  BodyMassIndex: "bodyMassIndex",
+  BodyTemperature: "bodyTemperature",
+  BodyFatPercentage: "bodyFatPercentage",
+  OxygenSaturation: "oxygenSaturation",
+  RespiratoryRate: "respiratoryRate",
+  BloodGlucose: "bloodGlucose",
+  BloodPressure: "bloodPressure",
+  Birthday: "dateOfBirth",
+  BiologicalSex: "biologicalSex",
 };
 
 export const FitbitScopes = {
   Activity: "activity",
   Heartrate: "heartrate",
-  Location: "location",
-  Nutrition: "nutrition",
   Profile: "profile",
-  Settings: "settings",
   Sleep: "sleep",
-  Social: "social",
   Weight: "weight",
+};
+
+export const OuraScopes = {
+  Daily: "daily",
+  HeartRate: "heartrate",
+  Personal: "personal",
+  Session: "session",
+  Workout: "workout",
 };
 
 export const InsightType = {
