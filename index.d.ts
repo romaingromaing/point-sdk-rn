@@ -59,6 +59,7 @@ export enum FitbitScopes {
   Profile = "profile",
   Sleep = "sleep",
   Weight = "weight",
+  CardioFitness = "cardio_fitness",
 }
 
 export enum OuraScopes {
@@ -182,7 +183,8 @@ export enum HealthMetricType {
   MinWorkoutHR = "MinWorkoutHR",
   MaxWorkoutHR = "MaxWorkoutHR",
   SleepDuration = "SleepDuration",
-  SleepDurationInbed = "SleepDurationInbed",
+  SleepDurationInbed = "SleepDurationAwake",
+  SleepDurationAwake = "SleepDurationAwake",
   SleepDurationAsleep = "SleepDurationAsleep",
   TotalWorkoutDuration = "TotalWorkoutDuration",
   TotalMinsHRZone12 = "TotalMinsHRZone12",
@@ -196,7 +198,7 @@ export enum HealthMetricType {
   SleepStageDeep = "SleepStageDeep",
   SleepStageLight = "SleepStageLight",
   SleepStageREM = "SleepStageREM",
-  SleepStageWake = "SleepStageWake",
+  SleepStageAwake = "SleepStageAwake",
 }
 
 // Point Health Kit
