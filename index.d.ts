@@ -183,6 +183,7 @@ export enum HealthMetricType {
   MinWorkoutHR = "MinWorkoutHR",
   MaxWorkoutHR = "MaxWorkoutHR",
   SleepDuration = "SleepDuration",
+  SleepDurationInbed = "SleepDurationInbed",
   SleepDurationAwake = "SleepDurationAwake",
   SleepDurationAsleep = "SleepDurationAsleep",
   TotalWorkoutDuration = "TotalWorkoutDuration",
