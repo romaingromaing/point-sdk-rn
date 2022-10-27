@@ -182,7 +182,7 @@ export enum HealthMetricType {
   MinWorkoutHR = "MinWorkoutHR",
   MaxWorkoutHR = "MaxWorkoutHR",
   SleepDuration = "SleepDuration",
-  SleepDurationInbed = "SleepDurationInbed",
+  SleepDurationAwake = "SleepDurationAwake",
   SleepDurationAsleep = "SleepDurationAsleep",
   TotalWorkoutDuration = "TotalWorkoutDuration",
   TotalMinsHRZone12 = "TotalMinsHRZone12",
@@ -196,7 +196,7 @@ export enum HealthMetricType {
   SleepStageDeep = "SleepStageDeep",
   SleepStageLight = "SleepStageLight",
   SleepStageREM = "SleepStageREM",
-  SleepStageWake = "SleepStageWake",
+  SleepStageAwake = "SleepStageAwake",
 }
 
 // Point Health Kit
