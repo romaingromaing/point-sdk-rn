@@ -59,6 +59,7 @@ export enum FitbitScopes {
   Profile = "profile",
   Sleep = "sleep",
   Weight = "weight",
+  CardioFitness = "cardio_fitness",
 }
 
 export enum OuraScopes {
