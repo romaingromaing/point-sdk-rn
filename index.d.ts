@@ -51,6 +51,7 @@ export enum InsightType {
   WeekHrZonesLowMinutesBurnCarb = "week_hr_zones_low_minutes_burn_carb",
   WeekHrZonesHighMinutesBurnCarb = "week_hr_zones_high_minutes_burn_carb",
   WeekHrZone5HighMinutes = "week_hr_zone5_high_minutes",
+  ActivityLevel = "activity_level",
 }
 
 export enum FitbitScopes {
@@ -60,6 +61,9 @@ export enum FitbitScopes {
   Sleep = "sleep",
   Weight = "weight",
   CardioFitness = "cardio_fitness",
+  Temperature = "temperature",
+  RespiratoryRate = "respiratory_rate",
+  OxygenSaturation = "oxygen_saturation",
 }
 
 export enum OuraScopes {
@@ -199,6 +203,8 @@ export enum HealthMetricType {
   SleepStageLight = "SleepStageLight",
   SleepStageREM = "SleepStageREM",
   SleepStageAwake = "SleepStageAwake",
+  MaxHR = "MaxHR",
+  SleepRestlessness = "SleepRestlessness",
 }
 
 // Point Health Kit
@@ -217,11 +223,17 @@ export function setup(
 
 export function setupHealthkitIntegration(queryTypes: QueryType[], callback: Callback): void;
 
+/**
+ * @deprecated Since version 1.3.0. It's not necessary to set up each integration manually anymore, this in now done automatically when setting up the SDK.
+ */
 export function setupFitbitIntegration(fitbitClientID: string, callback: Callback): void;
 export function authenticateFitbit(callbackURLScheme: string, fitbitScopes?: FitbitScopes[]): Promise<any>;
 export function revokeFitbitAuthentication(): Promise<any>;
 export function isFitbitAuthenticated(): Promise<any>;
 
+/**
+ * @deprecated Since version 1.3.0. It's not necessary to set up each integration manually anymore, this in now done automatically when setting up the SDK.
+ */
 export function setupOuraIntegration(ouraClientID: string, callback: Callback): void;
 export function authenticateOura(callbackURLScheme: string, ouraScopes?: OuraScopes[]): Promise<any>;
 export function revokeOuraAuthentication(): Promise<any>;
