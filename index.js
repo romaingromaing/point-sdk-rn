@@ -128,7 +128,7 @@ export const HealthMetricType = {
   SleepStageREM: 'SleepStageREM',
   SleepStageWake: 'SleepStageWake',
   SleepRestlessness: 'SleepRestlessness',
-  MaxHR: 'MaxHr'
+  MaxHR: 'MaxHR'
 }
 
 PointSdkRn.allQueryTypes = Object.values(QueryType);

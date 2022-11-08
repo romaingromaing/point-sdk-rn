@@ -32,6 +32,6 @@ Pod::Spec.new do |s|
   s.requires_arc  = true
 
   s.dependency "React"
-  s.dependency "PointSDK", '~> 1.2.1'
+  s.dependency "PointSDK", '~> 1.3.0'
 end
 
