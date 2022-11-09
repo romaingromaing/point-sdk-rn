@@ -50,7 +50,7 @@ export function PlaygroundScreen() {
 
   async function getInsights() {
     try {
-      console.log(await PointSdkRn.getInsights({ types: [InsightType.UsualWorkoutTime]}));
+      console.log(await PointSdkRn.getInsights({ types: [InsightType.ActivityLevel]}));
     } catch (error) {
       console.log(error);
     }

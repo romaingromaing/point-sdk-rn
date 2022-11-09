@@ -33,6 +33,10 @@ export const FitbitScopes = {
   Profile: "profile",
   Sleep: "sleep",
   Weight: "weight",
+  CardioFitness: "cardio_fitness",
+  Temperature: "temperature",
+  RespiratoryRate: "respiratory_rate",
+  OxygenSaturation: "oxygen_saturation",
 };
 
 export const OuraScopes = {
@@ -67,7 +71,8 @@ export const InsightType = {
   WeekHrZonesLowMinutesBurnFat: "week_hr_zones_low_minutes_burn_fat",
   WeekHrZonesLowMinutesBurnCarb: "week_hr_zones_low_minutes_burn_carb",
   WeekHrZonesHighMinutesBurnCarb: "week_hr_zones_high_minutes_burn_carb",
-  WeekHrZone5HighMinutes: "week_hr_zone5_high_minutes"
+  WeekHrZone5HighMinutes: "week_hr_zone5_high_minutes",
+  ActivityLevel: "activity_level"
 }
 
 export const HealthMetricType = {
@@ -121,7 +126,9 @@ export const HealthMetricType = {
   SleepStageDeep: 'SleepStageDeep',
   SleepStageLight: 'SleepStageLight',
   SleepStageREM: 'SleepStageREM',
-  SleepStageWake: 'SleepStageWake'
+  SleepStageWake: 'SleepStageWake',
+  SleepRestlessness: 'SleepRestlessness',
+  MaxHR: 'MaxHR'
 }
 
 PointSdkRn.allQueryTypes = Object.values(QueryType);
