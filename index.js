@@ -72,7 +72,7 @@ export const InsightType = {
   WeekHrZonesLowMinutesBurnCarb: "week_hr_zones_low_minutes_burn_carb",
   WeekHrZonesHighMinutesBurnCarb: "week_hr_zones_high_minutes_burn_carb",
   WeekHrZone5HighMinutes: "week_hr_zone5_high_minutes",
-  ActivityLevel: "activity_level"
+  ActivityLevel: "activity_level",
 }
 
 export const HealthMetricType = {
