@@ -24,6 +24,10 @@ export function HomeScreen() {
         FitbitScopes.Activity,
         FitbitScopes.Heartrate,
         FitbitScopes.Profile,
+        FitbitScopes.OxygenSaturation,
+        FitbitScopes.CardioFitness,
+        FitbitScopes.Temperature,
+        FitbitScopes.RespiratoryRate
       ]);
       console.log(result);
     } catch (error) {
