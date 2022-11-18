@@ -4,7 +4,7 @@ import PointSDK
 @objc
 extension PointSdkRn {
     func setupFitbitIntegration(_ fitbitClientId: String, callback: RCTResponseSenderBlock) {
-        fitbitManager = Point.setupFitbitIntegration(fitbitClientId: fitbitClientId)
+        Point.setupFitbitIntegration(fitbitClientId: fitbitClientId)
         callback([NSNull(), true])
     }
         
@@ -18,7 +18,7 @@ extension PointSdkRn {
                     scopes = scopesParam.compactMap { fitbitScopesMapping(type: $0) }
                 }
                     
-                try await fitbitManager?.authenticate(scopes: scopes, callbackURLScheme: callbackURLScheme)
+                try await Point.fitbitManager?.authenticate(scopes: scopes, callbackURLScheme: callbackURLScheme)
                 resolve(true)
             } catch {
                 reject("authenticateFitbit", error.localizedDescription, error)
@@ -31,7 +31,7 @@ extension PointSdkRn {
             guard !Task.isCancelled else { return }
                 
             do {
-                try await fitbitManager?.revoke()
+                try await Point.fitbitManager?.revoke()
                 resolve(true)
             } catch {
                 reject("revokeFitbitAuthentication", error.localizedDescription, error)
@@ -44,7 +44,7 @@ extension PointSdkRn {
             guard !Task.isCancelled else { return }
                 
             do {
-                let result = try await fitbitManager?.getUserAuthenticationStatus()?.active ?? false
+                let result = try await Point.fitbitManager?.getUserAuthenticationStatus()?.active ?? false
                 resolve(result)
             } catch {
                 reject("isFitbitAuthenticated", error.localizedDescription, error)
