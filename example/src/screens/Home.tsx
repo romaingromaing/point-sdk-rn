@@ -1,6 +1,6 @@
-import React, {useEffect, useState} from 'react';
-import {Button, Text, View} from 'react-native';
-import PointSdkRn, {FitbitScopes, OuraScopes} from 'react-native-point-sdk';
+import React, { useEffect, useState } from 'react';
+import { Button, Text, View } from 'react-native';
+import PointSdkRn, { FitbitScopes, OuraScopes } from 'react-native-point-sdk';
 
 export function HomeScreen() {
   const [user, setUser] = useState<PointSdkRn.User | null>(null);

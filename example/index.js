@@ -2,15 +2,16 @@
  * @format
  */
 
-import {AppRegistry} from 'react-native';
-import PointSdkRn, {QueryType} from 'react-native-point-sdk';
+import { AppRegistry, NativeModules } from 'react-native';
+import PointSdkRn, { QueryType } from 'react-native-point-sdk';
 import App from './src/App';
-import {name as appName} from './app.json';
+import { name as appName } from './app.json';
 
 AppRegistry.registerComponent(appName, () => {
   PointSdkRn.setup('foo', 'bar', 'development', true, () =>
     console.log('Setup completed!'),
   );
+
 
   PointSdkRn.setupHealthkitIntegration(
     [
