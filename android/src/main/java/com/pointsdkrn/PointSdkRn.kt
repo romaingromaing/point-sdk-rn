@@ -8,6 +8,7 @@ import com.facebook.react.bridge.*
 class PointSdkRn(reactContext: ReactApplicationContext) :
     ReactContextBaseJavaModule(reactContext) {
     private lateinit var pointClient: PointClient
+    private lateinit var pointSdkRepository: PointSdkRepository
     private val reactContext: ReactApplicationContext
 
     init {
@@ -30,6 +31,7 @@ class PointSdkRn(reactContext: ReactApplicationContext) :
             clientSecret = clientSecret,
             apiEnvironment = environmentsMapping(environment)
         )
+        pointSdkRepository = PointSdkRepository(pointClient.repository)
         callback.invoke()
     }
 
@@ -64,6 +66,14 @@ class PointSdkRn(reactContext: ReactApplicationContext) :
     fun setupOuraIntegration(ouraClientID: String, callback: Callback) {
         print("Not implemented")
         callback.invoke()
+    }
+
+    /**
+     * REPOSITORY/PUBLIC API
+     */
+    @ReactMethod
+    fun getUserData(promise: Promise) {
+        pointSdkRepository.getUserData(promise)
     }
 }
 
