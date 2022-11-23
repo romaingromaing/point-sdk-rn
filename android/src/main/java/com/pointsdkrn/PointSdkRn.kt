@@ -3,16 +3,12 @@ package com.pointsdkrn
 import co.areyouonpoint.pointsdk.PointClient
 import co.areyouonpoint.pointsdk.domain.PointEnvironment
 import co.areyouonpoint.pointsdk.domain.exceptions.PointException
-import com.facebook.react.bridge.Callback
-import com.facebook.react.bridge.Promise
-import com.facebook.react.bridge.ReactApplicationContext
-import com.facebook.react.bridge.ReactContextBaseJavaModule
-import com.facebook.react.bridge.ReactMethod
-import com.facebook.react.bridge.ReadableArray
+import com.facebook.react.bridge.*
 
 class PointSdkRn(reactContext: ReactApplicationContext) :
     ReactContextBaseJavaModule(reactContext) {
-    private var pointClient: PointClient? = null
+    private lateinit var pointClient: PointClient
+    private lateinit var pointSdkRepository: PointSdkRepository
     private val reactContext: ReactApplicationContext
 
     init {
@@ -22,20 +18,27 @@ class PointSdkRn(reactContext: ReactApplicationContext) :
     override fun getName() = "PointSdkRn"
 
     @ReactMethod
-    fun setup(clientId: String, clientSecret: String, environment: String, verbose: Boolean, callback: Callback) {
-        PointClient.getInstance(
+    fun setup(
+        clientId: String,
+        clientSecret: String,
+        environment: String,
+        verbose: Boolean,
+        callback: Callback
+    ) {
+        pointClient = PointClient.getInstance(
             context = reactContext,
             clientId = clientId,
             clientSecret = clientSecret,
             apiEnvironment = environmentsMapping(environment)
         )
+        pointSdkRepository = PointSdkRepository(pointClient.repository)
         callback.invoke()
     }
 
     @ReactMethod
     fun setUserToken(userToken: String, promise: Promise) {
         try {
-            pointClient?.setUserToken(userToken)
+            pointClient.setUserToken(userToken)
             promise.resolve(true)
         } catch (ex: PointException) {
             promise.reject("PointSDKError", ex.message)
@@ -64,10 +67,18 @@ class PointSdkRn(reactContext: ReactApplicationContext) :
         print("Not implemented")
         callback.invoke()
     }
+
+    /**
+     * REPOSITORY/PUBLIC API
+     */
+    @ReactMethod
+    fun getUserData(promise: Promise) {
+        pointSdkRepository.getUserData(promise)
+    }
 }
 
 private fun environmentsMapping(env: String): PointEnvironment {
-    return when(env) {
+    return when (env) {
         "development" -> PointEnvironment.DEVELOPMENT
         "staging" -> PointEnvironment.STAGING
         "production" -> PointEnvironment.PRODUCTION
