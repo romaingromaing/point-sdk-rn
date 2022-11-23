@@ -27,7 +27,7 @@ class PointSdkRn(reactContext: ReactApplicationContext) :
             context = reactContext,
             clientId = clientId,
             clientSecret = clientSecret,
-            apiEnvironment = PointEnvironment.DEVELOPMENT
+            apiEnvironment = environmentsMapping(environment)
         )
         callback.invoke()
     }
@@ -63,5 +63,15 @@ class PointSdkRn(reactContext: ReactApplicationContext) :
     fun setupOuraIntegration(ouraClientID: String, callback: Callback) {
         print("Not implemented")
         callback.invoke()
+    }
+}
+
+private fun environmentsMapping(env: String): PointEnvironment {
+    return when(env) {
+        "development" -> PointEnvironment.DEVELOPMENT
+        "staging" -> PointEnvironment.STAGING
+        "production" -> PointEnvironment.PRODUCTION
+        "preprod" -> PointEnvironment.PRE_PROD
+        else -> PointEnvironment.DEVELOPMENT
     }
 }
