@@ -12,7 +12,7 @@ import com.facebook.react.bridge.ReadableArray
 
 class PointSdkRn(reactContext: ReactApplicationContext) :
     ReactContextBaseJavaModule(reactContext) {
-    private var pointClient: PointClient? = null
+    private lateinit var pointClient: PointClient
     private val reactContext: ReactApplicationContext
 
     init {
@@ -23,7 +23,7 @@ class PointSdkRn(reactContext: ReactApplicationContext) :
 
     @ReactMethod
     fun setup(clientId: String, clientSecret: String, environment: String, verbose: Boolean, callback: Callback) {
-        PointClient.getInstance(
+        pointClient = PointClient.getInstance(
             context = reactContext,
             clientId = clientId,
             clientSecret = clientSecret,
@@ -35,7 +35,7 @@ class PointSdkRn(reactContext: ReactApplicationContext) :
     @ReactMethod
     fun setUserToken(userToken: String, promise: Promise) {
         try {
-            pointClient?.setUserToken(userToken)
+            pointClient.setUserToken(userToken)
             promise.resolve(true)
         } catch (ex: PointException) {
             promise.reject("PointSDKError", ex.message)
