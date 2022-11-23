@@ -13,6 +13,7 @@ import com.facebook.react.bridge.ReadableArray
 class PointSdkRn(reactContext: ReactApplicationContext) :
     ReactContextBaseJavaModule(reactContext) {
     private var pointClient: PointClient? = null
+    private var pointSDKRepository: PointSDKRepository? = null
     private val reactContext: ReactApplicationContext
 
     init {
@@ -28,7 +29,9 @@ class PointSdkRn(reactContext: ReactApplicationContext) :
             clientId = clientId,
             clientSecret = clientSecret,
             apiEnvironment = PointEnvironment.DEVELOPMENT
-        )
+        ).also {
+            pointSDKRepository = PointSDKRepository(it.repository)
+        }
         callback.invoke()
     }
 
@@ -64,4 +67,15 @@ class PointSdkRn(reactContext: ReactApplicationContext) :
         print("Not implemented")
         callback.invoke()
     }
+
+    @ReactMethod
+    fun setUserGoal(goal: String, promise: Promise) {
+        pointSDKRepository?.setUserGoal(goal, promise)
+    }
+
+    @ReactMethod
+    fun setUserSpecificGoal(specificGoal: String, promise: Promise) {
+        pointSDKRepository?.setUserSpecificGoal(specificGoal, promise)
+    }
+
 }
