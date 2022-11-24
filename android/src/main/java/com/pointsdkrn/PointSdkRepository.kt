@@ -41,6 +41,17 @@ internal class PointSdkRepository(
         }
     }
 
+    fun getUserWorkoutById(workoutId: Int, promise: Promise) {
+        GlobalScope.launch(Dispatchers.IO) {
+            try {
+                val workout = pointRepository.getWorkout(workoutId).toResponse()
+                promise.resolve(workout)
+            } catch (ex: PointException) {
+                promise.reject("PointSDKError", ex.message)
+            }
+        }
+    }
+
     fun getHealthMetrics(
         filter: List<HealthMetricType>,
         workoutId: Int?,
