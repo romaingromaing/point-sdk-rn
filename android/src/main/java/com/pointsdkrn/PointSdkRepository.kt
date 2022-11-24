@@ -2,9 +2,7 @@ package com.pointsdkrn
 
 import co.areyouonpoint.pointsdk.domain.PointRepository
 import co.areyouonpoint.pointsdk.domain.exceptions.PointException
-import co.areyouonpoint.pointsdk.domain.model.DailyHistory
 import com.facebook.react.bridge.Promise
-import com.facebook.react.bridge.ReadableMap
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -20,6 +18,20 @@ internal class PointSdkRepository(
             try {
                 val user = pointRepository.getUser()?.toResponse()
                 promise.resolve(user)
+            } catch (ex: PointException) {
+                promise.reject("PointSDKError", ex.message)
+            }
+        }
+    }
+
+    fun getUserWorkouts(offset: Int, promise: Promise) {
+        GlobalScope.launch(Dispatchers.IO) {
+            try {
+                val workouts = pointRepository.getUserWorkouts(offset)
+                    .map { it.toResponse() }
+                    .toReadableArray()
+
+                promise.resolve(workouts)
             } catch (ex: PointException) {
                 promise.reject("PointSDKError", ex.message)
             }

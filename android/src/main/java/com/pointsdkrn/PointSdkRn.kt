@@ -77,6 +77,11 @@ class PointSdkRn(reactContext: ReactApplicationContext) :
     }
 
     @ReactMethod
+    fun getUserWorkouts(offset: Int?, promise: Promise) {
+        pointSdkRepository.getUserWorkouts(offset ?: 0, promise)
+    }
+
+    @ReactMethod
     fun getDailyHistory(offset: Int?, promise: Promise) {
         pointSdkRepository.getDailyHistory(offset ?: 0, promise)
     }
