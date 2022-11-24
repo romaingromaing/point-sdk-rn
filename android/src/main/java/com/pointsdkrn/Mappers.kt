@@ -91,6 +91,18 @@ fun HealthMetric.toResponse(): ReadableMap =
 fun ReadableArray.toHealthMetricTypes() =
     this.toArrayList().mapNotNull { HealthMetricType.safeValueOf(it.toString()) }
 
+fun Insight.toResponse(): ReadableMap =
+    Arguments.createMap().apply {
+        putInt("id", id)
+        putString("type", type.rawValue)
+        putString("additionalFields", additionalFields)
+        putString("createdAt", createdAt)
+    }
+
+fun ReadableArray.toInsightTypes() =
+    this.toArrayList().mapNotNull { InsightType.safeValueOf(it.toString()) }
+
+
 fun DailyHistory.toResponse(): ReadableMap =
     Arguments.createMap().apply {
         putString("date", date)

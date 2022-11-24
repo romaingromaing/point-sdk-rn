@@ -94,6 +94,16 @@ class PointSdkRn(reactContext: ReactApplicationContext) :
 
         return pointSdkRepository.getHealthMetrics(filter, workoutId, date, promise)
     }
+
+    @ReactMethod
+    fun getInsights(params: ReadableMap?, promise: Promise) {
+        val types = params?.getArray("types")?.toInsightTypes().orEmpty()
+        val startDate = params?.getString("from")?.fromIsoStringToDate()
+        val endDate = params?.getString("to")?.fromIsoStringToDate()
+        val offset = params?.getNullableInt("offset")
+
+        return pointSdkRepository.getInsights(types, startDate, endDate, offset, promise)
+    }
 }
 
 private fun environmentsMapping(env: String): PointEnvironment {

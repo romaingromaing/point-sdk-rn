@@ -3,6 +3,7 @@ package com.pointsdkrn
 import co.areyouonpoint.pointsdk.domain.PointRepository
 import co.areyouonpoint.pointsdk.domain.exceptions.PointException
 import co.areyouonpoint.pointsdk.domain.model.HealthMetricType
+import co.areyouonpoint.pointsdk.domain.model.InsightType
 import com.facebook.react.bridge.Promise
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
@@ -69,6 +70,26 @@ internal class PointSdkRepository(
                     .toReadableArray()
 
                 promise.resolve(dailyHistory)
+            } catch (ex: PointException) {
+                promise.reject("PointSDKError", ex.message)
+            }
+        }
+    }
+
+    fun getInsights(
+        types: List<InsightType>,
+        startDate: Date?,
+        endDate: Date?,
+        offset: Int?,
+        promise: Promise
+    ) {
+        GlobalScope.launch(Dispatchers.IO) {
+            try {
+                val insights = pointRepository.getInsights(types, startDate, endDate, offset)
+                    .map { it.toResponse() }
+                    .toReadableArray()
+
+                promise.resolve(insights)
             } catch (ex: PointException) {
                 promise.reject("PointSDKError", ex.message)
             }
