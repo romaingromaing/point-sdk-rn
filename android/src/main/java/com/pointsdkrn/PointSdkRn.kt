@@ -75,6 +75,11 @@ class PointSdkRn(reactContext: ReactApplicationContext) :
     fun getUserData(promise: Promise) {
         pointSdkRepository.getUserData(promise)
     }
+
+    @ReactMethod
+    fun getDailyHistory(offset: Int?, promise: Promise) {
+        pointSdkRepository.getDailyHistory(offset ?: 0, promise)
+    }
 }
 
 private fun environmentsMapping(env: String): PointEnvironment {

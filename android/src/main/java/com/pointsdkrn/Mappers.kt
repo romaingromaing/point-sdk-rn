@@ -2,6 +2,8 @@ package com.pointsdkrn
 
 import co.areyouonpoint.pointsdk.domain.model.*
 import com.facebook.react.bridge.Arguments
+import com.facebook.react.bridge.ReadableArray
+import com.facebook.react.bridge.ReadableMap
 import com.facebook.react.bridge.WritableMap
 
 fun User.toResponse(): WritableMap =
@@ -68,6 +70,28 @@ fun Recovery.toResponse(): WritableMap =
         putDouble("value", value)
         putDoubleOrNull("variance", variance)
     }
+
+
+fun HealthMetric.toResponse(): ReadableMap =
+    Arguments.createMap().apply {
+        putString("type", type.rawValue)
+        putString("date", date)
+        putString("value", value)
+        putIntOrNull("variance", variance)
+        putIntOrNull("workoutId", workoutId)
+    }
+
+fun DailyHistory.toResponse(): ReadableMap =
+    Arguments.createMap().apply {
+        putString("date", date)
+        putArray("metrics", metrics.map { it.toResponse() }.toReadableArray())
+    }
+
+fun <E : ReadableMap> List<E>.toReadableArray(): ReadableArray {
+    val response = Arguments.createArray()
+    this.forEach { response.pushMap(it) }
+    return response
+}
 
 fun WritableMap.putIntOrNull(key: String, value: Int?) =
     if (value != null) putInt(key, value) else putNull(key)
