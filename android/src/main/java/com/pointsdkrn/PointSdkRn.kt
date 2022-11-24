@@ -85,6 +85,15 @@ class PointSdkRn(reactContext: ReactApplicationContext) :
     fun getDailyHistory(offset: Int?, promise: Promise) {
         pointSdkRepository.getDailyHistory(offset ?: 0, promise)
     }
+
+    @ReactMethod
+    fun getHealthMetrics(params: ReadableMap?, promise: Promise) {
+        val filter = params?.getArray("filter")?.toHealthMetricTypes() ?: emptyList()
+        val workoutId = params?.getNullableInt("workoutId")
+        val date = params?.getString("date")?.fromIsoStringToDate()
+
+        return pointSdkRepository.getHealthMetrics(filter, workoutId, date, promise)
+    }
 }
 
 private fun environmentsMapping(env: String): PointEnvironment {
@@ -96,3 +105,6 @@ private fun environmentsMapping(env: String): PointEnvironment {
         else -> PointEnvironment.DEVELOPMENT
     }
 }
+
+private fun ReadableMap.getNullableInt(name: String) =
+    if (this.hasKey(name)) this.getInt(name) else null

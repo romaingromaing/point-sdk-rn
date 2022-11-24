@@ -5,6 +5,13 @@ import com.facebook.react.bridge.Arguments
 import com.facebook.react.bridge.ReadableArray
 import com.facebook.react.bridge.ReadableMap
 import com.facebook.react.bridge.WritableMap
+import java.text.SimpleDateFormat
+import java.util.*
+
+fun String.fromIsoStringToDate(): Date {
+    val formatter = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
+    return formatter.parse(this)!!
+}
 
 fun User.toResponse(): WritableMap =
     Arguments.createMap().apply {
@@ -80,6 +87,9 @@ fun HealthMetric.toResponse(): ReadableMap =
         putIntOrNull("variance", variance)
         putIntOrNull("workoutId", workoutId)
     }
+
+fun ReadableArray.toHealthMetricTypes() =
+    this.toArrayList().mapNotNull { HealthMetricType.safeValueOf(it.toString()) }
 
 fun DailyHistory.toResponse(): ReadableMap =
     Arguments.createMap().apply {
