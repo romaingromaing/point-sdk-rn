@@ -75,6 +75,19 @@ export const InsightType = {
   ActivityLevel: "activity_level",
 };
 
+export const Goal = {
+  WeightLoss: "weightLoss",
+  AthleticPerformance: "athleticPerformance",
+};
+
+export const SpecificGoal = {
+  BuildLeanMuscle: "buildLeanMuscle",
+  LoseWeight: "loseWeight",
+  PrepareForEvent: "prepareForEvent",
+  AccomplishMore: "accomplishMore",
+  MaintainHealth: "maintainHealth",
+};
+
 export const HealthMetricType = {
   RestingHR: "RestingHR",
   OneMinuteHRR: "OneMinuteHRR",
