@@ -79,6 +79,18 @@ fun Recovery.toResponse(): WritableMap =
     }
 
 
+fun WorkoutRecommendation.toResponse(): ReadableMap =
+    Arguments.createMap().apply {
+        putInt("id", id)
+        putString("date", date)
+        putIntOrNull("activityId", activityId)
+        putString("activityName", activityName)
+        putIntOrNull("workoutId", workoutId)
+        putString("completedAt", completedAt)
+        putString("createdAt", createdAt)
+        putString("savedAt", savedAt)
+    }
+
 fun HealthMetric.toResponse(): ReadableMap =
     Arguments.createMap().apply {
         putString("type", type.rawValue)
