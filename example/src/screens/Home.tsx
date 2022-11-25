@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { Button, Text, View } from 'react-native';
-import PointSdkRn, { FitbitScopes, OuraScopes } from 'react-native-point-sdk';
+import React, {useEffect, useState} from 'react';
+import {Button, Text, View} from 'react-native';
+import PointSdkRn, {FitbitScopes, OuraScopes} from 'react-native-point-sdk';
 
 export function HomeScreen() {
   const [user, setUser] = useState<PointSdkRn.User | null>(null);
+  const [ouraStatus, setOuraStatus] = useState<string>('unknown');
 
   useEffect(() => {
     handleLogin();
@@ -31,13 +32,35 @@ export function HomeScreen() {
     }
   };
 
-  const handleOura = async () => {
+  const authenticateOura = async () => {
     try {
       const result = await PointSdkRn.authenticateOura('sampleapp', [
         OuraScopes.HeartRate,
         OuraScopes.Workout,
       ]);
       console.log(result);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const isOuraAuthenticated = async () => {
+    try {
+      setOuraStatus('fetching');
+      const status = await PointSdkRn.isOuraAuthenticated();
+      setOuraStatus(`${status}`);
+    } catch (error: any) {
+      console.log(error);
+      setOuraStatus(`error: ${error.message}`);
+    }
+  };
+
+  const revokeOuraAuthentication = async () => {
+    try {
+      await PointSdkRn.revokeOuraAuthentication();
+
+      // Call isOuraAuthenticated to update the Oura Authentication Status
+      isOuraAuthenticated();
     } catch (error) {
       console.log(error);
     }
@@ -84,12 +107,20 @@ export function HomeScreen() {
       )}
       <Button onPress={handleRequestPermissions} title="Request Permissions" />
       <Button onPress={handleFitbit} title="Authenticate Fitbit" />
-      <Button onPress={handleOura} title="Authenticate Oura" />
       {user ? (
         <Button onPress={handleLogout} title="Logout" />
       ) : (
         <Button onPress={handleLogin} title="Login" />
       )}
+      <Text style={{fontSize: 16}}>
+        Oura Authentication Status: {ouraStatus}
+      </Text>
+      <Button onPress={authenticateOura} title="Authenticate Oura" />
+      <Button onPress={isOuraAuthenticated} title="Is Oura Authenticated?" />
+      <Button
+        onPress={revokeOuraAuthentication}
+        title="Revoke Oura Authentication"
+      />
     </View>
   );
 }
