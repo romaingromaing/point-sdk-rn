@@ -2,7 +2,9 @@ package com.pointsdkrn
 
 import co.areyouonpoint.pointsdk.domain.PointRepository
 import co.areyouonpoint.pointsdk.domain.exceptions.PointException
-import co.areyouonpoint.pointsdk.domain.model.*
+import co.areyouonpoint.pointsdk.domain.model.HealthMetricType
+import co.areyouonpoint.pointsdk.domain.model.InsightType
+import co.areyouonpoint.pointsdk.domain.model.WorkoutRatings
 import com.facebook.react.bridge.Arguments
 import com.facebook.react.bridge.Promise
 import kotlinx.coroutines.DelicateCoroutinesApi

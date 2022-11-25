@@ -7,15 +7,11 @@ import co.areyouonpoint.pointsdk.domain.model.GoalAnswers
 import co.areyouonpoint.pointsdk.domain.model.SpecificGoalAnswers
 import com.facebook.react.bridge.*
 
-class PointSdkRn(reactContext: ReactApplicationContext) :
-    ReactContextBaseJavaModule(reactContext) {
+class PointSdkRn(private val context: ReactApplicationContext) :
+    ReactContextBaseJavaModule(context) {
     private lateinit var pointClient: PointClient
     private lateinit var pointSdkRepository: PointSdkRepository
-    private val reactContext: ReactApplicationContext
-
-    init {
-        this.reactContext = reactContext
-    }
+    private lateinit var pointSdkOura: PointSdkOura
 
     override fun getName() = "PointSdkRn"
 
@@ -28,12 +24,13 @@ class PointSdkRn(reactContext: ReactApplicationContext) :
         callback: Callback
     ) {
         pointClient = PointClient.getInstance(
-            context = reactContext,
+            context = context,
             clientId = clientId,
             clientSecret = clientSecret,
             apiEnvironment = environmentsMapping(environment)
         )
         pointSdkRepository = PointSdkRepository(pointClient.repository)
+        pointSdkOura = PointSdkOura(pointClient)
         callback.invoke()
     }
 
@@ -64,10 +61,36 @@ class PointSdkRn(reactContext: ReactApplicationContext) :
         callback.invoke()
     }
 
+    /**
+     * OURA
+     */
     @ReactMethod
-    fun setupOuraIntegration(ouraClientID: String, callback: Callback) {
-        print("Not implemented")
+    fun setupOuraIntegration(
+        @Suppress("UNUSED_PARAMETER") ouraClientID: String,
+        callback: Callback
+    ) {
+        print("setupOuraIntegration is deprecated - Since version 1.3.0, it's no longer necessary to set up each integration manually, this in now done automatically when setting up the SDK.")
         callback.invoke()
+    }
+
+    @ReactMethod
+    fun authenticateOura(
+        @Suppress("UNUSED_PARAMETER") callbackURLScheme: String?,
+        ouraScopes: ReadableArray?,
+        promise: Promise
+    ) {
+        val scopesAsNames = ouraScopes?.toArrayList()?.mapNotNull { it.toString() } ?: emptyList()
+        pointSdkOura.authenticateOura(scopesAsNames, promise)
+    }
+
+    @ReactMethod
+    fun revokeOuraAuthentication(promise: Promise) {
+        pointSdkOura.revokeOuraAuthentication(promise)
+    }
+
+    @ReactMethod
+    fun isOuraAuthenticated(promise: Promise) {
+        pointSdkOura.isOuraAuthenticated(promise)
     }
 
     /**
