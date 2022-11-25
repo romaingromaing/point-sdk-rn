@@ -17,6 +17,10 @@ export function PlaygroundScreen() {
         date: new Date('2022-05-10').toISOString(),
       });
       console.log(data);
+      console.log(`Get User Health Metrics: Received ${data.length} results`);
+      for (const metric of data) {
+        console.log(metric);
+      }
     } catch (error) {
       console.log(error);
     }

@@ -2,7 +2,16 @@ package com.pointsdkrn
 
 import co.areyouonpoint.pointsdk.domain.model.*
 import com.facebook.react.bridge.Arguments
+import com.facebook.react.bridge.ReadableArray
+import com.facebook.react.bridge.ReadableMap
 import com.facebook.react.bridge.WritableMap
+import java.text.SimpleDateFormat
+import java.util.*
+
+fun String.fromIsoStringToDate(): Date {
+    val formatter = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
+    return formatter.parse(this)!!
+}
 
 fun User.toResponse(): WritableMap =
     Arguments.createMap().apply {
@@ -36,6 +45,12 @@ fun WorkoutRatings.toResponse(): WritableMap =
         putIntOrNull("instructor", instructor)
     }
 
+fun ReadableMap.toWorkoutRatings() = WorkoutRatings(
+    difficulty = getNullableInt("difficulty"),
+    energy = getNullableInt("energy"),
+    instructor = getNullableInt("instructor")
+)
+
 fun GoalProgress.toResponse(): WritableMap =
     Arguments.createMap().apply {
         putMap("endurance", endurance.toResponse())
@@ -68,6 +83,58 @@ fun Recovery.toResponse(): WritableMap =
         putDouble("value", value)
         putDoubleOrNull("variance", variance)
     }
+
+
+fun WorkoutRecommendation.toResponse(): ReadableMap =
+    Arguments.createMap().apply {
+        putInt("id", id)
+        putString("date", date)
+        putIntOrNull("activityId", activityId)
+        putString("activityName", activityName)
+        putIntOrNull("workoutId", workoutId)
+        putString("completedAt", completedAt)
+        putString("createdAt", createdAt)
+        putString("savedAt", savedAt)
+    }
+
+fun HealthMetric.toResponse(): ReadableMap =
+    Arguments.createMap().apply {
+        putString("type", type.rawValue)
+        putString("date", date)
+        putString("value", value)
+        putIntOrNull("variance", variance)
+        putIntOrNull("workoutId", workoutId)
+    }
+
+fun ReadableArray.toHealthMetricTypes() =
+    this.toArrayList().mapNotNull { HealthMetricType.safeValueOf(it.toString()) }
+
+fun Insight.toResponse(): ReadableMap =
+    Arguments.createMap().apply {
+        putInt("id", id)
+        putString("type", type.rawValue)
+        putString("additionalFields", additionalFields)
+        putString("createdAt", createdAt)
+    }
+
+fun ReadableArray.toInsightTypes() =
+    this.toArrayList().mapNotNull { InsightType.safeValueOf(it.toString()) }
+
+
+fun DailyHistory.toResponse(): ReadableMap =
+    Arguments.createMap().apply {
+        putString("date", date)
+        putArray("metrics", metrics.map { it.toResponse() }.toReadableArray())
+    }
+
+fun <E : ReadableMap> List<E>.toReadableArray(): ReadableArray {
+    val response = Arguments.createArray()
+    this.forEach { response.pushMap(it) }
+    return response
+}
+
+fun ReadableMap.getNullableInt(name: String) =
+    if (this.hasKey(name)) this.getInt(name) else null
 
 fun WritableMap.putIntOrNull(key: String, value: Int?) =
     if (value != null) putInt(key, value) else putNull(key)

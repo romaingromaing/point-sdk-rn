@@ -77,6 +77,31 @@ class PointSdkRn(reactContext: ReactApplicationContext) :
     }
 
     @ReactMethod
+    fun getUserWorkouts(offset: Int?, promise: Promise) {
+        pointSdkRepository.getUserWorkouts(offset ?: 0, promise)
+    }
+
+    @ReactMethod
+    fun getUserWorkoutById(id: Int, promise: Promise) {
+        pointSdkRepository.getUserWorkoutById(id, promise)
+    }
+
+    @ReactMethod
+    fun getWorkoutRecommendations(date: String, promise: Promise) {
+        pointSdkRepository.getWorkoutRecommendations(date.fromIsoStringToDate(), promise)
+    }
+
+    @ReactMethod
+    fun saveWorkoutRecommendation(id: Int, promise: Promise) {
+        return pointSdkRepository.saveWorkoutRecommendation(id, promise)
+    }
+
+    @ReactMethod
+    fun getDailyHistory(offset: Int?, promise: Promise) {
+        pointSdkRepository.getDailyHistory(offset ?: 0, promise)
+    }
+
+    @ReactMethod
     fun setUserGoal(goal: String, promise: Promise) {
         pointSdkRepository.setUserGoal(goal, promise)
     }
@@ -84,6 +109,32 @@ class PointSdkRn(reactContext: ReactApplicationContext) :
     @ReactMethod
     fun setUserSpecificGoal(specificGoal: String, promise: Promise) {
         pointSdkRepository.setUserSpecificGoal(specificGoal, promise)
+    }
+
+    @ReactMethod
+    fun getHealthMetrics(params: ReadableMap?, promise: Promise) {
+        val filter = params?.getArray("filter")?.toHealthMetricTypes() ?: emptyList()
+        val workoutId = params?.getNullableInt("workoutId")
+        val date = params?.getString("date")?.fromIsoStringToDate()
+
+        return pointSdkRepository.getHealthMetrics(filter, workoutId, date, promise)
+    }
+
+    @ReactMethod
+    fun getInsights(params: ReadableMap?, promise: Promise) {
+        val types = params?.getArray("types")?.toInsightTypes().orEmpty()
+        val startDate = params?.getString("from")?.fromIsoStringToDate()
+        val endDate = params?.getString("to")?.fromIsoStringToDate()
+        val offset = params?.getNullableInt("offset")
+
+        return pointSdkRepository.getInsights(types, startDate, endDate, offset, promise)
+    }
+
+    @ReactMethod
+    fun rateWorkout(id: Int, ratings: ReadableMap, promise: Promise) {
+        val workoutRatings = ratings.toWorkoutRatings()
+
+        return pointSdkRepository.rateWorkout(id, workoutRatings, promise)
     }
 }
 
