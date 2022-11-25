@@ -2,9 +2,7 @@ package com.pointsdkrn
 
 import co.areyouonpoint.pointsdk.domain.PointRepository
 import co.areyouonpoint.pointsdk.domain.exceptions.PointException
-import co.areyouonpoint.pointsdk.domain.model.HealthMetricType
-import co.areyouonpoint.pointsdk.domain.model.InsightType
-import co.areyouonpoint.pointsdk.domain.model.WorkoutRatings
+import co.areyouonpoint.pointsdk.domain.model.*
 import com.facebook.react.bridge.Arguments
 import com.facebook.react.bridge.Promise
 import kotlinx.coroutines.DelicateCoroutinesApi
@@ -77,6 +75,30 @@ internal class PointSdkRepository(
                     putBoolean("result", result)
                 })
             } catch (ex: PointException) {
+                promise.reject("PointSDKError", ex.message)
+            }
+        }
+    }
+
+    fun setUserGoal(goalAnswer: GoalAnswers, promise: Promise) {
+        GlobalScope.launch(Dispatchers.IO) {
+            try {
+                pointRepository.setUserGoal(goalAnswer)
+                // We're supposed to return the User from here, but `setUserGoal` just returns a boolean
+                getUserData(promise)
+            } catch (ex: Exception) {
+                promise.reject("PointSDKError", ex.message)
+            }
+        }
+    }
+
+    fun setUserSpecificGoal(specificGoal: SpecificGoalAnswers, promise: Promise) {
+        GlobalScope.launch(Dispatchers.IO) {
+            try {
+                pointRepository.setUserSpecificGoal(specificGoal)
+                // We're supposed to return the User from here, but `setUserGoal` just returns a boolean
+                getUserData(promise)
+            } catch (ex: Exception) {
                 promise.reject("PointSDKError", ex.message)
             }
         }

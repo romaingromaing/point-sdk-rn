@@ -3,6 +3,8 @@ package com.pointsdkrn
 import co.areyouonpoint.pointsdk.PointClient
 import co.areyouonpoint.pointsdk.domain.PointEnvironment
 import co.areyouonpoint.pointsdk.domain.exceptions.PointException
+import co.areyouonpoint.pointsdk.domain.model.GoalAnswers
+import co.areyouonpoint.pointsdk.domain.model.SpecificGoalAnswers
 import com.facebook.react.bridge.*
 
 class PointSdkRn(private val context: ReactApplicationContext) :
@@ -147,6 +149,18 @@ class PointSdkRn(private val context: ReactApplicationContext) :
     @ReactMethod
     fun getDailyHistory(offset: Int?, promise: Promise) {
         pointSdkRepository.getDailyHistory(offset ?: 0, promise)
+    }
+
+    @ReactMethod
+    fun setUserGoal(goal: String, promise: Promise) {
+        val goalAnswer = GoalAnswers.valueOf(goal)
+        pointSdkRepository.setUserGoal(goalAnswer, promise)
+    }
+
+    @ReactMethod
+    fun setUserSpecificGoal(specificGoal: String, promise: Promise) {
+        val specificGoalAnswer = SpecificGoalAnswers.valueOf(specificGoal)
+        pointSdkRepository.setUserSpecificGoal(specificGoalAnswer, promise)
     }
 
     @ReactMethod

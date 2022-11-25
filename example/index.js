@@ -2,16 +2,19 @@
  * @format
  */
 
-import { AppRegistry, NativeModules } from 'react-native';
-import PointSdkRn, { QueryType } from 'react-native-point-sdk';
+import {AppRegistry, NativeModules} from 'react-native';
+import PointSdkRn, {QueryType} from 'react-native-point-sdk';
 import App from './src/App';
-import { name as appName } from './app.json';
+import {name as appName} from './app.json';
 
 AppRegistry.registerComponent(appName, () => {
-  PointSdkRn.setup('foo', 'bar', 'development', true, () =>
-    console.log('Setup completed!'),
+  PointSdkRn.setup(
+    '8LBpmn8YYvWZ0MX-EyBx51O39Pd9u0csvVl5',
+    'bar',
+    'development',
+    true,
+    () => console.log('Setup completed!'),
   );
-
 
   PointSdkRn.setupHealthkitIntegration(
     [
@@ -29,17 +32,9 @@ AppRegistry.registerComponent(appName, () => {
       QueryType.BloodGlucose,
       QueryType.BloodPressure,
       QueryType.Birthday,
-      QueryType.BiologicalSex
+      QueryType.BiologicalSex,
     ],
     () => console.log('Setup Health Kit completed!'),
-  );
-
-  PointSdkRn.setupFitbitIntegration('23895P', () =>
-    console.log('Setup Fitbit completed!'),
-  );
-
-  PointSdkRn.setupOuraIntegration('D4NKI4CXAXA7KFNC', () =>
-    console.log('Setup Oura completed!'),
   );
 
   PointSdkRn.startAllListeners();

@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Button, Text, View} from 'react-native';
+import {Platform, Button, Text, View} from 'react-native';
 import PointSdkRn, {FitbitScopes, OuraScopes} from 'react-native-point-sdk';
 
 export function HomeScreen() {
@@ -9,6 +9,7 @@ export function HomeScreen() {
 
   useEffect(() => {
     handleLogin();
+    isOuraAuthenticated();
   }, []);
 
   const handleRequestPermissions = async () => {
@@ -71,6 +72,7 @@ export function HomeScreen() {
     try {
       setOuraStatus('fetching');
       const status = await PointSdkRn.isOuraAuthenticated();
+      console.log('isOuraAuthenticated:', status);
       setOuraStatus(`${status}`);
     } catch (error: any) {
       console.log(error);
@@ -92,7 +94,7 @@ export function HomeScreen() {
   const handleLogin = async () => {
     try {
       await PointSdkRn.setUserToken(
-        'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IkpPeWtVSkFNZjc4M3E2NGtrM0phWCJ9.eyJodHRwczovL2FyZXlvdW9ucG9pbnQuY28vZW1haWwiOiJhbm55Kzc2QGFlLnN0dWRpbyIsImlzcyI6Imh0dHBzOi8vcG9pbnQtYXBwLWRldi51cy5hdXRoMC5jb20vIiwic3ViIjoiYXV0aDB8NjM3MjMzZDM1NTc5ZTUxMTZlODQ2YjBjIiwiYXVkIjpbImxvY2FsaG9zdCIsImh0dHBzOi8vcG9pbnQtYXBwLWRldi51cy5hdXRoMC5jb20vdXNlcmluZm8iXSwiaWF0IjoxNjY5MjIyMTE2LCJleHAiOjE2NjkzMDg1MTYsImF6cCI6IkZibEZTNUhNNkJTcGZSbklRQkVHRlJZT1FiSEhXdnhpIiwic2NvcGUiOiJvcGVuaWQgcHJvZmlsZSBlbWFpbCIsInBlcm1pc3Npb25zIjpbXX0.I82KBolYKjfq-wA7r6TMLOKZH42ro-Uz3CVM7W_GqhcRLGawqZ49qG5GePLjkOPr47iN3aAa74BeIu0FuuzBA1yMV5AT5ylUsiInjrztV6l53VeI1J9jK9WrjrnBHrza5fy2yuZsm16SNv0aWOSpGaEFbYD-qASPWLax6Ltbiv0ZrGW_wz8bG6xbquaBzaky_cQ72LiQZNaUncIQ2WqNlstfxMtlxiuL-VEYz4nI353yQVJ_xZ2A-QWD7waIbHlkFDvBRRmmniDPw7FglGUQPW37PQ7uxataHDSdS0ETOnmd4h9AtMLj3gVRrO-bqVOzuwIazS_XH_lYfofVPZPAng',
+        'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IkpPeWtVSkFNZjc4M3E2NGtrM0phWCJ9.eyJodHRwczovL2FyZXlvdW9ucG9pbnQuY28vZW1haWwiOiJhbm55QGFlLnN0dWRpbyIsImlzcyI6Imh0dHBzOi8vcG9pbnQtYXBwLWRldi51cy5hdXRoMC5jb20vIiwic3ViIjoiZ29vZ2xlLW9hdXRoMnwxMDIyNTMxNDYxMDA2NDU3Mjk3MDkiLCJhdWQiOlsibG9jYWxob3N0IiwiaHR0cHM6Ly9wb2ludC1hcHAtZGV2LnVzLmF1dGgwLmNvbS91c2VyaW5mbyJdLCJpYXQiOjE2NjkzODczNjYsImV4cCI6MTY2OTQ3Mzc2NiwiYXpwIjoiRmJsRlM1SE02QlNwZlJuSVFCRUdGUllPUWJISFd2eGkiLCJzY29wZSI6Im9wZW5pZCBwcm9maWxlIGVtYWlsIiwicGVybWlzc2lvbnMiOltdfQ.aidfIE5WIJrVcOYifC4a9TO2DgjHAwMA1MRxJb9f_BY8Lf9UzUucaAktcbmS3DgBitQch6CqQETMu2iNbTSXw6jqVjruT3jP1IMoeOXoDRW5qdGI7aT3ROe6HYu3k4LK0RMcJwgWfL10Ozt6pU9LY4RkVkIyq8X9L4o3r2U3fZNR9ln1h4r81bdGRjgQ6N3hNOFTf6YUzQyRZhkW5dDHaJmi6dEdA5zpYZ_-xXfmRegErMl00oNQjvocpPK8d5YJ8c1E-RfiI8YU8P9XdYUCglJdR0PwY43Lxf99Y7dwSi6idTqKMX-LolT7ZovjKiRN8w6CVKaGlfLzLSU8FBJFRQ',
       );
       console.log('User token set!');
     } catch (error) {
@@ -104,6 +106,7 @@ export function HomeScreen() {
       if (!userData) {
         throw new Error('Token expired!');
       }
+      console.log('User: ', JSON.stringify(userData));
 
       setUser(userData);
     } catch (error) {
@@ -128,7 +131,12 @@ export function HomeScreen() {
           Welcome, {user.email}!
         </Text>
       )}
-      <Button onPress={handleRequestPermissions} title="Request Permissions" />
+      {Platform.OS === 'ios' && (
+        <Button
+          onPress={handleRequestPermissions}
+          title="Request AH Permissions"
+        />
+      )}
       {user ? (
         <Button onPress={handleLogout} title="Logout" />
       ) : (
