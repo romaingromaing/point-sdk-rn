@@ -92,6 +92,11 @@ class PointSdkRn(reactContext: ReactApplicationContext) :
     }
 
     @ReactMethod
+    fun saveWorkoutRecommendation(id: Int, promise: Promise) {
+        return pointSdkRepository.saveWorkoutRecommendation(id, promise)
+    }
+
+    @ReactMethod
     fun getDailyHistory(offset: Int?, promise: Promise) {
         pointSdkRepository.getDailyHistory(offset ?: 0, promise)
     }
