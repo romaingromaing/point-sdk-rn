@@ -59,7 +59,6 @@ fun GoalProgress.toResponse(): WritableMap =
         putMap("recovery", recovery.toResponse())
     }
 
-
 fun Endurance.toResponse(): WritableMap =
     Arguments.createMap().apply {
         putDouble("value", value)
