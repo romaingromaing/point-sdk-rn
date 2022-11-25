@@ -49,7 +49,7 @@ export function HomeScreen() {
     try {
       setOuraStatus('fetching');
       const status = await PointSdkRn.isOuraAuthenticated();
-      console.log(status);
+      console.log('isOuraAuthenticated:', status);
       setOuraStatus(`${status}`);
     } catch (error: any) {
       console.log(error);
