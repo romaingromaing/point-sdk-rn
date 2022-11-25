@@ -5,6 +5,8 @@ import co.areyouonpoint.pointsdk.domain.exceptions.PointException
 import co.areyouonpoint.pointsdk.domain.model.HealthMetricType
 import co.areyouonpoint.pointsdk.domain.model.InsightType
 import co.areyouonpoint.pointsdk.domain.model.WorkoutRatings
+import co.areyouonpoint.pointsdk.domain.model.WorkoutRecommendation
+import com.facebook.react.bridge.Arguments
 import com.facebook.react.bridge.Promise
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
@@ -61,6 +63,20 @@ internal class PointSdkRepository(
                     .toReadableArray()
 
                 promise.resolve(recommendations)
+            } catch (ex: PointException) {
+                promise.reject("PointSDKError", ex.message)
+            }
+        }
+    }
+
+    fun saveWorkoutRecommendation(workoutRecommendationId: Int, promise: Promise) {
+        GlobalScope.launch(Dispatchers.IO) {
+            try {
+                val result = pointRepository.saveWorkoutRecommendation(workoutRecommendationId)
+
+                promise.resolve(Arguments.createMap().apply {
+                    putBoolean("result", result)
+                })
             } catch (ex: PointException) {
                 promise.reject("PointSDKError", ex.message)
             }
