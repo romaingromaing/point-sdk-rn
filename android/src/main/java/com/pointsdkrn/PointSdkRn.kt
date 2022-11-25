@@ -114,6 +114,13 @@ class PointSdkRn(reactContext: ReactApplicationContext) :
 
         return pointSdkRepository.getInsights(types, startDate, endDate, offset, promise)
     }
+
+    @ReactMethod
+    fun rateWorkout(id: Int, ratings: ReadableMap, promise: Promise) {
+        val workoutRatings = ratings.toWorkoutRatings()
+
+        return pointSdkRepository.rateWorkout(id, workoutRatings, promise)
+    }
 }
 
 private fun environmentsMapping(env: String): PointEnvironment {
@@ -125,6 +132,3 @@ private fun environmentsMapping(env: String): PointEnvironment {
         else -> PointEnvironment.DEVELOPMENT
     }
 }
-
-private fun ReadableMap.getNullableInt(name: String) =
-    if (this.hasKey(name)) this.getInt(name) else null

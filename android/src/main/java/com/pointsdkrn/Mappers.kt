@@ -45,6 +45,12 @@ fun WorkoutRatings.toResponse(): WritableMap =
         putIntOrNull("instructor", instructor)
     }
 
+fun ReadableMap.toWorkoutRatings() = WorkoutRatings(
+    difficulty = getNullableInt("difficulty"),
+    energy = getNullableInt("energy"),
+    instructor = getNullableInt("instructor")
+)
+
 fun GoalProgress.toResponse(): WritableMap =
     Arguments.createMap().apply {
         putMap("endurance", endurance.toResponse())
@@ -126,6 +132,9 @@ fun <E : ReadableMap> List<E>.toReadableArray(): ReadableArray {
     this.forEach { response.pushMap(it) }
     return response
 }
+
+fun ReadableMap.getNullableInt(name: String) =
+    if (this.hasKey(name)) this.getInt(name) else null
 
 fun WritableMap.putIntOrNull(key: String, value: Int?) =
     if (value != null) putInt(key, value) else putNull(key)
