@@ -1,6 +1,11 @@
 import React from 'react';
 import {Button, Text, View} from 'react-native';
-import PointSdkRn, { HealthMetricType, InsightType } from 'react-native-point-sdk';
+import PointSdkRn, {
+  Goal,
+  HealthMetricType,
+  InsightType,
+  SpecificGoal,
+} from 'react-native-point-sdk';
 
 export function PlaygroundScreen() {
   const getUserHealthMetrics = async () => {
@@ -54,7 +59,27 @@ export function PlaygroundScreen() {
 
   async function getInsights() {
     try {
-      console.log(await PointSdkRn.getInsights({ types: [InsightType.ActivityLevel]}));
+      console.log(
+        await PointSdkRn.getInsights({types: [InsightType.ActivityLevel]}),
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async function setUserGoal() {
+    try {
+      console.log(await PointSdkRn.setUserGoal(Goal.AthleticPerformance));
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async function setUserSpecificGoal() {
+    try {
+      console.log(
+        await PointSdkRn.setUserSpecificGoal(SpecificGoal.MaintainHealth),
+      );
     } catch (error) {
       console.log(error);
     }
@@ -76,6 +101,8 @@ export function PlaygroundScreen() {
         title="Save Workout Recommendation"
       />
       <Button onPress={getInsights} title="Get Insights" />
+      <Button onPress={setUserGoal} title="Set User Goal" />
+      <Button onPress={setUserSpecificGoal} title="Set User Specific Goal" />
     </View>
   );
 }
