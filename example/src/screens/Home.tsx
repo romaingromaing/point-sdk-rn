@@ -86,7 +86,7 @@ export function HomeScreen() {
       {Platform.OS === 'ios' && (
         <Button
           onPress={handleRequestPermissions}
-          title="Request Permissions"
+          title="Request AH Permissions"
         />
       )}
       <Button onPress={handleFitbit} title="Authenticate Fitbit" />
