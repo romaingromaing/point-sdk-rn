@@ -11,15 +11,7 @@ export function PlaygroundScreen() {
   const getUserHealthMetrics = async () => {
     try {
       const data = await PointSdkRn.getHealthMetrics({
-        filter: [
-          HealthMetricType.Vo2Max,
-          HealthMetricType.Weight,
-          HealthMetricType.TotalWorkoutDuration,
-          HealthMetricType.TotalMinsHRZone12,
-          HealthMetricType.MinsHRZone12,
-          HealthMetricType.MinsHRZone5,
-        ],
-        date: new Date('2022-05-10').toISOString(),
+        filter: Object.values(HealthMetricType),
       });
       console.log(data);
       console.log(`Get User Health Metrics: Received ${data.length} results`);
@@ -33,7 +25,8 @@ export function PlaygroundScreen() {
 
   async function getDailyHistory() {
     try {
-      console.log(await PointSdkRn.getDailyHistory(0));
+      const data = await PointSdkRn.getDailyHistory(0);
+      console.log('Get User Daily History: ', JSON.stringify(data));
     } catch (error) {
       console.log(error);
     }
