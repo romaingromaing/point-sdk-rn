@@ -82,6 +82,30 @@ internal class PointSdkRepository(
         }
     }
 
+    fun setUserGoal(goalAnswer: GoalAnswers, promise: Promise) {
+        GlobalScope.launch(Dispatchers.IO) {
+            try {
+                pointRepository.setUserGoal(goalAnswer)
+                // We're supposed to return the User from here, but `setUserGoal` just returns a boolean
+                getUserData(promise)
+            } catch (ex: Exception) {
+                promise.reject("PointSDKError", ex.message)
+            }
+        }
+    }
+
+    fun setUserSpecificGoal(specificGoal: SpecificGoalAnswers, promise: Promise) {
+        GlobalScope.launch(Dispatchers.IO) {
+            try {
+                pointRepository.setUserSpecificGoal(specificGoal)
+                // We're supposed to return the User from here, but `setUserGoal` just returns a boolean
+                getUserData(promise)
+            } catch (ex: Exception) {
+                promise.reject("PointSDKError", ex.message)
+            }
+        }
+    }
+
     fun getHealthMetrics(
         filter: List<HealthMetricType>,
         workoutId: Int?,

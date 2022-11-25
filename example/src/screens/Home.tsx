@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Button, Text, View} from 'react-native';
+import {Platform, Button, Text, View} from 'react-native';
 import PointSdkRn, {FitbitScopes, OuraScopes} from 'react-native-point-sdk';
 
 export function HomeScreen() {
@@ -83,6 +83,7 @@ export function HomeScreen() {
       if (!userData) {
         throw new Error('Token expired!');
       }
+      console.log('User: ', JSON.stringify(userData));
 
       setUser(userData);
     } catch (error) {
@@ -107,7 +108,12 @@ export function HomeScreen() {
           Welcome, {user.email}!
         </Text>
       )}
-      <Button onPress={handleRequestPermissions} title="Request Permissions" />
+      {Platform.OS === 'ios' && (
+        <Button
+          onPress={handleRequestPermissions}
+          title="Request AH Permissions"
+        />
+      )}
       <Button onPress={handleFitbit} title="Authenticate Fitbit" />
       {user ? (
         <Button onPress={handleLogout} title="Logout" />
