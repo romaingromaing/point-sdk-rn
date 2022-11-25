@@ -5,15 +5,10 @@ import co.areyouonpoint.pointsdk.domain.PointEnvironment
 import co.areyouonpoint.pointsdk.domain.exceptions.PointException
 import com.facebook.react.bridge.*
 
-class PointSdkRn(reactContext: ReactApplicationContext) :
-    ReactContextBaseJavaModule(reactContext) {
+class PointSdkRn(private val context: ReactApplicationContext) :
+    ReactContextBaseJavaModule(context) {
     private lateinit var pointClient: PointClient
     private lateinit var pointSdkRepository: PointSdkRepository
-    private val reactContext: ReactApplicationContext
-
-    init {
-        this.reactContext = reactContext
-    }
 
     override fun getName() = "PointSdkRn"
 
@@ -26,7 +21,7 @@ class PointSdkRn(reactContext: ReactApplicationContext) :
         callback: Callback
     ) {
         pointClient = PointClient.getInstance(
-            context = reactContext,
+            context = context,
             clientId = clientId,
             clientSecret = clientSecret,
             apiEnvironment = environmentsMapping(environment)
