@@ -80,23 +80,24 @@ internal class PointSdkRepository(
         }
     }
 
-    fun setUserGoal(goal: String, promise: Promise) {
+    fun setUserGoal(goalAnswer: GoalAnswers, promise: Promise) {
         GlobalScope.launch(Dispatchers.IO) {
             try {
-                val result = pointRepository.setUserGoal(GoalAnswers.safeValueOf(goal)!!)
-                promise.resolve(result)
+                pointRepository.setUserGoal(goalAnswer)
+                // We're supposed to return the User from here, but `setUserGoal` just returns a boolean
+                getUserData(promise)
             } catch (ex: Exception) {
                 promise.reject("PointSDKError", ex.message)
             }
         }
     }
 
-    fun setUserSpecificGoal(specificGoal: String, promise: Promise) {
+    fun setUserSpecificGoal(specificGoal: SpecificGoalAnswers, promise: Promise) {
         GlobalScope.launch(Dispatchers.IO) {
             try {
-                val result =
-                    pointRepository.setUserSpecificGoal(SpecificGoalAnswers.safeValueOf(specificGoal)!!)
-                promise.resolve(result)
+                pointRepository.setUserSpecificGoal(specificGoal)
+                // We're supposed to return the User from here, but `setUserGoal` just returns a boolean
+                getUserData(promise)
             } catch (ex: Exception) {
                 promise.reject("PointSDKError", ex.message)
             }
