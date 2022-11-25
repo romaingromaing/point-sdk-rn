@@ -10,6 +10,7 @@ export function HomeScreen() {
   useEffect(() => {
     handleLogin();
     isOuraAuthenticated();
+    isFitbitAuthenticated();
   }, []);
 
   const handleRequestPermissions = async () => {
