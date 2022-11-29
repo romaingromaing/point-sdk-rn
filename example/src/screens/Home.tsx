@@ -5,10 +5,12 @@ import PointSdkRn, {FitbitScopes, OuraScopes} from 'react-native-point-sdk';
 export function HomeScreen() {
   const [user, setUser] = useState<PointSdkRn.User | null>(null);
   const [ouraStatus, setOuraStatus] = useState<string>('unknown');
+  const [fitbitStatus, setFitbitStatus] = useState<string>('unknown');
 
   useEffect(() => {
     handleLogin();
     isOuraAuthenticated();
+    isFitbitAuthenticated();
   }, []);
 
   const handleRequestPermissions = async () => {
@@ -20,7 +22,7 @@ export function HomeScreen() {
     }
   };
 
-  const handleFitbit = async () => {
+  const authenticateFitbit = async () => {
     try {
       const result = await PointSdkRn.authenticateFitbit('sampleapp', [
         FitbitScopes.Activity,
@@ -28,6 +30,28 @@ export function HomeScreen() {
         FitbitScopes.Profile,
       ]);
       console.log(result);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const isFitbitAuthenticated = async () => {
+    try {
+      setFitbitStatus('fetching');
+      const status = await PointSdkRn.isFitbitAuthenticated();
+      setFitbitStatus(`${status}`);
+    } catch (error: any) {
+      console.log(error);
+      setFitbitStatus(`error: ${error.message}`);
+    }
+  };
+
+  const revokeFitbitAuthentication = async () => {
+    try {
+      await PointSdkRn.revokeFitbitAuthentication();
+
+      // Call isFitbitAuthenticated to update the Fitbit Authentication Status
+      isFitbitAuthenticated();
     } catch (error) {
       console.log(error);
     }
@@ -114,12 +138,20 @@ export function HomeScreen() {
           title="Request AH Permissions"
         />
       )}
-      <Button onPress={handleFitbit} title="Authenticate Fitbit" />
       {user ? (
         <Button onPress={handleLogout} title="Logout" />
       ) : (
         <Button onPress={handleLogin} title="Login" />
       )}
+      <Text style={{fontSize: 16}}>
+        Fitbit Authentication Status: {fitbitStatus}
+      </Text>
+      <Button onPress={authenticateFitbit} title="Authenticate Fitbit" />
+      <Button onPress={isFitbitAuthenticated} title="Is Fitbit Authenticated?" />
+      <Button
+        onPress={revokeFitbitAuthentication}
+        title="Revoke Fitbit Authentication"
+      />
       <Text style={{fontSize: 16}}>
         Oura Authentication Status: {ouraStatus}
       </Text>

@@ -12,6 +12,7 @@ class PointSdkRn(private val context: ReactApplicationContext) :
     private lateinit var pointClient: PointClient
     private lateinit var pointSdkRepository: PointSdkRepository
     private lateinit var pointSdkOura: PointSdkOura
+    private lateinit var pointSdkFitbit: PointSdkFitbit
 
     override fun getName() = "PointSdkRn"
 
@@ -31,6 +32,7 @@ class PointSdkRn(private val context: ReactApplicationContext) :
         )
         pointSdkRepository = PointSdkRepository(pointClient.repository)
         pointSdkOura = PointSdkOura(pointClient)
+        pointSdkFitbit = PointSdkFitbit(pointClient)
         callback.invoke()
     }
 
@@ -55,10 +57,33 @@ class PointSdkRn(private val context: ReactApplicationContext) :
         print("Android doesn't support healthkit")
     }
 
+    /**
+     * FITBIT
+     */
     @ReactMethod
-    fun setupFitbitIntegration(fitbitClientID: String, callback: Callback) {
-        print("Not implemented")
+    fun setupFitbitIntegration(@Suppress("UNUSED_PARAMETER") fitbitClientID: String, callback: Callback) {
+        print("setupFitbitIntegration is deprecated -  Since version 1.3.0, it's no longer necessary to set up each integration manually, this in now done automatically when setting up the SDK.")
         callback.invoke()
+    }
+
+    @ReactMethod
+    fun authenticateFitbit(
+        @Suppress("UNUSED_PARAMETER") callbackURLScheme: String?,
+        fitbitScopes: ReadableArray?,
+        promise: Promise
+    ) {
+        val scopesAsNames = fitbitScopes?.toArrayList()?.mapNotNull { it.toString() } ?: emptyList()
+        pointSdkFitbit.authenticateFitbit(scopesAsNames, promise)
+    }
+
+    @ReactMethod
+    fun revokeFitbitAuthentication(promise: Promise) {
+        pointSdkFitbit.revokeFitbitAuthentication(promise)
+    }
+
+    @ReactMethod
+    fun isFitbitAuthenticated(promise: Promise) {
+        pointSdkFitbit.isFitbitAuthenticated(promise)
     }
 
     /**
