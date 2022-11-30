@@ -153,13 +153,13 @@ class PointSdkRn(private val context: ReactApplicationContext) :
 
     @ReactMethod
     fun setUserGoal(goal: String, promise: Promise) {
-        val goalAnswer = GoalAnswers.valueOf(goal)
+        val goalAnswer = GoalAnswers.safeValueOf(goal)!!
         pointSdkRepository.setUserGoal(goalAnswer, promise)
     }
 
     @ReactMethod
     fun setUserSpecificGoal(specificGoal: String, promise: Promise) {
-        val specificGoalAnswer = SpecificGoalAnswers.valueOf(specificGoal)
+        val specificGoalAnswer = SpecificGoalAnswers.safeValueOf(specificGoal)!!
         pointSdkRepository.setUserSpecificGoal(specificGoalAnswer, promise)
     }
 
