@@ -14,7 +14,7 @@ PODS:
     - ReactCommon/turbomodule/core (= 0.68.5)
   - fmt (6.2.1)
   - glog (0.3.5)
-  - PointSDK (1.3.0):
+  - PointSDK (1.3.1):
     - Apollo (~> 0.51.2)
     - SQLite.swift (~> 0.13.3)
   - RCT-Folly (2021.06.28.00-v2):

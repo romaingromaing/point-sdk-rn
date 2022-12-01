@@ -3,9 +3,7 @@ import PointSDK
 
 @objc(PointSdkRn)
 class PointSdkRn: NSObject {
-  var healthKit: HealthKitManager? 
-  var fitbitManager: FitbitIntegrationManager?
-  var ouraManager: OuraIntegrationManager?
+  var healthKit: HealthKitManager?
   var healthService: HealthDataService? { Point.healthDataService }
 
   /**
