@@ -55,6 +55,9 @@ internal class PointSdkFitbit(private val pointClient: PointClient) {
             "sleep" -> FitbitScopes.Sleep
             "weight" -> FitbitScopes.Weight
             "cardio_fitness" -> FitbitScopes.CardioFitness
+            "temperature" -> FitbitScopes.Temperature
+            "respiratory_rate" -> FitbitScopes.RespiratoryRate
+            "oxygen_saturation" -> FitbitScopes.OxygenSaturation
             else -> null
         }
     }

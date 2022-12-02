@@ -53,7 +53,7 @@ export function PlaygroundScreen() {
   async function getInsights() {
     try {
       console.log(
-        await PointSdkRn.getInsights({types: [InsightType.ActivityLevel]}),
+        await PointSdkRn.getInsights({ types: Object.values(InsightType) }),
       );
     } catch (error) {
       console.log(error);

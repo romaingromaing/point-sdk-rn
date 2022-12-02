@@ -24,15 +24,9 @@ export function HomeScreen() {
 
   const authenticateFitbit = async () => {
     try {
-      const result = await PointSdkRn.authenticateFitbit('sampleapp', [
-        FitbitScopes.Activity,
-        FitbitScopes.Heartrate,
-        FitbitScopes.Profile,
-        FitbitScopes.OxygenSaturation,
-        FitbitScopes.CardioFitness,
-        FitbitScopes.Temperature,
-        FitbitScopes.RespiratoryRate
-      ]);
+      const result = await PointSdkRn.authenticateFitbit('sampleapp',
+        Object.values(FitbitScopes)
+      );
       console.log(result);
     } catch (error) {
       console.log(error);
@@ -63,10 +57,9 @@ export function HomeScreen() {
 
   const authenticateOura = async () => {
     try {
-      const result = await PointSdkRn.authenticateOura('sampleapp', [
-        OuraScopes.HeartRate,
-        OuraScopes.Workout,
-      ]);
+      const result = await PointSdkRn.authenticateOura('sampleapp',
+        Object.values(OuraScopes)
+      );
       console.log(result);
     } catch (error) {
       console.log(error);
