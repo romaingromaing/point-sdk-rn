@@ -1,22 +1,23 @@
 import React from 'react';
 import {Button, Text, View} from 'react-native';
-import PointSdkRn, { HealthMetricType, InsightType } from 'react-native-point-sdk';
+import PointSdkRn, {
+  Goal,
+  HealthMetricType,
+  InsightType,
+  SpecificGoal,
+} from 'react-native-point-sdk';
 
 export function PlaygroundScreen() {
   const getUserHealthMetrics = async () => {
     try {
       const data = await PointSdkRn.getHealthMetrics({
-        filter: [
-          HealthMetricType.Vo2Max,
-          HealthMetricType.Weight,
-          HealthMetricType.TotalWorkoutDuration,
-          HealthMetricType.TotalMinsHRZone12,
-          HealthMetricType.MinsHRZone12,
-          HealthMetricType.MinsHRZone5,
-        ],
-        date: new Date('2022-05-10').toISOString(),
+        filter: Object.values(HealthMetricType),
       });
       console.log(data);
+      console.log(`Get User Health Metrics: Received ${data.length} results`);
+      for (const metric of data) {
+        console.log(metric);
+      }
     } catch (error) {
       console.log(error);
     }
@@ -24,7 +25,8 @@ export function PlaygroundScreen() {
 
   async function getDailyHistory() {
     try {
-      console.log(await PointSdkRn.getDailyHistory(0));
+      const data = await PointSdkRn.getDailyHistory(0);
+      console.log('Get User Daily History: ', JSON.stringify(data));
     } catch (error) {
       console.log(error);
     }
@@ -50,7 +52,27 @@ export function PlaygroundScreen() {
 
   async function getInsights() {
     try {
-      console.log(await PointSdkRn.getInsights({ types: [InsightType.ActivityLevel]}));
+      console.log(
+        await PointSdkRn.getInsights({ types: Object.values(InsightType) }),
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async function setUserGoal() {
+    try {
+      console.log(await PointSdkRn.setUserGoal(Goal.AthleticPerformance));
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async function setUserSpecificGoal() {
+    try {
+      console.log(
+        await PointSdkRn.setUserSpecificGoal(SpecificGoal.MaintainHealth),
+      );
     } catch (error) {
       console.log(error);
     }
@@ -72,6 +94,8 @@ export function PlaygroundScreen() {
         title="Save Workout Recommendation"
       />
       <Button onPress={getInsights} title="Get Insights" />
+      <Button onPress={setUserGoal} title="Set User Goal" />
+      <Button onPress={setUserSpecificGoal} title="Set User Specific Goal" />
     </View>
   );
 }

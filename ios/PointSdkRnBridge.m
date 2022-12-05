@@ -10,12 +10,12 @@ RCT_EXTERN_METHOD(logout:(RCTPromiseResolveBlock)resolve rejecter: (RCTPromiseRe
 RCT_EXTERN_METHOD(setupFitbitIntegration:(NSString)fitbitClientId callback: (RCTResponseSenderBlock)callback);
 RCT_EXTERN_METHOD(authenticateFitbit:(NSString)callbackURLScheme fitbitScopes: (NSArray)fitbitScopes resolve: (RCTPromiseResolveBlock)resolve rejecter: (RCTPromiseRejectBlock)reject);
 RCT_EXTERN_METHOD(revokeFitbitAuthentication:(RCTPromiseResolveBlock)resolve rejecter: (RCTPromiseRejectBlock)reject);
-RCT_EXTERN_METHOD(isFitbitAuthenticated:(RCTPromiseResolveBlock)resolve);
+RCT_EXTERN_METHOD(isFitbitAuthenticated:(RCTPromiseResolveBlock)resolve rejecter: (RCTPromiseRejectBlock)reject);
 
 RCT_EXTERN_METHOD(setupOuraIntegration:(NSString)ouraClientId callback: (RCTResponseSenderBlock)callback);
 RCT_EXTERN_METHOD(authenticateOura:(NSString)callbackURLScheme ouraScopes: (NSArray)ouraScopes resolve: (RCTPromiseResolveBlock)resolve rejecter: (RCTPromiseRejectBlock)reject);
 RCT_EXTERN_METHOD(revokeOuraAuthentication:(RCTPromiseResolveBlock)resolve rejecter: (RCTPromiseRejectBlock)reject);
-RCT_EXTERN_METHOD(isOuraAuthenticated:(RCTPromiseResolveBlock)resolve);
+RCT_EXTERN_METHOD(isOuraAuthenticated:(RCTPromiseResolveBlock)resolve rejecter: (RCTPromiseRejectBlock)reject);
 
 
 RCT_EXTERN_METHOD(startAllListeners:(RCTPromiseResolveBlock)resolve rejecter: (RCTPromiseRejectBlock)reject);
