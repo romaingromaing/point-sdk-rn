@@ -47,6 +47,11 @@ class PointSdkRn(private val context: ReactApplicationContext) :
     }
 
     @ReactMethod
+    fun logout() {
+        pointClient.logout()
+    }
+
+    @ReactMethod
     fun setupHealthkitIntegration(queryTypes: ReadableArray, callback: Callback) {
         print("Android doesn't support healthkit")
         callback.invoke()
