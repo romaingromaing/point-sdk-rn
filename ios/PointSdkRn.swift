@@ -43,6 +43,18 @@ class PointSdkRn: NSObject {
       }
     }
   }
+
+  @objc
+  func setRefreshToken(_ refreshToken: String, userId: String, resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) -> Void {
+    Task {
+      do {
+        try await Point.setRefreshToken(refreshToken: refreshToken, userId: userId)
+        resolve(true)
+      } catch {
+        reject("login", error.localizedDescription, error)
+      }
+    }
+  }
   
   /**
    *  logout          Logout from Point

@@ -6,6 +6,9 @@ import co.areyouonpoint.pointsdk.domain.exceptions.PointException
 import co.areyouonpoint.pointsdk.domain.model.GoalAnswers
 import co.areyouonpoint.pointsdk.domain.model.SpecificGoalAnswers
 import com.facebook.react.bridge.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class PointSdkRn(private val context: ReactApplicationContext) :
     ReactContextBaseJavaModule(context) {
@@ -43,6 +46,18 @@ class PointSdkRn(private val context: ReactApplicationContext) :
             promise.resolve(true)
         } catch (ex: PointException) {
             promise.reject("PointSDKError", ex.message)
+        }
+    }
+
+    @ReactMethod
+    fun setRefreshToken(refreshToken: String, userId: String, promise: Promise) {
+        GlobalScope.launch(Dispatchers.IO) {
+            try {
+                pointClient.setRefreshToken(refreshToken = refreshToken, id = userId)
+                promise.resolve(true)
+            } catch (ex: PointException) {
+                promise.reject("PointSDKError", ex.message)
+            }
         }
     }
 

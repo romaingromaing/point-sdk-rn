@@ -244,6 +244,7 @@ export function revokeOuraAuthentication(): Promise<any>;
 export function isOuraAuthenticated(): Promise<any>;
 
 export function setUserToken(accessToken: string): Promise<any>;
+export function setRefreshToken(refreshToken: string, userId: string): Promise<any>;
 export function logout(): Promise<any>;
 
 // Point API
