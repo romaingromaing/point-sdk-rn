@@ -243,7 +243,11 @@ export function authenticateOura(callbackURLScheme: string, ouraScopes?: OuraSco
 export function revokeOuraAuthentication(): Promise<any>;
 export function isOuraAuthenticated(): Promise<any>;
 
+/**
+ * @deprecated Since version 1.4.0. Function renamed to setAccessToken
+ */
 export function setUserToken(accessToken: string): Promise<any>;
+export function setAccessToken(accessToken: string): Promise<any>;
 export function setRefreshToken(refreshToken: string, userId: string): Promise<any>;
 export function logout(): Promise<any>;
 

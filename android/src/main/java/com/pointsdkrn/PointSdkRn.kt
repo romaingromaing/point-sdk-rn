@@ -50,6 +50,16 @@ class PointSdkRn(private val context: ReactApplicationContext) :
     }
 
     @ReactMethod
+    fun setAccessToken(accessToken: String, promise: Promise) {
+        try {
+            pointClient.setAccessToken(accessToken)
+            promise.resolve(true)
+        } catch (ex: PointException) {
+            promise.reject("PointSDKError", ex.message)
+        }
+    }
+
+    @ReactMethod
     fun setRefreshToken(refreshToken: String, userId: String, promise: Promise) {
         GlobalScope.launch(Dispatchers.IO) {
             try {
