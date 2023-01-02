@@ -5,6 +5,8 @@ RCT_EXTERN_METHOD(setup:(NSString)clientId clientSecret: (NSString)clientSecret 
 RCT_EXTERN_METHOD(setupHealthkitIntegration:(NSArray)queryTypes callback: (RCTResponseSenderBlock)callback);
 RCT_EXTERN_METHOD(requestPermissions:(RCTPromiseResolveBlock)resolve rejecter: (RCTPromiseRejectBlock)reject);
 RCT_EXTERN_METHOD(setUserToken:(NSString)accessToken resolve: (RCTPromiseResolveBlock)resolve rejecter: (RCTPromiseRejectBlock)reject);
+RCT_EXTERN_METHOD(setAccessToken:(NSString)accessToken resolve: (RCTPromiseResolveBlock)resolve rejecter: (RCTPromiseRejectBlock)reject);
+RCT_EXTERN_METHOD(setRefreshToken:(NSString)refreshToken userId: (NSString)userId resolve: (RCTPromiseResolveBlock)resolve rejecter: (RCTPromiseRejectBlock)reject);
 RCT_EXTERN_METHOD(logout:(RCTPromiseResolveBlock)resolve rejecter: (RCTPromiseRejectBlock)reject);
 
 RCT_EXTERN_METHOD(setupFitbitIntegration:(NSString)fitbitClientId callback: (RCTResponseSenderBlock)callback);
