@@ -8,12 +8,6 @@ export function HomeScreen() {
   const [ouraStatus, setOuraStatus] = useState<string>('unknown');
   const [fitbitStatus, setFitbitStatus] = useState<string>('unknown');
 
-  // useEffect(() => {
-  //   handleLogin();
-  //   isOuraAuthenticated();
-  //   isFitbitAuthenticated();
-  // }, []);
-
   const handleRequestPermissions = async () => {
     try {
       const result = await PointSdkRn.requestPermissions();
@@ -38,6 +32,7 @@ export function HomeScreen() {
     try {
       setFitbitStatus('fetching');
       const status = await PointSdkRn.isFitbitAuthenticated();
+      console.log('isFitbitrAuthenticated:', status);
       setFitbitStatus(`${status}`);
     } catch (error: any) {
       console.log(error);
@@ -101,6 +96,8 @@ export function HomeScreen() {
       console.error(error);
     }
     try {
+      await isFitbitAuthenticated();
+      await isOuraAuthenticated();
       const userData = await PointSdkRn.getUserData();
 
       if (!userData) {
@@ -118,6 +115,8 @@ export function HomeScreen() {
     try {
       await PointSdkRn.logout();
       setUser(null);
+      setFitbitStatus('unknown');
+      setOuraStatus('unknown');
       console.log('Successfully logged out');
     } catch (error) {
       console.log(error);
